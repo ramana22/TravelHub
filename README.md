@@ -7,8 +7,8 @@ git init
 
 git remote add origin https://github.com/ramana22/TravelHub.git 
 
-git add TravelHub
+git add .
 
-git commit -m "backend folder"
+git commit -m "backend structure"
 
 git push -u origin main
