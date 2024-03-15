@@ -43,4 +43,5 @@ jobs:
       run: |
           cd TravelHub-frontend/
           npm install
-          ng build --prod
+          ng build --configuration=production
+
