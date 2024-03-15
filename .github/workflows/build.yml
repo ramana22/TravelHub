@@ -33,8 +33,8 @@ jobs:
 
     - name: Build and Test Spring Boot
       run: |
-          pwd
-          ls -al
+          cd TravelHub-Backend/
+          ./mvnw clean install
 
     - name: Build and Test Angular
       run: |
