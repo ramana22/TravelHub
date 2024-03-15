@@ -6,6 +6,11 @@ name: java with CI/CD
 on:
   release:
     types: [created]
+  workflow_dispatch:  # Add manual trigger
+    inputs:           # Optional inputs for manual trigger
+      manual_trigger:
+        description: 'Manually trigger the workflow'
+        default: 'true' 
 
 jobs:
   build:
