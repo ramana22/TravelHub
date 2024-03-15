@@ -29,7 +29,9 @@ jobs:
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-
+        
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
 
     - name: Build and Test Spring Boot
       run: |
