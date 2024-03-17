@@ -44,4 +44,10 @@ jobs:
           cd TravelHub-frontend/
           npm install
           ng build --configuration=production
+    - name: Publish to GitHub Packages
+  run: |
+    cd TravelHub-Backend/
+    echo "//maven.pkg.github.com/https://github.com/ramana22/TravelHub.git/:registry=https://maven.pkg.github.com/https://github.com/ramana22/TravelHub.git" >> ~/.m2/settings.xml
+    ./mvnw deploy -Dmaven.deploy.skip=true
+
 
