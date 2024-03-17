@@ -38,6 +38,8 @@ jobs:
           cd TravelHub-Backend/
           chmod +x mvnw
           ./mvnw clean install
+    - name: Run Spring Boot application
+      run: mvn spring-boot:run
 
     - name: Build and Test Angular
       run: |
