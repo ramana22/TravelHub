@@ -43,7 +43,7 @@ jobs:
           cd TravelHub-Backend/
           ./mvnw spring-boot:run &
 
-      - name: Build and Test Angular
+     - name: Build and Test Angular
         run: |
           cd TravelHub-frontend/
           npm install
