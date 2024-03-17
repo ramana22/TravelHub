@@ -52,12 +52,12 @@ jobs:
     - name: Publish Angular build artifacts
       uses: actions/upload-artifact@v2
         with:
-          name: angular-build
-          path: TravelHub-frontend/dist
+         name: angular-build
+         path: TravelHub-frontend/dist
 
-    - name: Publish Spring Boot JAR artifact
-      uses: actions/upload-artifact@v2
-        with:
+     - name: Publish Spring Boot JAR artifact
+       uses: actions/upload-artifact@v2
+         with:
           name: spring-boot-jar
           path: TravelHub-Backend/target/*.jar
 
