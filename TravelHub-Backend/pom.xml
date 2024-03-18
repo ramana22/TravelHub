@@ -63,15 +63,18 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<artifactId>maven-war-plugin</artifactId>
-                                    <configuration>
-                                               <packaging>war</packaging>
-                                     </configuration>
-			</plugin>
+		    <plugin>
+		        <groupId>org.springframework.boot</groupId>
+		        <artifactId>spring-boot-maven-plugin</artifactId>
+		    </plugin>
+		    <plugin>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <configuration>
+		            <packaging>war</packaging>
+		        </configuration>
+		    </plugin>
 		</plugins>
+
 	</build>
 
 </project>
