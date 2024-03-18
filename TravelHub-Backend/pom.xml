@@ -54,6 +54,11 @@
                      <version>4.0.1</version>
                      <scope>provided</scope>
                    </dependency>
+		<dependency>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-war-plugin</artifactId>
+		    <version>3.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -61,6 +66,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<artifactId>maven-war-plugin</artifactId>
                                     <configuration>
                                                <packaging>war</packaging>
                                      </configuration>
