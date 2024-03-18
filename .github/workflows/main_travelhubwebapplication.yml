@@ -22,13 +22,16 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: |
+         cd TravelHub-Backend/
+         chmod +x mvn
+         mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.war'
+          path: '${{ github.workspace }}/TravelHub-Backend/target/*.war'
 
   deploy:
     runs-on: windows-latest
