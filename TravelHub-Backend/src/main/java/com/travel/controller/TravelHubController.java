@@ -28,6 +28,19 @@ public class TravelHubController {
   	   }
   	   return userobj;
     }
+	 @PostMapping("/login")
+	   public User login(@RequestBody User user) throws Exception {
+		   String tempemail=user.getEmail();
+		   String temppass=user.getPassword();
+		   User userobj=null;
+		   if(tempemail!=null &&temppass!=null) {
+			   userobj=service.fetchuseremailandpassword(tempemail, temppass);
+		   }
+		   if(userobj==null) {
+			   throw new Exception("Bad Credentials");
+		   }
+		   return userobj;   
+	   }
 	@GetMapping("/health")
     public String healthCheck() {
         return "Application is running!";

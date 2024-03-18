@@ -19,4 +19,7 @@ public class TravelHubService {
 	public User fetchemail(String email) {
 		return userrepo.findByEmail(email);
 	}
+	public  User fetchuseremailandpassword(String email,String password) {
+		return userrepo.findByEmailAndPassword(email, password);
+	}
 }
