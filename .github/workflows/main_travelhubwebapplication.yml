@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'TravelHubwebapplication'
           slot-name: 'Production'
-          package: '*.war'
+          package: '${{ github.workspace }}/java-app/*.war'
           
