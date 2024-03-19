@@ -44,7 +44,6 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
   build-frontend:
-  
     runs-on: ubuntu-latest
 
     steps:
@@ -56,8 +55,8 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Navigate to TravelHub-frontend directory
-      run: cd TravelHub-frontend
+    - name: Change directory to Angular project
+      run: cd TravelHub-frontend && ls -la
 
     - name: Install dependencies
       run: npm install
@@ -69,5 +68,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: angular-dist
-        path: TravelHub-frontend/dist/  # Adjust to the path where your Angular app is built within the TravelHub-frontend directory
-
+        path: TravelHub-frontend/dist/ 
