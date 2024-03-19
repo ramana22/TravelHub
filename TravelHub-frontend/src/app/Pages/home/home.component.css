@@ -1,5 +1,5 @@
 .banner {
-  background-image: url("..\\..\\../assets/img/traveler.jpg");
+  background-image: url("..\\../assets/img/traveler.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,7 +9,7 @@
 .banner-content {
   font-size: 50px;
   color: white;
-  padding-top: 2cm;
+  padding-top: 3cm;
   padding-inline: 2cm;
 }
 
@@ -17,7 +17,7 @@
   font-size: 30px;
   color: white;
   padding-left: 2cm;
-  padding-top: 10px;
+  padding-top: 30px;
 }
 
 .places-heading h1 {
@@ -65,4 +65,135 @@
   padding-block: 1.5cm;
   padding-left: 2cm;
   display: inline;
+}
+
+.review-image img {
+  width: 10cm;
+  height: 10cm;
+}
+.review-card {
+  display: flex;
+  margin-top: 1cm;
+}
+.review-heading {
+  margin-left: 3cm;
+  display: inline;
+}
+.review-input {
+  width: 8cm;
+  height: 3cm;
+}
+.reviewpage {
+  margin-left: 1cm;
+  font-size: 30px;
+}
+.reviewsection {
+  margin-left: 6cm;
+  margin-top: 3cm;
+  margin-bottom: 3cm;
+}
+.emailsection {
+  margin-top: 1cm;
+}
+.emailsection input {
+  width: 6cm;
+}
+.restbook-now {
+  margin-top: 0.7cm;
+}
+.book-hotel {
+  width: 4cm;
+  background-color: olivedrab;
+  height: 1cm;
+  color: white;
+}
+.stars {
+  display: flex;
+  margin-block: 0.5cm;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 30px;
+  margin: 0 5px;
+}
+
+.star.checked {
+  color: olivedrab; /* Color for filled star */
+}
+
+.reviewcard {
+  border-radius: 5px;
+  box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+  border: none;
+  margin-bottom: 30px;
+  width: 350px;
+  height: 10cm;
+}
+
+.holder {
+  margin-right: 1cm;
+  display: flex; /* Ensure each card is a flex item */
+}
+
+.reviewcard {
+  border-radius: 5px;
+  box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+  border: none;
+  margin-bottom: 30px;
+  width: 8cm;
+  display: flex;
+  flex-direction: column; /* Align card content vertically */
+}
+
+/* Add the following style to arrange cards side by side */
+@media only screen and (min-width: 768px) {
+  .holder {
+    flex-basis: calc(
+      33.3333% - 1cm
+    ); /* Set a flex basis to control the width of each card */
+  }
+}
+.title h1 {
+  font-size: 40px;
+}
+.title {
+  align-items: center;
+  margin-left: 40%;
+}
+.section {
+  display: flex;
+  margin-left: 9cm;
+  margin-top: 2cm;
+}
+.downimage img {
+  width: 7cm;
+  height: 10cm;
+}
+
+.weather p {
+  margin-left: 70%;
+  font-size: 25px;
+  color: white;
+  white-space: nowrap;
+}
+
+.temperature-circle {
+  width: 100px; /* Adjust the width and height as needed */
+  height: 100px;
+  border-radius: 50%;
+  margin-left: 75%;
+  margin-bottom: 20%;
+  background-color: #3498db; /* Choose a color for the circle */
+  color: #ffffff;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Add this CSS to your stylesheet or style section */
+.more {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px; /* Optional: Add some margin for spacing */
 }
