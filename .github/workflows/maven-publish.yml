@@ -26,4 +26,3 @@ jobs:
       run: |
         cd TravelHub-Backend/
         mvn clean install
-
