@@ -78,4 +78,5 @@ jobs:
           git add .
           git commit -m "Deploy to GitHub Pages"
           git branch -M gh-pages
-          git push -f https://github.com/ramana22/TravelHub.git gh-pages:${{ secrets.PAT_TOKEN }}
+          export GIT_TERMINAL_PROMPT=0
+          git push -f https://github.com/ramana22/TravelHub.git gh-pages
