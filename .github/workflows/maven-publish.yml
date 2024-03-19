@@ -66,17 +66,4 @@ jobs:
         with:
           name: angular-dist
           path: TravelHub-frontend/dist/
-  
-      - name: Deploy to GitHub Pages
-        run: |
-          git config --global user.name "ramana22"
-          git config --global user.email "ramanagajula1999@gmail.com"
-          git checkout --orphan gh-pages
-          git rm -rf .
-          mv TravelHub-frontend/dist/* .
-          touch .nojekyll
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git branch -M gh-pages
-          export GIT_TERMINAL_PROMPT=0
-          git push -f https://github.com/ramana22/TravelHub.git gh-pages
+ 
