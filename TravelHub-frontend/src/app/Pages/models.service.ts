@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModelsService {
-
-  constructor() { }
+  constructor() {}
 }
 export class User {
-  'userid':number;
-  'email':string;
-  'password':string;
-  'confirmpassword':string;
-  constructor(){}
+  'userid': number;
+  'email': string;
+  'password': string;
+  'confirmpassword': string;
+  constructor() {}
+}
+export class Review {
+  'rating': number;
+  'comment': string;
+  'date': string;
+  'reviewemail': string;
+  'userDetails': User;
 }
