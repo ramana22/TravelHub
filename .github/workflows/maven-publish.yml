@@ -55,9 +55,9 @@ jobs:
       with:
         node-version: '18.x'
 
-    - name: Install dependencies
-      run: npm install --prefix TravelHub-frontend
-
+    - name: Change directory to Angular project
+      run: cd TravelHub-frontend && npm install
+      
     - name: Build Angular App
       run: |
         cd TravelHub-frontend
