@@ -29,3 +29,14 @@ jobs:
       run: |
         cd TravelHub-Backend/
         mvn clean install
+
+    - name: Build & push docker image
+      uses: mr-smithers-excellent/docker-build-push@v6
+      name: Build & push Docker image
+      with:
+        image: reshma784/travelhub
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
