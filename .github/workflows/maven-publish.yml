@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  build-Backend:
 
     runs-on: ubuntu-latest
     permissions:
@@ -42,3 +42,32 @@ jobs:
         dockerfile: TravelHub-Backend/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+  build-frontend:
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Navigate to TravelHub-frontend directory
+      run: cd TravelHub-frontend
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build Angular App
+      run: npm run build -- --prod
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: angular-dist
+        path: TravelHub-frontend/dist/  # Adjust to the path where your Angular app is built within the TravelHub-frontend directory
+
