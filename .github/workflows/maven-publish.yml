@@ -24,6 +24,6 @@ jobs:
 
     - name: Build with Maven
       run: |
-        cd Travel-Backend/
+        cd TravelHub-Backend/
         mvn clean install
 
