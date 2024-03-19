@@ -1,15 +1,21 @@
 package com.travel.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.travel.model.Review;
 import com.travel.model.User;
+import com.travel.repository.ReviewRepository;
 import com.travel.repository.UserRepository;
 
 @Service
 public class TravelHubService {
 	@Autowired
 	UserRepository userrepo;
+	@Autowired
+	ReviewRepository reviewrepo;
 	public User saveUser(User user) throws Exception {
 		if(user==null) {
 			throw new Exception("user is null");
