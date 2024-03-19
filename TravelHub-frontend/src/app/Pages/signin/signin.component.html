@@ -1,38 +1,37 @@
-<div class="signup-form">
-    <form #loginform="ngForm" (ngSubmit)="registerUser()">
-        <h1><b>Sign Up !</b></h1>
-        <p class="lead">It's free and hardly takes more than 30 seconds.</p>
-        <small class="text-danger">{{msg}}</small>
-        <div class="form-group">
-            <div class="input-group">
-                <input type="text" class="form-control" name="email" placeholder="email" [(ngModel)] ="user.email" required="required" #email="ngModel" [class.is-invalid]="email.invalid&&email.touched">
-            </div>
-            <div *ngIf="email.errors && (email.invalid && email.touched)">
-                <small class="text-danger" *ngIf="email.errors?.['required']">Email id is required</small>
-            </div>            
-        </div
-        <div class="form-group">
-            <div class="input-group">
-                <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)] ="user.password" required="required" #password="ngModel" [class.is-invalid]="password.invalid&&password.touched">
-            </div>
-            <div *ngIf="password.errors && (password.invalid && password.touched)">
-                <small class="text-danger" *ngIf="password.errors?.['required']">Password is required</small>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" [(ngModel)] ="user.confirmpassword" required="required" #confirmpassword="ngModel" [class.is-invalid]="confirmpassword.invalid&&confirmpassword.touched">
-            </div>
-            <div *ngIf="confirmpassword.errors && (confirmpassword.invalid && confirmpassword.touched)">
-                <small class="text-danger" *ngIf="password.errors?.['required']">This field is required</small>
-            </div>
-            <div *ngIf="(user.password != null && user.confirmpassword != null) && (user.password !== user.confirmpassword)">
-                <small class="text-danger">Passwords do not match</small>
-            </div>            
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
-        </div>
-        <div class="text-center">Already have an account? <a routerLink="/signin" routerLinkActive="active-link">Login</a></div>
+<div class="wrapper">
+    <div class="title">
+       Login
+    </div>
+    <form #loginform="ngForm" (ngSubmit)="loginUser()">
+       <div class="field">
+         <input type="text" name="email" [(ngModel)] ="user.email" required #email="ngModel" [class.is-invalid]="email.invalid&&email.touched">
+         <label>Email Address</label>
+         <div *ngIf="email.errors && (email.invalid && email.touched)">
+            <small class="text-danger" *ngIf="email.errors?.['required']">Email id is required</small>
+         </div> 
+       </div>
+       <div class="field">
+         <input type="password" name="password" [(ngModel)] ="user.password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched">
+         <label>Password</label>
+         <div *ngIf="password.errors && (password.invalid && password.touched)">
+            <small class="text-danger" *ngIf="password.errors?.['required']">password id is required</small>
+         </div> 
+       </div>
+       <div class="content">
+          <div class="checkbox">
+             <input type="checkbox" id="remember-me">
+             <label for="remember-me">Remember me</label>
+          </div>
+          <div class="pass-link">
+             <a href="#">Forgot password?</a>
+          </div>
+       </div>
+       <div class="field">
+          <input type="submit"  value=login>
+       </div>
+       <div class="signup-link">
+          Not a member? <a  routerLink="/signup" routerLinkActive="active-link">Register</a>
+       </div>
     </form>
-</div>
+ </div>
+
