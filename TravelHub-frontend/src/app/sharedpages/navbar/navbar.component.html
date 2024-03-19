@@ -1,1 +1,53 @@
-<p>navbar works!</p>
+<div class="nav">
+  <input type="checkbox" id="nav-check" />
+  <div class="nav-header">
+    <div class="nav-title" routerLink="" routerLinkActive="active-link">
+      TravelHub
+    </div>
+  </div>
+  <div class="navlinks">
+    <a class="nav-link" routerLink="/" routerLinkActive="active-link">Home</a>
+    <a class="nav-link" routerLink="Hotels" routerLinkActive="active-link"
+      >Stays</a
+    >
+    <label class="nav-link nav-dropdown"
+      >Transport
+      <div class="nav-sublinks">
+        <a
+          class="nav-sublink"
+          routerLink="flights"
+          routerLinkActive="active-link"
+          >Flight</a
+        >
+        <a class="nav-sublink" routerLink="train" routerLinkActive="active-link"
+          >Train</a
+        >
+        <a class="nav-sublink" routerLink="bus" routerLinkActive="active-link"
+          >Bus</a
+        >
+      </div>
+    </label>
+    <a class="nav-link" routerLink="car" routerLinkActive="active-link"
+      >Car-rentals</a
+    >
+    <a class="nav-link" routerLink="Attract" routerLinkActive="active-link"
+      >Attractions</a
+    >
+  </div>
+  <div class="nav-links">
+    <a
+      class="nav-link"
+      *ngIf="!isLoggedIn"
+      routerLink="signup"
+      routerLinkActive="active-link"
+      >Register</a
+    >
+    <a
+      class="nav-link"
+      *ngIf="!isLoggedIn"
+      routerLink="signin"
+      routerLinkActive="active-link"
+      >Sign in</a
+    >
+  </div>
+</div>

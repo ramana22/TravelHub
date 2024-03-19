@@ -1,0 +1,67 @@
+.banner {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px;
+}
+
+.banner-content {
+  font-size: 50px;
+  color: white;
+  padding-top: 2cm;
+  padding-inline: 2cm;
+}
+
+.description {
+  font-size: 30px;
+  color: white;
+  padding-left: 2cm;
+  padding-top: 10px;
+}
+
+.places-heading h1 {
+  font-size: 30px;
+  color: black;
+  margin-left: 2cm;
+  padding-block: 1cm;
+}
+.place-card {
+  background-size: cover;
+  height: 5cm;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+.card-container {
+  padding-inline: 1cm;
+}
+.mr-2 {
+  padding-bottom: 5px;
+  padding-top: 3px;
+}
+.place-title {
+  font-size: 40px;
+  padding-inline: 2.5cm;
+  padding-block: 1.5cm;
+}
+
+@media (max-width: 768px) {
+  .row {
+    padding-inline: 0.5cm;
+  }
+  .banner-content {
+    font-size: 40px;
+    color: white;
+    padding-top: 3cm;
+    padding-inline: 2cm;
+  }
+  .card,
+  .place-card {
+    width: 90%;
+    margin-bottom: 0.5cm;
+  }
+}
+.places-heading {
+  padding-block: 1.5cm;
+  padding-left: 2cm;
+  display: inline;
+}

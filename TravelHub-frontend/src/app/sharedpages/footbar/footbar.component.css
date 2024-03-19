@@ -1,0 +1,24 @@
+.footer {
+  overflow: hidden;
+  position: sticky;
+  top: 100%;
+  background-color: black;
+  height: 50%;
+}
+h1 {
+  font-weight: bold;
+  font-size: 25px;
+}
+p {
+  font-size: 20px;
+}
+a {
+  text-decoration: none;
+  padding: 0px 10px;
+  font-size: 17px;
+}
+.baseline {
+  padding-left: 1cm;
+  padding-top: 1cm;
+  color: lightseagreen;
+}
