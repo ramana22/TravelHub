@@ -1,4 +1,4 @@
 FROM openjdk:8
 EXPOSE 8080
-ADD target/travelhub.jar travelhub.jar
+ADD target/travelhub.jar /travelhub.jar
 ENTRYPOINT ["java","-jar","/travelhub.jar"]
