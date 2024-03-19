@@ -59,7 +59,9 @@ jobs:
       run: npm install --prefix TravelHub-frontend
 
     - name: Build Angular App
-      run: npm run build -- --prod --prefix TravelHub-frontend
+      run: |
+        cd TravelHub-frontend
+        npm run build -- --prod 
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
