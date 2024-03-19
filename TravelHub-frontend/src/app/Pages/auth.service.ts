@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  login() {
-    throw new Error('Method not implemented.');
-  }
-  logout() {
-    throw new Error('Method not implemented.');
-  }
-  isLoggedIn$: any;
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  constructor() {}
+  login() {
+    // Your login logic here
+
+    // Assuming login is successful
+    this.isLoggedInSubject.next(true);
+  }
+
+  logout() {
+    this.isLoggedInSubject.next(false);
+  }
 }

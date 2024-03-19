@@ -33,6 +33,7 @@
   position: absolute;
   top: 2cm;
   left: 1.7cm;
+  padding-top: 0.5cm;
 }
 .nav > .nav-links > a {
   display: inline-block;
