@@ -63,7 +63,7 @@ jobs:
     - name: Build Angular App
       run: |
         cd TravelHub-frontend
-        npm npm run build -- --configuration=production
+        npm run build -- --configuration=production
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
