@@ -1,0 +1,182 @@
+* body {
+  margin: 0px;
+  font-family: "segoe ui";
+}
+
+.nav {
+  height: 150px;
+  width: 100%;
+  background-color: lightseagreen;
+}
+
+.nav > .nav-header > .nav-title {
+  display: inline-block;
+  font-size: 30px;
+  color: white;
+  padding-left: 2cm;
+  padding-top: 1cm;
+  font-weight: bolder;
+}
+
+.nav > .nav-title {
+  font-size: 22px;
+  color: white;
+}
+.nav > .nav-links {
+  font-size: 18px;
+  position: absolute;
+  right: 1.2cm;
+  padding-top: 1cm;
+}
+.nav > .navlinks {
+  font-size: 18px;
+  position: absolute;
+  top: 2cm;
+  left: 1.7cm;
+}
+.nav > .nav-links > a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+}
+.nav > .navlinks > label {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+}
+.nav > .navlinks > a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+}
+
+.nav > .nav-links > a:hover {
+  border-radius: 20px;
+  border: 1px solid;
+}
+.nav > .navlinks > a:hover {
+  border-radius: 20px;
+  border: 1px solid;
+}
+
+.nav > #nav-check {
+  display: none;
+}
+
+.nav > .booking > a:hover {
+  border-radius: 20px;
+  border: 1px solid;
+}
+.nav > .booking > a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+}
+.nav > .booking {
+  font-size: 18px;
+  position: absolute;
+  right: 1.2cm;
+  padding-top: 1cm;
+}
+.account {
+  font-size: 30px;
+  color: white;
+  padding-right: 1.1cm;
+}
+/* Add this to your existing styles or create new styles */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-sublinks {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.nav-dropdown:hover .nav-sublinks {
+  display: flex;
+  flex-direction: column;
+  width: 5cm;
+}
+
+.nav-sublink {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.nav-sublink:hover {
+  background-color: #f0f0f0;
+}
+
+/* styles.css */
+.account {
+  cursor: pointer;
+}
+
+.mat-card {
+  position: absolute;
+  top: 50px; /* Adjust the top position as needed */
+  right: 10px; /* Adjust the right position as needed */
+  z-index: 2;
+}
+
+.card {
+  width: 5cm;
+  height: 4cm;
+  position: fixed;
+  top: 10px; /* Adjust the top position as needed */
+  left: 10px; /* Adjust the left position as needed */
+  background-color: white; /* or any other background color */
+  z-index: 1; /* Ensure the card appears above other elements */
+}
+
+.account {
+  position: relative;
+  display: inline-block;
+}
+.n-card {
+  width: 9cm;
+  height: fit-content;
+  position: fixed;
+  top: 10px; /* Adjust the top position as needed */
+  left: 10px; /* Adjust the left position as needed */
+  background-color: white; /* or any other background color */
+  z-index: 1; /* Ensure the card appears above other elements */
+}
+
+.card.left {
+  position: absolute;
+  left: -5cm;
+  top: 1;
+  height: fit-content;
+}
+.logout {
+  color: black;
+  padding-block: 0.3cm;
+  padding-inline: 0.3cm;
+  font-size: 20px;
+  text-decoration: none;
+}
+.n-card.left {
+  position: absolute;
+  top: 0;
+  left: -8.5cm;
+}
+.n-card h3 {
+  color: black;
+  border: 2px solid black;
+}
+.n-card .row {
+  margin-top: 0.5cm;
+}
+.n-card {
+  max-height: 300px; /* Set the maximum height for the card */
+  overflow-y: auto; /* Enable vertical scroll when content overflows */
+}
