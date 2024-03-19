@@ -55,17 +55,14 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Change directory to Angular project
-      run: cd TravelHub-frontend && ls -la
-
     - name: Install dependencies
-      run: npm install
+      run: npm install --prefix TravelHub-frontend
 
     - name: Build Angular App
-      run: npm run build -- --prod
+      run: npm run build -- --prod --prefix TravelHub-frontend
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
         name: angular-dist
-        path: TravelHub-frontend/dist/ 
+        path: TravelHub-frontend/dist/
