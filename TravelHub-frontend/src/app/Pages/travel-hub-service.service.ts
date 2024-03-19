@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from 'c:/Users/Sivva Nagadinesh/Vscode/TravelHub/TravelHub-frontend/src/app/Pages/models.service';
+import { HttpClient } from '@angular/common/http';
+import { User } from './models.service';
 
 @Injectable({
   providedIn: 'root'
