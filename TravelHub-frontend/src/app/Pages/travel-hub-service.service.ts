@@ -13,4 +13,9 @@ export class TravelHubServiceService {
     this.currentuser=user;
     return this.http.post("http://localhost:8080/register",user);
   }
+  public loginUserFromRemote(user: User): Observable<any> {
+    // Assuming this.getUser returns an Observable
+    this.currentuser=user;
+    return this.http.post("http://localhost:8080/login", user);
+  }
 }
