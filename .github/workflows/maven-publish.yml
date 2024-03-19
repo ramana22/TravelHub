@@ -68,8 +68,14 @@ jobs:
           path: TravelHub-frontend/dist/
   
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: TravelHub-frontend/dist/  # Adjust this to your project's correct dist folder
+        run: |
+          git config --global user.name "ramana22"
+          git config --global user.email "ramanagajula1999@gmail.com"
+          git checkout --orphan gh-pages
+          git rm -rf .
+          mv TravelHub-frontend/dist/* .
+          touch .nojekyll
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git branch -M gh-pages
+          git push -f origin gh-pages
