@@ -32,7 +32,6 @@ jobs:
 
     - name: Build & push docker image
       uses: mr-smithers-excellent/docker-build-push@v6
-      name: Build & push Docker image
       with:
         image: reshma784/travelhub
         tags: latest
