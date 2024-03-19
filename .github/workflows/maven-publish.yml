@@ -45,35 +45,31 @@ jobs:
 
   build-frontend:
     runs-on: ubuntu-latest
-
+  
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18.x'
-   
-    - name: Install dependencies and build Angular App
-      run: |
-        cd TravelHub-frontend
-        npm install
-
-    - name: Build Angular App
-      run: |
-        cd TravelHub-frontend
-        npm run build -- --configuration=production
-
-    - name: Archive artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: angular-dist
-        path: TravelHub-frontend/dist/
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.4
-      with:
-        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: dist/your-project-name  # Change this to your project's dist directory
-
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+  
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+     
+      - name: Install dependencies and build Angular App
+        run: |
+          cd TravelHub-frontend
+          npm install
+          npm run build -- --configuration=production
+  
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: angular-dist
+          path: TravelHub-frontend/dist/
+  
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: TravelHub-frontend/dist/  # Adjust this to your project's correct dist folder
