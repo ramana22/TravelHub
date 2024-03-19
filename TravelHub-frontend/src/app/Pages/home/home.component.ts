@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TravelHubServiceService } from '../travel-hub-service.service';
+import { Review } from '../models.service';
 
 @Component({
   selector: 'app-home',

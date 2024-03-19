@@ -22,4 +22,10 @@ public class TravelHubService {
 	public  User fetchuseremailandpassword(String email,String password) {
 		return userrepo.findByEmailAndPassword(email, password);
 	}
+	 public Review saveReview(Review review) {
+		 return reviewrepo.save(review);
+	 }
+	 public List<Review> getReview(){
+		 return reviewrepo.findAll();
+	 }
 }

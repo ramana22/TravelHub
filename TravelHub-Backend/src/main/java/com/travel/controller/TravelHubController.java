@@ -42,6 +42,16 @@ public class TravelHubController {
 		   }
 		   return userobj;   
 	   }
+	@PostMapping("/saveReview")
+	   public Review saveReview(@RequestBody Review review) {
+		   User user= service.fetchemail(review.getReviewemail());
+		   review.setUserDetails(user);
+		   return service.saveReview(review);
+	   }
+	 @GetMapping("/getreview")
+	   public List<Review> getReviews(){
+		   return service.getReview();
+	   }
 	@GetMapping("/health")
     public String healthCheck() {
         return "Application is running!";
