@@ -9,15 +9,24 @@ import { SigninComponent } from './Pages/signin/signin.component';
 import { SignupComponent } from './Pages/signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient,HttpClientModule } from '@angular/common/http'
+import { TrainComponent } from './Pages/train/train.component';
+import { HotelsComponent } from './Pages/hotels/hotels.component';
+import { CarRentalsComponent } from './Pages/car-rentals/car-rentals.component';
+import { AttractionsComponent } from './Pages/attractions/attractions.component';
 
 @NgModule({
   declarations: [
+    TrainComponent,
     AppComponent,
     HomeComponent,
     SigninComponent,
     SignupComponent,
     NavbarComponent,
-    FootbarComponent
+    FootbarComponent,
+    TrainComponent,
+    HotelsComponent,
+    CarRentalsComponent,
+    AttractionsComponent,
   ],
   imports: [
     BrowserModule,
