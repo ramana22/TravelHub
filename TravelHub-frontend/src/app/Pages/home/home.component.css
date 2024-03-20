@@ -103,7 +103,7 @@
 }
 .book-hotel {
   width: 4cm;
-  background-color: olivedrab;
+  background-color: lightseagreen;
   height: 1cm;
   color: white;
 }
@@ -119,7 +119,7 @@
 }
 
 .star.checked {
-  color: olivedrab; /* Color for filled star */
+  color: lightseagreen; /* Color for filled star */
 }
 
 .reviewcard {
@@ -196,4 +196,8 @@
   bottom: 0;
   right: 0;
   margin: 10px; /* Optional: Add some margin for spacing */
+}
+.reviewcontent {
+  font-size: 16px; /* Adjust font size as needed */
+  font-family: 'Times New Roman', Times, serif;
 }

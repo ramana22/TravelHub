@@ -19,9 +19,9 @@ export class TravelHubServiceService {
     return this.http.post('http://localhost:8080/login', user);
   }
   public getReviews(): Observable<any> {
-    return this.http.get('http://localhost:8098/getreview');
+    return this.http.get('http://localhost:8080/getreview');
   }
   saveReview(review: Review): Observable<any> {
-    return this.http.post<any>('http://localhost:8098/saveReview', review);
+    return this.http.post<any>('http://localhost:8080/saveReview', review);
   }
 }

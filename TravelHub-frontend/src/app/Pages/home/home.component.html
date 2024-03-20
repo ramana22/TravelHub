@@ -136,17 +136,17 @@
   </div>
   <div class="head">
     <div class="title">
-      <h1><b>Your Stories</b></h1>
+        <h1><b>Your Stories</b></h1>
     </div>
-  </div>
-  <div class="section">
+</div>
+<div class="section">
     <div class="row">
       <!-- Display only the first review -->
       <div *ngFor="let review of reviews.slice(0, 1)" class="holder">
         <div class="reviewcard">
           <div class="card-body">
             <h3>
-              <p>{{ review.comment }}</p>
+              <p class="reviewcontent">{{ review.comment }}</p>
             </h3>
             <div class="more">
               <div class="viewmore">
@@ -157,14 +157,11 @@
             </div>
           </div>
         </div>
-
         <!-- Display the image alongside the first review -->
         <div class="downimage">
-          <img
-            src="https://img.freepik.com/free-photo/smiling-young-woman-crouching-rock-with-holding-binoculars_23-2147842479.jpg?w=360&t=st=1701080126~exp=1701080726~hmac=e95bcf3142337d05f48f9ac004dde551bc24d468c590836074580edec8781a46"
-          />
+          <img src="https://img.freepik.com/free-photo/smiling-young-woman-crouching-rock-with-holding-binoculars_23-2147842479.jpg?w=360&t=st=1701080126~exp=1701080726~hmac=e95bcf3142337d05f48f9ac004dde551bc24d468c590836074580edec8781a46">
         </div>
       </div>
     </div>
-  </div>
+</div>      
 </div>
