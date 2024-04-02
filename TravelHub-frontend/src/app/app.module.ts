@@ -7,12 +7,23 @@ import { FootbarComponent } from './sharedpages/footbar/footbar.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { SigninComponent } from './Pages/signin/signin.component';
 import { SignupComponent } from './Pages/signup/signup.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient,HttpClientModule } from '@angular/common/http'
 import { TrainComponent } from './Pages/train/train.component';
 import { HotelsComponent } from './Pages/hotels/hotels.component';
 import { CarRentalsComponent } from './Pages/car-rentals/car-rentals.component';
 import { AttractionsComponent } from './Pages/attractions/attractions.component';
+import { CommonModule } from '@angular/common';
+import { FlightsComponent } from './Pages/flights/flights.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -27,12 +38,23 @@ import { AttractionsComponent } from './Pages/attractions/attractions.component'
     HotelsComponent,
     CarRentalsComponent,
     AttractionsComponent,
+    FlightsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatSelectModule,
+    NgxMaterialTimepickerModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
