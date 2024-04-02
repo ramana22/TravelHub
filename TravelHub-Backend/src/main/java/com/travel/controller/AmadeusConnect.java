@@ -39,10 +39,11 @@ public class AmadeusConnect {
                         .and("adults", adults)
                         );
     }
-    public static HotelOfferSearch[] searchHotelById(String hotelId) throws ResponseException {
+    public static HotelOfferSearch[] searchHotelById(String hotelId,int adult,String checkInDate) throws ResponseException {
         return amadeus.shopping.hotelOffersSearch.get(
                 Params.with("hotelIds", hotelId)
-        );
+                .and("checkIn", checkInDate)
+                .and("adult", adult));
     }
     public static List<String> searchHotelIdsByCity(String cityCode, double radius) throws ResponseException {
         List<String> hotelIds = new ArrayList<>();
@@ -60,4 +61,5 @@ public class AmadeusConnect {
 
         return hotelIds;
     }
+    
 }

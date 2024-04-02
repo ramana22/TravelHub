@@ -82,51 +82,6 @@ class LocationData {
 
 
 
-class Address {
-    private String cityName;
-    private String cityCode;
-    private String countryName;
-    private String countryCode;
-    private String stateCode; // Optional
-    private String regionCode;
-	public String getCityName() {
-		return cityName;
-	}
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-	public String getCityCode() {
-		return cityCode;
-	}
-	public void setCityCode(String cityCode) {
-		this.cityCode = cityCode;
-	}
-	public String getCountryName() {
-		return countryName;
-	}
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
-	}
-	public String getCountryCode() {
-		return countryCode;
-	}
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
-	public String getStateCode() {
-		return stateCode;
-	}
-	public void setStateCode(String stateCode) {
-		this.stateCode = stateCode;
-	}
-	public String getRegionCode() {
-		return regionCode;
-	}
-	public void setRegionCode(String regionCode) {
-		this.regionCode = regionCode;
-	}
-    
-}
 
 
 

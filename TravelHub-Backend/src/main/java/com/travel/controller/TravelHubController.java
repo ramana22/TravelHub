@@ -12,6 +12,7 @@ import com.amadeus.resources.Location;
 import com.amadeus.exceptions.ResponseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travel.model.Bus;
+import com.travel.model.Car;
 import com.travel.model.FlightBookingDetails;
+import com.travel.model.Hotel;
 import com.travel.model.HotelOfferResponse;
 import com.travel.model.Review;
 import com.travel.model.Train;
@@ -256,6 +259,10 @@ public class TravelHubController {
 	public Bus savebus (@RequestBody Bus bus) {
 		   return service.saveBus(bus);
 	}
+	@PostMapping("/saveCar")
+	public Car saveCar (@RequestBody Car car) {
+		   return service.saveCar(car);
+	}
 	@PostMapping("/trains")
 	public List<Train> searchTrains(@RequestBody Map<String, Object> requestMap) {
 	    String departureStation = (String) requestMap.get("departureStation");
@@ -267,22 +274,26 @@ public class TravelHubController {
 
 	    return service.searchtrains(departureStation, arrivalStation, departureDate);
 	}
-	@PostMapping("/buses")
-	public List<Bus> searchBuses(@RequestBody Map<String, Object> requestMap) {
-	    String departureTerminal = (String) requestMap.get("departureTerminal");
-	    String arrivalTerminal = (String) requestMap.get("arrivalTerminal");
-	    String departureDateString = (String) requestMap.get("departureDate");
+	@PostMapping("/cars")
+	public List<Car> searchCars(@RequestBody Map<String, Object> requestMap) {
+	    String pickupLocation = (String) requestMap.get("pickupLocation");
+	    String rentalStartDateString = (String) requestMap.get("rentalStartDate");
+	    String rentalEndDateString = (String) requestMap.get("rentalEndDate");
 
-	    // Parse the departureDateString to LocalDate
-	    LocalDate departureDate = LocalDate.parse(departureDateString);
+	    // Parse the rentalStartDate and rentalEndDate to LocalDate
+	    LocalDate rentalStartDate = LocalDate.parse(rentalStartDateString);
+	    LocalDate rentalEndDate = LocalDate.parse(rentalEndDateString);
 
-	    return service.searchBuses(departureTerminal, arrivalTerminal, departureDate);
+	    return service.searchCars(pickupLocation, rentalStartDate, rentalEndDate);
 	}
+
+	
+    
 	@GetMapping("/hotels/search")
-	public List<HotelOfferResponse.HotelOffer> searchHotels(@RequestParam String hotelId) {
+	public List<HotelOfferResponse.HotelOffer> searchHotels(@RequestParam String hotelId,@RequestParam String checkInDate,int adult) {
 	    List<HotelOfferResponse.HotelOffer> hotelOfferList = new ArrayList<>();
 	    try {
-	        com.amadeus.resources.HotelOfferSearch[] hotelOfferSearchArray = AmadeusConnect.searchHotelById(hotelId);
+	        com.amadeus.resources.HotelOfferSearch[] hotelOfferSearchArray = AmadeusConnect.searchHotelById(hotelId,adult,checkInDate);
 	        for (com.amadeus.resources.HotelOfferSearch offerSearch : hotelOfferSearchArray) {
 	            HotelOfferResponse.HotelOffer hotelOffer = new HotelOfferResponse.HotelOffer();
 	            
@@ -392,18 +403,16 @@ public class TravelHubController {
 	@GetMapping("/hotels")
 	public List<HotelOfferResponse.HotelOffer> getHotelIdsByCity(
 	        @RequestParam String cityCode,
+	        @RequestParam String checkInDate,
+	        @RequestParam int adult,
 	        @RequestParam(required = false) Double radius
 	) {
 	    try {
 	        List<String> hotelIds;
-	        int count = 0; // Initialize count outside the method to retain its value across method calls
-	        
 	        if (radius != null) {
 	            hotelIds = AmadeusConnect.searchHotelIdsByCity(cityCode, radius);
-	            count++; // Increment count after retrieving hotel IDs
-	            
 	            // Limit the number of hotel IDs retrieved to a maximum of 5
-	            hotelIds = hotelIds.subList(0, Math.min(hotelIds.size(), 10));
+	            hotelIds = hotelIds.subList(0, Math.min(hotelIds.size(), 30));
 	        } else {
 	            hotelIds = new ArrayList<>(); // Initialize with an empty list
 	        }
@@ -413,7 +422,7 @@ public class TravelHubController {
 	        for (String hotelId : hotelIds) {
 	            try {
 	                // Call the searchHotels method passing the hotelId
-	                List<HotelOfferResponse.HotelOffer> hotelOffers = searchHotels(hotelId);
+	                List<HotelOfferResponse.HotelOffer> hotelOffers = searchHotels(hotelId,checkInDate,adult);
 	                hotelResults.addAll(hotelOffers);
 	            } catch (Exception e) {
 	                // Log the error or handle it as needed
@@ -429,5 +438,24 @@ public class TravelHubController {
 	        return null;
 	    }
 	}
+	@PostMapping("/getfilterlist")
+	   public List<Object> filter(@RequestBody Map<String, String> requestBody) {
+	        String city = requestBody.get("city");
 
+	        List<Object> filteredHotels = new ArrayList<>();
+	        List<Hotel> hotels = service.getAllHotels();
+	        for (Hotel hotel : hotels) {
+	            String hotelCity = hotel.getAddress().getCity();
+
+	            if (hotelCity != null && hotelCity.equalsIgnoreCase(city.trim())) {
+	                filteredHotels.add(hotel);
+	            }
+	        }
+	        return filteredHotels;
+	  }
+	@PostMapping("/addHotel")
+	public Hotel addHotel(@RequestBody Hotel hotel) {   
+	       Hotel savedHotel = service.saveHotel(hotel);
+	       return savedHotel;
+	}
 }
