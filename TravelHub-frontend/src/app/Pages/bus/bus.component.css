@@ -1,0 +1,78 @@
+.banner {
+    position: relative;
+    background-image: url("..\\..\\../assets/img/bus.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px; /* Ensure this height matches your banner height */
+  }
+  
+  .banner-content,
+  .description {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    right: 10%;
+  }
+  
+  .banner-content {
+    font-size: 50px;
+  }
+  
+  .description {
+    font-size: 30px;
+    padding-top: 3cm;
+    padding-right: 1.5cm;
+  }
+
+
+  .search-card {
+    margin: 2cm;
+    padding: 1cm;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: fit-content;
+  }
+  
+  .head {
+    margin-left: 0.5cm;
+    margin-bottom: 0.5cm;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+  }
+  
+
+  
+  .input-field label {
+    margin-bottom: 0.5cm;
+    margin-inline: 1cm;
+  }
+  
+  .input-field input {
+    padding: 0.5cm;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    height: 1.5cm;
+    width: 8cm;
+  }
+  
+  button {
+    padding: 0.5cm;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    width: 3cm;
+    height: 1.5cm;
+    background-color: lightseagreen;
+    align-items: center;
+    padding: 0.5;
+  }

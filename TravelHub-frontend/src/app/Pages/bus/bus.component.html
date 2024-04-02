@@ -1,1 +1,22 @@
-<p>bus works!</p>
+<div class="banner">
+    <div class="banner-content">Find Your Dream Retreat<br></div>
+    <div class="description"> Explore vacation homes, and more...</div>
+</div> 
+
+<div class="search-card">
+    <div class="head">search Buses</div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form">
+        <div class="input-field">
+          <input [(ngModel)]="departureTerminal" placeholder =" From where ? " name="departureStation" required>
+        </div>
+        <div class="input-field">
+          <input [(ngModel)]="arrivalTerminal" placeholder =" TO ... ? " name="arrivalStation" required>
+        </div>
+        <div class="input-field">
+          <input type="date" [(ngModel)]="departureDate" placeholder =" When are you going " name="departureDate" required>
+        </div>
+        <button type="submit">Search </button>
+      </div>
+    </form>
+</div>

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Review, User } from './models.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Bus, Car, HotelOffer, Review, Train, User } from './models.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TravelHubServiceService {
+  [x: string]: any;
   searchAirports(searchQuery: any) {
     throw new Error('Method not implemented.');
   }
@@ -46,4 +47,22 @@ export class TravelHubServiceService {
   getAirports(keyword: string) {
     return this.http.get<any[]>(`http://localhost:8080/searchLocations?keyword=${keyword}`);
   }
+  getHotelOffers(cityCode: string, radius?: number): Observable<HotelOffer[]> {
+    let params = new HttpParams().set('cityCode', cityCode);
+    if (radius) {
+      params = params.set('radius', radius.toString());
+    }
+
+    return this.http.get<HotelOffer[]>(`${this.baseUrl}/hotels`, { params });
+  }
+  public searchBuses(searchParams: any): Observable<Bus[]> {
+    return this.http.post<Bus[]>('http://localhost:8080/buses', searchParams);
+  }
+  public searchCars(searchParams: any): Observable<Car[]> {
+    return this.http.post<Car[]>('http://localhost:8080/cars', searchParams);
+  }
+  public searchTrains(searchParams: any): Observable<Train[]> {
+    return this.http.post<Train[]>('http://localhost:8080/trains', searchParams);
+  }
+
 }

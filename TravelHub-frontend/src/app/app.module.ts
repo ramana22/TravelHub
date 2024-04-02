@@ -23,6 +23,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { buffer } from 'rxjs';
+import { BusComponent } from './Pages/bus/bus.component';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HotelsComponent,
     CarRentalsComponent,
     AttractionsComponent,
-    FlightsComponent
+    FlightsComponent,
+    BusComponent
   ],
   imports: [
     BrowserModule,

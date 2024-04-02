@@ -1,1 +1,24 @@
-<p>train works!</p>
+<div class="banner">
+    <div class="banner-content">Find Your Dream Retreat<br></div>
+    <div class="description"> Explore vacation homes, and more...</div>
+</div> 
+
+<!-- train-search-form.component.html -->
+
+<div class="search-card">
+    <div class="head">search trains</div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form">
+        <div class="input-field">
+          <input [(ngModel)]="departureStation" placeholder =" From where ? " name="departureStation" required>
+        </div>
+        <div class="input-field">
+          <input [(ngModel)]="arrivalStation" placeholder =" TO ... ? " name="arrivalStation" required>
+        </div>
+        <div class="input-field">
+          <input type="date" [(ngModel)]="departureDate" placeholder =" When are you going " name="departureDate" required>
+        </div>
+        <button type="submit">Search </button>
+      </div>
+    </form>
+</div>
