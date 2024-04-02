@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.amadeus.resources.FlightOfferSearch;
+import com.amadeus.resources.FlightOfferSearch.BaggageAllowance;
 
 public class FlightBookingDetails {
     private String airline;
@@ -352,7 +353,7 @@ public class FlightBookingDetails {
         private String cabin;
         private String fareBasis;
         private String segmentClass;
-        private IncludedCheckedBags includedCheckedBags;
+        private BaggageAllowance includedCheckedBags;
 		public String getSegmentId() {
 			return segmentId;
 		}
@@ -377,18 +378,13 @@ public class FlightBookingDetails {
 		public void setSegmentClass(String segmentClass) {
 			this.segmentClass = segmentClass;
 		}
-		public IncludedCheckedBags getIncludedCheckedBags() {
+		public BaggageAllowance getIncludedCheckedBags() {
 			return includedCheckedBags;
 		}
-		public void setIncludedCheckedBags(IncludedCheckedBags includedCheckedBags) {
-			this.includedCheckedBags = includedCheckedBags;
+		public void setIncludedCheckedBags(BaggageAllowance baggageAllowance) {
+			this.includedCheckedBags = baggageAllowance;
 		}
-		public void setIncludedCheckedBags(
-				com.amadeus.resources.FlightOfferSearch.IncludedCheckedBags includedCheckedBags2) {
-			// TODO Auto-generated method stub
-			
-		}
-
+		
         
     }
 
@@ -413,8 +409,8 @@ public class FlightBookingDetails {
 
     public static class SearchPrice {
         private String currency;
-        private double total;
-        private double base;
+        private String total;
+        private String base;
         private List<Fee> fees;
         private double grandTotal;
 		public String getCurrency() {
@@ -423,17 +419,17 @@ public class FlightBookingDetails {
 		public void setCurrency(String currency) {
 			this.currency = currency;
 		}
-		public double getTotal() {
+		public String getTotal() {
 			return total;
 		}
-		public void setTotal(double total) {
-			this.total = total;
+		public void setTotal(String string) {
+			this.total = string;
 		}
-		public double getBase() {
+		public String getBase() {
 			return base;
 		}
-		public void setBase(double base) {
-			this.base = base;
+		public void setBase(String string) {
+			this.base = string;
 		}
 		public List<Fee> getFees() {
 			return fees;

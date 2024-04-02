@@ -2,15 +2,12 @@ package com.travel.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import com.amadeus.resources.FlightOfferSearch;
+import com.amadeus.resources.HotelOfferSearch.Offer;
 import com.amadeus.resources.Location;
 import com.amadeus.exceptions.ResponseException;
 
@@ -26,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.travel.model.Bus;
 import com.travel.model.FlightBookingDetails;
+import com.travel.model.HotelOfferResponse;
 import com.travel.model.Review;
 import com.travel.model.Train;
 import com.travel.model.User;
@@ -138,10 +136,13 @@ public class TravelHubController {
 	private double calculateTotalPrice(FlightOfferSearch flightOffer) {
 	    double totalPrice = 0.0;
 	    for (FlightOfferSearch.TravelerPricing travelerPricing : flightOffer.getTravelerPricings()) {
-	        totalPrice += travelerPricing.getPrice().getTotal();
+	        String totalAsString = travelerPricing.getPrice().getTotal();
+	        double totalAsDouble = Double.parseDouble(totalAsString);
+	        totalPrice += totalAsDouble;
 	    }
 	    return totalPrice;
 	}
+
 
 	private FlightBookingDetails extractBookingDetails(FlightOfferSearch flightOffer) {
 	    FlightBookingDetails bookingDetails = new FlightBookingDetails();
@@ -276,6 +277,157 @@ public class TravelHubController {
 	    LocalDate departureDate = LocalDate.parse(departureDateString);
 
 	    return service.searchBuses(departureTerminal, arrivalTerminal, departureDate);
+	}
+	@GetMapping("/hotels/search")
+	public List<HotelOfferResponse.HotelOffer> searchHotels(@RequestParam String hotelId) {
+	    List<HotelOfferResponse.HotelOffer> hotelOfferList = new ArrayList<>();
+	    try {
+	        com.amadeus.resources.HotelOfferSearch[] hotelOfferSearchArray = AmadeusConnect.searchHotelById(hotelId);
+	        for (com.amadeus.resources.HotelOfferSearch offerSearch : hotelOfferSearchArray) {
+	            HotelOfferResponse.HotelOffer hotelOffer = new HotelOfferResponse.HotelOffer();
+	            
+	            // Set hotel details
+	            HotelOfferResponse.Hotel hotel = new HotelOfferResponse.Hotel();
+	            hotel.setType("hotel");
+	            hotel.setHotelId(offerSearch.getHotel().getHotelId());
+	            hotel.setChainCode(offerSearch.getHotel().getChainCode());
+	            hotel.setDupeId(offerSearch.getHotel().getDupeId());
+	            hotel.setName(offerSearch.getHotel().getName());
+	            hotel.setCityCode(offerSearch.getHotel().getCityCode());
+	            hotelOffer.setHotel(hotel);
+	            
+	            // Set offer details
+	            List<HotelOfferResponse.Offer> offers = new ArrayList<>();
+	            for (Offer offer : offerSearch.getOffers()) {
+	                HotelOfferResponse.Offer hotelOfferOffer = new HotelOfferResponse.Offer();
+	                hotelOfferOffer.setId(offer.getId());
+	                hotelOfferOffer.setCheckInDate(offer.getCheckInDate());
+	                hotelOfferOffer.setCheckOutDate(offer.getCheckOutDate());
+	                // Set other offer properties similarly
+	                
+	                // Set rate family estimated
+	                if (offer.getRateFamilyEstimated() != null) {
+	                    HotelOfferResponse.RateFamilyEstimated rateFamilyEstimated = new HotelOfferResponse.RateFamilyEstimated();
+	                    rateFamilyEstimated.setCode(offer.getRateFamilyEstimated().getCode());
+	                    rateFamilyEstimated.setType(offer.getRateFamilyEstimated().getType());
+	                    hotelOfferOffer.setRateFamilyEstimated(rateFamilyEstimated);
+	                }
+	                
+	                // Set room
+	                if (offer.getRoom() != null) {
+	                    HotelOfferResponse.Room room = new HotelOfferResponse.Room();
+	                    room.setType(offer.getRoom().getType());
+	                    
+	                    // Set type estimated
+	                    if (offer.getRoom().getTypeEstimated() != null) {
+	                        HotelOfferResponse.TypeEstimated typeEstimated = new HotelOfferResponse.TypeEstimated();
+	                        typeEstimated.setCategory(offer.getRoom().getTypeEstimated().getCategory());
+	                        
+	                        // Check if beds is null before accessing it
+	                        Integer beds = offer.getRoom().getTypeEstimated().getBeds();
+	                        if (beds != null) {
+	                            typeEstimated.setBeds(beds);
+	                        } else {
+	                            // Handle the case when beds is null, you can set a default value or handle it according to your application's logic
+	                            typeEstimated.setBeds(0); // Setting a default value of 0 beds
+	                        }
+	                        
+	                        typeEstimated.setBedType(offer.getRoom().getTypeEstimated().getBedType());
+	                        room.setTypeEstimated(typeEstimated);
+	                    }
+	                    
+	                    // Set description
+	                    if (offer.getRoom().getDescription() != null) {
+	                        HotelOfferResponse.Description description = new HotelOfferResponse.Description();
+	                        description.setText(offer.getRoom().getDescription().getText());
+	                        description.setLang(offer.getRoom().getDescription().getLang());
+	                        room.setDescription(description);
+	                    }
+	                    
+	                    hotelOfferOffer.setRoom(room);
+	                }
+	                
+	                // Set guests
+	                if (offer.getGuests() != null) {
+	                    HotelOfferResponse.Guests guests = new HotelOfferResponse.Guests();
+	                    guests.setAdults(offer.getGuests().getAdults());
+	                    // Set other guest properties similarly
+	                    hotelOfferOffer.setGuests(guests);
+	                }
+	                
+	                // Set price
+	                if (offer.getPrice() != null) {
+	                    HotelOfferResponse.Price price = new HotelOfferResponse.Price();
+	                    price.setCurrency(offer.getPrice().getCurrency());
+	                    price.setBase(offer.getPrice().getBase());
+	                    price.setTotal(offer.getPrice().getTotal());
+	                    // Set variations and other price properties similarly
+	                    hotelOfferOffer.setPrice(price);
+	                }
+	                
+	                // Set policies
+	                if (offer.getPolicies() != null) {
+	                    HotelOfferResponse.Policies policies = new HotelOfferResponse.Policies();
+	                    // Set policies properties similarly
+	                    hotelOfferOffer.setPolicies(policies);
+	                }
+	                
+	                // Set self
+	                if (offer.getSelf() != null) {
+	                    hotelOfferOffer.setSelf(offer.getSelf());
+	                }
+	                
+	                offers.add(hotelOfferOffer);
+	            }
+	            hotelOffer.setOffers(offers);
+	            
+	            hotelOfferList.add(hotelOffer);
+	        }
+	    } catch (ResponseException e) {
+	        e.printStackTrace();
+	        // Handle the exception or return appropriate response
+	    }
+	    return hotelOfferList;
+	}
+	@GetMapping("/hotels")
+	public List<HotelOfferResponse.HotelOffer> getHotelIdsByCity(
+	        @RequestParam String cityCode,
+	        @RequestParam(required = false) Double radius
+	) {
+	    try {
+	        List<String> hotelIds;
+	        int count = 0; // Initialize count outside the method to retain its value across method calls
+	        
+	        if (radius != null) {
+	            hotelIds = AmadeusConnect.searchHotelIdsByCity(cityCode, radius);
+	            count++; // Increment count after retrieving hotel IDs
+	            
+	            // Limit the number of hotel IDs retrieved to a maximum of 5
+	            hotelIds = hotelIds.subList(0, Math.min(hotelIds.size(), 10));
+	        } else {
+	            hotelIds = new ArrayList<>(); // Initialize with an empty list
+	        }
+	        
+	        System.out.println(hotelIds);
+	        List<HotelOfferResponse.HotelOffer> hotelResults = new ArrayList<>();
+	        for (String hotelId : hotelIds) {
+	            try {
+	                // Call the searchHotels method passing the hotelId
+	                List<HotelOfferResponse.HotelOffer> hotelOffers = searchHotels(hotelId);
+	                hotelResults.addAll(hotelOffers);
+	            } catch (Exception e) {
+	                // Log the error or handle it as needed
+	                System.err.println("Error occurred while searching for hotel with ID " + hotelId + ": " + e.getMessage());
+	                // Continue to the next hotel ID if any error occurs
+	                continue;
+	            }
+	        }
+	        return hotelResults;
+	    } catch (Exception e) {
+	        // Handle the exception or return appropriate response
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 
 }
