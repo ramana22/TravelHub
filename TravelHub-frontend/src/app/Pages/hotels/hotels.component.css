@@ -1,0 +1,69 @@
+.banner {
+    background-image: url("..\\..\\\../assets/img/286780497.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+}
+
+.banner-content {
+    font-size: 50px;
+    color: white;
+    padding-top: 3cm;
+    padding-inline: 2cm; 
+}
+
+.description {
+    font-size: 30px;
+    color: white;
+    padding-left: 2cm;
+    padding-top: 30px;
+}
+
+.search-card {
+  margin: 2cm;
+  padding: 1cm;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.head {
+  margin-bottom: 0.5cm;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+}
+
+input {
+  padding: 0.5cm;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  height: 1.5cm;
+}
+
+#city {
+  width: 13cm; /* Set city input width */
+}
+
+#radius {
+  width: 7cm; /* Set radius input width */
+}
+
+button {
+  padding: 0.5cm 3cm; /* Adjust button dimensions */
+  border: none;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  background-color: lightseagreen; /* Adjust button color */
+  height: 1.5cm;
+}
+
+
+

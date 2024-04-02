@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './car-rentals.component.css'
 })
 export class CarRentalsComponent {
+onSubmit() {
+throw new Error('Method not implemented.');
+}
+pickupLocation: any;
+rentalstartDate: any;
+rentalendDate: any;
 
 }

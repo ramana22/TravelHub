@@ -1,1 +1,19 @@
-<p>hotels works!</p>
+<div class="banner">
+    <div class="banner-content"><b>Find Your Dream Retreat</b><br></div>
+    <div class="description"> Explore vacation homes, and more...</div>
+</div>
+
+<div class="search-card">
+  <div class="head">Search Hotels</div>
+  <form (ngSubmit)="onSubmit()" class="form">
+    <div class="form-group">
+      <input type="text" id="city" placeholder="City" [(ngModel)]="city" name="city" required>
+    </div>
+    <div class="form-group">
+      <input type="number" id="radius" placeholder="radius" name="radius" required>
+    </div>
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+  
