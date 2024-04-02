@@ -25,6 +25,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { buffer } from 'rxjs';
 import { BusComponent } from './Pages/bus/bus.component';
+import { BookingpageComponent } from './Pages/bookingpage/bookingpage.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { BusComponent } from './Pages/bus/bus.component';
     CarRentalsComponent,
     AttractionsComponent,
     FlightsComponent,
-    BusComponent
+    BusComponent,
+    BookingpageComponent
   ],
   imports: [
     BrowserModule,

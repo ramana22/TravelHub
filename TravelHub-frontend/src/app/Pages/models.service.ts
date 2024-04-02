@@ -141,6 +141,8 @@ export interface HotelOfferResponse {
 }
 
 export interface HotelOffer {
+  room: any;
+  showDetails: any;
   type: string;
   hotel: Hotel;
   available: boolean;
@@ -154,6 +156,7 @@ export interface Hotel {
   chainCode: string;
   dupeId: string;
   name: string;
+  price: Price;
   cityCode: string;
   latitude: number;
   longitude: number;
@@ -228,6 +231,32 @@ export interface Policies {
 export interface Cancellation {
   description: Description;
   type: string;
+}
+
+export class Hotel{
+  'hotelid':number;
+  'hotelname':String;
+  'rating':number;
+  'address':address;
+  'image':Image;
+  'room':Room;
+}
+export class Room{
+  'roomnumber':number;
+  'image':Image; 
+  'bill':Bill;  
+}
+export class Image{
+  'imageUrl':string;
+}
+export class address{
+  'street':string;
+  'city':string;
+  'state':string;
+  'postalCode':number;
+}
+export class Bill{
+  'amount':number;
 }
 
 

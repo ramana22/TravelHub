@@ -47,10 +47,16 @@ export class TravelHubServiceService {
   getAirports(keyword: string) {
     return this.http.get<any[]>(`http://localhost:8080/searchLocations?keyword=${keyword}`);
   }
-  getHotelOffers(cityCode: string, radius?: number): Observable<HotelOffer[]> {
+  getHotelOffers(cityCode: string,checkInDate:string,adult:number, radius?: number): Observable<HotelOffer[]> {
     let params = new HttpParams().set('cityCode', cityCode);
     if (radius) {
       params = params.set('radius', radius.toString());
+    }
+    if (adult) {
+      params = params.set('adult', adult.toString());
+    }
+    if (checkInDate) {
+      params = params.set('checkInDate',checkInDate);
     }
 
     return this.http.get<HotelOffer[]>(`${this.baseUrl}/hotels`, { params });
@@ -63,6 +69,9 @@ export class TravelHubServiceService {
   }
   public searchTrains(searchParams: any): Observable<Train[]> {
     return this.http.post<Train[]>('http://localhost:8080/trains', searchParams);
+  }
+  searchDestination(destination: string): Observable<any> {
+    return this.http.post<any>("http://localhost:8080/getfilterlist", { city: destination });
   }
 
 }

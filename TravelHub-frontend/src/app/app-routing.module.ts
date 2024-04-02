@@ -9,6 +9,7 @@ import { HotelsComponent } from './Pages/hotels/hotels.component';
 import { AttractionsComponent } from './Pages/attractions/attractions.component';
 import { BusComponent } from './Pages/bus/bus.component';
 import { TrainComponent } from './Pages/train/train.component';
+import { BookingpageComponent } from './Pages/bookingpage/bookingpage.component';
 
 
 const routes: Routes = [

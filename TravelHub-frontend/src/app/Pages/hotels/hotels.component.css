@@ -21,7 +21,9 @@
 }
 
 .search-card {
-  margin: 2cm;
+  margin-left: 2cm;
+  margin-right: 2cm;
+  margin-top: 2cm;
   padding: 1cm;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -48,22 +50,94 @@ input {
 }
 
 #city {
-  width: 13cm; /* Set city input width */
+  width: 7cm; /* Set city input width */
+}
+#date{
+  width: 7cm;
 }
 
 #radius {
-  width: 7cm; /* Set radius input width */
+  width: 5cm; /* Set radius input width */
 }
 
-button {
-  padding: 0.5cm 3cm; /* Adjust button dimensions */
+.search{ /* Adjust button dimensions */
   border: none;
   border-radius: 3px;
   color: white;
   cursor: pointer;
   background-color: lightseagreen; /* Adjust button color */
   height: 1.5cm;
+  padding-inline:2.3cm;
 }
 
 
 
+
+.holder {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: row;
+  width: 25.5cm;
+  height: fit-content;
+  margin-block: 0.3cm;
+  margin-inline: 2cm;
+}
+
+
+
+.image-container {
+  width: 40%; /* Set the width of the image container */
+}
+
+.image-container img {
+  width: 100%; /* Make the image fill its container */
+  height: 100%; /* Make the image fill its container */
+  object-fit: cover; /* Ensure the image covers the container */
+  border-top-left-radius: 5px; /* Add border radius to top left corner of image */
+  border-bottom-left-radius: 5px; /* Add border radius to bottom left corner of image */
+}
+.details{
+    width: 10cm;
+    padding-inline-start: 1cm;
+}
+.head{
+   margin-top: 0.5cm;
+}
+.head :hover{
+  cursor: pointer;
+  color: lightseagreen;
+}
+.tick-mark::before {
+  content: "\2713"; /* Unicode character for a tick mark */
+  margin-right: 5px; /* Add some space between the tick mark and the text */
+  color: lightseagreen; 
+  margin-block: 0.5cm;/* Color of the tick mark */
+}
+.location { /* Unicode character for a tick mark */
+  margin-right: 5px; /* Add some space between the tick mark and the text */
+  margin-block: 0.5cm;/* Color of the tick mark */
+}
+.rating{
+  margin-top: 2cm;
+  margin-bottom: 0.5cm;
+  display: flex;
+  flex-direction: row;
+}
+.price{
+  width: 5.3cm;
+  align-items: center;
+}
+.price h1{
+  margin-top: 3.5cm;
+}
+.check button{
+  width: 3cm;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  background-color: lightseagreen; /* Adjust button color */
+  height: 1.3cm;
+}

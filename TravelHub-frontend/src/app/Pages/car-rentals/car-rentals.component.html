@@ -7,13 +7,13 @@
     <form (ngSubmit)="onSubmit()">
       <div class="form">
         <div class="input-field">
-          <input [(ngModel)]="pickupLocation" placeholder =" From where ? " name="departureStation" required>
+          <input [(ngModel)]="pickupLocation" placeholder =" pick Up location " name="departureStation" required>
         </div>
         <div class="input-field">
-            <input type="date" [(ngModel)]="rentalstartDate" placeholder =" When are you going " name="departureDate" required>
-          </div>
+            <input type="date" [(ngModel)]="rentalstartDate" placeholder =" rental start date " name="departureDate" required>
+        </div>
         <div class="input-field">
-          <input type="date" [(ngModel)]="rentalendDate" placeholder =" When are you going " name="departureDate" required>
+          <input type="date" [(ngModel)]="rentalendDate" placeholder =" rental end date" name="departureDate" required>
         </div>
         <button type="submit">Search </button>
       </div>
