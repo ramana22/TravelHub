@@ -44,6 +44,20 @@ export class TravelHubServiceService {
     // Make the HTTP GET request with the query parameters
     return this.http.get(url, { params });
   }
+  searchFlightsoneway(departureAirport: string, arrivalAirport: string, departureDate: string, passengers : number): Observable<any> {
+    const url = `${this.baseUrl}/searchFlightsoneway`;
+
+    // Construct the query parameters
+    const params = {
+      origin: departureAirport,
+      destination: arrivalAirport,
+      departDate: departureDate,
+      adults: passengers
+    };
+
+    // Make the HTTP GET request with the query parameters
+    return this.http.get(url, { params });
+  }
   getAirports(keyword: string) {
     return this.http.get<any[]>(`http://localhost:8080/searchLocations?keyword=${keyword}`);
   }

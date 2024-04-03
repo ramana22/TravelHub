@@ -24,6 +24,8 @@ export class Review {
 
 export interface FlightOffer {
   airline: string;
+  starttime:Date;
+  endtime:Date;
   instantTicketingRequired: boolean;
   nonHomogeneous: boolean;
   oneWay: boolean;
@@ -262,5 +264,32 @@ export class address{
 export class Bill{
   'amount':number;
 }
+
+
+// Define the TypeScript interfaces for Address and GeoCode
+export interface Address {
+  cityName: string;
+  countryName: string;
+  regionCode: string;
+}
+
+export interface GeoCode {
+  latitude: number;
+  longitude: number;
+}
+
+export interface LocationData {
+  name: string;
+  detailedName: string;
+  iataCode: string;
+  address: Address;
+  geoCode: GeoCode;
+  timeZoneOffset: string;
+}
+
+
+
+
+
 
 
