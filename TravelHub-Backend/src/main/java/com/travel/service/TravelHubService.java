@@ -9,14 +9,18 @@ import org.springframework.stereotype.Service;
 
 import com.travel.model.Bus;
 import com.travel.model.Car;
+import com.travel.model.FlightBookingDetails;
 import com.travel.model.Hotel;
+import com.travel.model.LocationData;
 import com.travel.model.Review;
 import com.travel.model.Room;
 import com.travel.model.Train;
 import com.travel.model.User;
 import com.travel.repository.BusRepository;
 import com.travel.repository.CarRepository;
+import com.travel.repository.FlightsRepository;
 import com.travel.repository.HotelRepository;
+import com.travel.repository.Locationrepository;
 import com.travel.repository.ReviewRepository;
 import com.travel.repository.RoomRepository;
 import com.travel.repository.TrainRepository;
@@ -34,6 +38,10 @@ public class TravelHubService {
 	BusRepository busrepo;
 	@Autowired
 	CarRepository carrepo;
+	@Autowired
+	FlightsRepository flightrepo;
+	@Autowired
+    Locationrepository locationrepo;
 	public User saveUser(User user) throws Exception {
 		if(user==null) {
 			throw new Exception("user is null");
@@ -68,7 +76,7 @@ public class TravelHubService {
 		 return carrepo.save(car);
 	 }
 	 public List<Car> searchCars(String pickupLocation, LocalDate rentalStartDate, LocalDate rentalEndDate) {
-		    List<Car> cars = carrepo.findByPickupLocationAndRentalStartDateLessThanEqualAndRentalEndDateGreaterThanEqual(
+		    List<Car> cars = carrepo.findByPickupLocationStartingWithIgnoreCaseAndRentalStartDateLessThanEqualAndRentalEndDateGreaterThanEqual(
 		            pickupLocation, rentalStartDate, rentalEndDate);
 		    return cars;
 	}
@@ -83,7 +91,15 @@ public class TravelHubService {
 		return roomrepo.save(room);
 	}
 	public List<Hotel> getAllHotels() {
-        return hotelrepo.findAll();
-    }
+	    return hotelrepo.findAll();
+	}
+
+	public List<LocationData> saveAll(List<LocationData> locationDataList) {
+	    return locationrepo.saveAll(locationDataList);	
+	}
+	public List<FlightBookingDetails> saveAllflights(List<FlightBookingDetails> FlightBookingDetails) {
+	    return flightrepo.saveAll(FlightBookingDetails);	
+	}
+
 	 
 }

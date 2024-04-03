@@ -10,6 +10,6 @@ import com.travel.model.Car;
 
 public interface CarRepository extends JpaRepository<Car,Long>{
 
-	List<Car> findByPickupLocationAndRentalStartDateLessThanEqualAndRentalEndDateGreaterThanEqual(
+	List<Car> findByPickupLocationStartingWithIgnoreCaseAndRentalStartDateLessThanEqualAndRentalEndDateGreaterThanEqual(
 		    String pickupLocation, LocalDate rentalStartDate, LocalDate rentalEndDate);
 }
