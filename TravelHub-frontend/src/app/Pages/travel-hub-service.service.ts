@@ -61,17 +61,33 @@ export class TravelHubServiceService {
 
     return this.http.get<HotelOffer[]>(`${this.baseUrl}/hotels`, { params });
   }
-  public searchBuses(searchParams: any): Observable<Bus[]> {
-    return this.http.post<Bus[]>('http://localhost:8080/buses', searchParams);
+ 
+  searchBuses(departureTerminal: string, arrivalTerminal: string,departureDate:string) {
+    const searchParams = {
+      departureTerminal,
+      arrivalTerminal,
+      departureDate
+    };
+    return this.http.post<Bus[]>("http://localhost:8080/buses", searchParams);
   }
-  public searchCars(searchParams: any): Observable<Car[]> {
-    return this.http.post<Car[]>('http://localhost:8080/cars', searchParams);
-  }
-  public searchTrains(searchParams: any): Observable<Train[]> {
-    return this.http.post<Train[]>('http://localhost:8080/trains', searchParams);
+  searchTrains(departureStation: string, arrivalStation: string,departureDate:Date) {
+    const searchParams = {
+      departureStation,
+      arrivalStation,
+      departureDate
+    };
+    return this.http.post<Train[]>("http://localhost:8080/trains", searchParams);
   }
   searchDestination(destination: string): Observable<any> {
     return this.http.post<any>("http://localhost:8080/getfilterlist", { city: destination });
+  }
+  public getCars(pickupLocation:string,rentalStartDate:string,rentalEndDate:string):Observable<any> {
+    const searchParams = {
+      pickupLocation,
+      rentalStartDate,
+      rentalEndDate
+    };
+    return this.http.post("http://localhost:8080/cars",searchParams);
   }
 
 }

@@ -7,7 +7,7 @@
 
 <div class="search-card">
     <div class="head">Search Trains</div>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="searchTrains()">
       <div class="form">
         <div class="input-field">
           <input [(ngModel)]="departureStation" placeholder =" From where ? " name="departureStation" required>
@@ -22,3 +22,35 @@
       </div>
     </form>
 </div>
+
+<div class="train-container">
+  <div  *ngIf="Trains.length > 0; else notrains">
+    <h1 class="heading" style="margin-inline: 4cm;"><b>Best Deals</b></h1>
+    <div class="loop" *ngFor="let train of Trains">
+      <div class="train card">
+        <div class="operator card"><b>{{train.operator}}</b></div>
+        <div class="details card">
+          <div class="departure">
+            <div>{{train.departureStation}}</div>
+            <div>{{train.departureformattedDateTime}}</div>
+          </div>
+          <div class="space">----------></div>
+          <div class="arrival">
+            <div>{{train.arrivalStation}}</div>
+            <div>{{train.arrivalformattedDateTime}}</div>
+          </div>
+        </div>
+        <div class="price card">
+          <div class="pricetag" style="font-size: 24px;"><b>{{train.price}}$</b></div>
+          <span><i class="bi bi-person"></i>&nbsp;&nbsp;1&nbsp;&nbsp;One Way </span>
+          <div class="check"><button type="submit" routerLink="/bookingpage" routerLinkActive="active-link">Select Departure</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<ng-template #notrains>
+    <p></p>
+  </ng-template>
+</div>
+
+  

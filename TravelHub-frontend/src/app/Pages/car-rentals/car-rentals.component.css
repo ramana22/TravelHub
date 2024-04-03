@@ -70,3 +70,50 @@
     align-items: center;
     padding: 0.5;
   }
+
+  .car{
+    width: 8cm;
+    height: 11cm;
+    margin-inline: 0.9cm;
+    
+    padding: 0;
+    border-radius: 5px; /* Optional: adds rounded corners to the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .model{
+    height: 2cm;
+    justify-content: center;
+    padding-inline:0.3cm; 
+  }
+  .picture {
+    height: 5cm; /* Set the height of the container */
+    display: flex; /* Ensure the image is centered vertically and horizontally */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .picture img {
+    max-width: 100%; /* Ensure the image does not exceed the container's width */
+    max-height: 100%; /* Ensure the image does not exceed the container's height */
+  }
+  .amount{
+    display: flex;
+    flex-direction: column;
+  }
+  .pricetag{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.1cm;
+    margin-top:0.5cm;
+  }
+  .check button{
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    background-color: lightseagreen; /* Adjust button color */
+    height: 1.3cm;
+    padding: 0.3cm;
+    white-space: nowrap;
+  }

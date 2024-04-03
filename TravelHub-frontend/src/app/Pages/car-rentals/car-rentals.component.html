@@ -4,7 +4,7 @@
 </div>
 <div class="search-card">
     <div class="head">Search cars for rental</div>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="searchCars()">
       <div class="form">
         <div class="input-field">
           <input [(ngModel)]="pickupLocation" placeholder =" pick Up location " name="departureStation" required>
@@ -19,3 +19,22 @@
       </div>
     </form>
 </div>
+<div class="row" style="margin-inline: 2cm; margin-block: 1cm;">
+  <div *ngFor="let car of cars " class="car card">
+      <div class="model card">
+        <div class="name" style="font-size: 24px;"><b>{{car.carModel}}</b></div>
+        <span>2017</span>
+      </div>
+      <div class="picture card">
+        <div class="name"><img src={{car.carImageUrl}} alt="car image"></div>
+      </div>
+      <div class="price" style="height: 2.8cm;padding-inline: 0.3cm;">
+        <span>Explore our fleet: from compact sedans to spacious SUVs</span>
+        <div class="pricetag">
+          <div class="ammout"><b>{{car.totalPrice}}$</b><br><span>per day</span></div>
+          <div class="check"><button type="submit" routerLink="/bookingpage" routerLinkActive="active-link">learn more</button></div>
+        </div>
+      </div>
+  </div>
+</div>
+

@@ -91,6 +91,8 @@ export class Airport {
 }
 
 export interface Bus {
+arrivalformattedDateTime: any;
+departureformattedDateTime: any;
   busId: number; // Unique identifier for the bus
   busNumber: number; // Bus number
   operator: string; // Operator of the bus
@@ -104,6 +106,8 @@ export interface Bus {
 }
 
 export interface Train {
+arrivalformattedDateTime: any;
+departureformattedDateTime: any;
   trainId: number; // Unique identifier for the train
   trainNumber: number; // Train number
   operator: string; // Operator of the train
