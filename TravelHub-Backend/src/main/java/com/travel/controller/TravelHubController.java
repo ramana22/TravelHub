@@ -23,16 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travel.model.Bus;
-import com.travel.model.Car;
-import com.travel.model.FlightBookingDetails;
-import com.travel.model.Hotel;
-import com.travel.model.HotelOfferResponse;
-import com.travel.model.LocationData;
 import com.travel.model.*;
-import com.travel.model.Review;
-import com.travel.model.Train;
-import com.travel.model.User;
 import com.travel.service.TravelHubService;
 
 
@@ -517,6 +508,26 @@ public class TravelHubController {
 
         return locationData;
     }
+	@PostMapping("/saveBusTicket")
+	public BusTicket savebusticket(@RequestBody BusTicket busticket, @RequestParam String userEmail) {
+	    // Fetch user object by email
+	    User user = service.fetchemail(userEmail);
+	    
+	    // Set the fetched user object to the bus ticket
+	    busticket.setUser(user);
+	    
+	    // Save the bus ticket
+	    return service.savebusticket(busticket);
+	}
+	@PostMapping("/saveTrainTicket")
+    public TrainTicket saveTrainTicket(@RequestBody TrainTicket trainTicket, @RequestParam String userEmail) {
+        // Fetch user object by email
+        User user = service.fetchemail(userEmail);
 
+        // Set the fetched user object to the train ticket
+        trainTicket.setUser(user);
 
+        // Save the train ticket
+        return service.savetrainticket(trainTicket);
+    }
 }
