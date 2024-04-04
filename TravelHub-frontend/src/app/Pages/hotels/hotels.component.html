@@ -31,7 +31,7 @@
               <img class="img-fluid" src="{{hotel.image.imageUrl}}" alt="">
             </div>
             <div class="details card">
-              <div class="head">{{hotel.name}}</div>
+              <div class="head" >{{hotel.name}}</div>
               <span class="location"><i class="bi bi-geo-alt-fill"></i>&nbsp;&nbsp;{{hotel.address.street}},&nbsp;&nbsp;{{hotel.address.city}}</span>
               <span class="tick-mark">free parking</span>
               <span class="tick-mark">free internet access ..<a routerLink="/bookingpage" routerLinkActive="active-link">......Amenties</a></span>
@@ -44,7 +44,6 @@
             <div class="price card">
               <h1><b>{{hotel.room.bill.amount}}$</b></h1>
               <span style="margin-block: 0.2cm;">per person</span>
-              <span>Grand Total:</span>
               <div class="check"><button type="submit" routerLink="/bookingpage" routerLinkActive="active-link">Check Out</button></div>
             </div>
           </div>
