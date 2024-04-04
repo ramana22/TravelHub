@@ -25,7 +25,10 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { buffer } from 'rxjs';
 import { BusComponent } from './Pages/bus/bus.component';
-import { BookingpageComponent } from './Pages/bookingpage/bookingpage.component';
+import { CarbookingComponent } from './Pages/carbooking/carbooking.component';
+import { HotelbookingComponent } from './Pages/hotelbooking/hotelbooking.component';
+import { TrainticketComponent } from './Pages/trainticket/trainticket.component';
+import { BusticketComponent } from './Pages/busticket/busticket.component';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import { BookingpageComponent } from './Pages/bookingpage/bookingpage.component'
     AttractionsComponent,
     FlightsComponent,
     BusComponent,
-    BookingpageComponent
+    CarbookingComponent,
+    HotelbookingComponent,
+    TrainticketComponent,
+    BusticketComponent
   ],
   imports: [
     BrowserModule,

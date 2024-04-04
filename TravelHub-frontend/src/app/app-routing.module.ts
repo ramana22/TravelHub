@@ -9,7 +9,10 @@ import { HotelsComponent } from './Pages/hotels/hotels.component';
 import { AttractionsComponent } from './Pages/attractions/attractions.component';
 import { BusComponent } from './Pages/bus/bus.component';
 import { TrainComponent } from './Pages/train/train.component';
-import { BookingpageComponent } from './Pages/bookingpage/bookingpage.component';
+import { BusticketComponent } from './Pages/busticket/busticket.component';
+import { TrainticketComponent } from './Pages/trainticket/trainticket.component';
+import { CarbookingComponent } from './Pages/carbooking/carbooking.component';
+import { HotelbookingComponent } from './Pages/hotelbooking/hotelbooking.component';
 
 
 const routes: Routes = [
@@ -22,6 +25,10 @@ const routes: Routes = [
   {path:'bus',component:BusComponent},
   {path:'train',component:TrainComponent},
   {path:'Attract',component:AttractionsComponent},
+  {path:'busticket',component:BusticketComponent},
+  {path:'trainticket',component:TrainticketComponent},
+  {path:'carbooking',component:CarbookingComponent},
+  {path:'hotelbooking',component:HotelbookingComponent}
 
 ];
 
