@@ -9,11 +9,16 @@ import org.springframework.stereotype.Service;
 import com.travel.model.Bus;
 import com.travel.model.BusTicket;
 import com.travel.model.Car;
+<<<<<<< HEAD
 import com.travel.model.CarBooking;
 import com.travel.model.FlightBookingDetails;
 import com.travel.model.FlightTicket;
 import com.travel.model.Hotel;
 import com.travel.model.HotelBooking;
+=======
+import com.travel.model.FlightBookingDetails;
+import com.travel.model.Hotel;
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 import com.travel.model.LocationData;
 import com.travel.model.Review;
 import com.travel.model.Room;
@@ -51,6 +56,7 @@ public class TravelHubService {
 	FlightsRepository flightrepo;
 	@Autowired
     Locationrepository locationrepo;
+<<<<<<< HEAD
 	@Autowired
 	BusTicketRepository busticket;
 	@Autowired
@@ -61,6 +67,8 @@ public class TravelHubService {
 	carbookingrepository carbooking;
 	@Autowired
 	hotelbookingrepository hotelbooking;
+=======
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 	public User saveUser(User user) throws Exception {
 		if(user==null) {
 			throw new Exception("user is null");
@@ -119,6 +127,7 @@ public class TravelHubService {
 	public List<FlightBookingDetails> saveAllflights(List<FlightBookingDetails> FlightBookingDetails) {
 	    return flightrepo.saveAll(FlightBookingDetails);	
 	}
+<<<<<<< HEAD
 	public BusTicket savebusticket(BusTicket busticketobject) {
 		return busticket.save(busticketobject);
 	}
@@ -135,4 +144,8 @@ public class TravelHubService {
 		return hotelbooking.save(carookingobject);
 	}
 
+=======
+
+	 
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 }

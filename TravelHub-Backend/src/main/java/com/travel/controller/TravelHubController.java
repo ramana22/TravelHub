@@ -23,7 +23,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
 import com.travel.model.*;
+=======
+import com.travel.model.Bus;
+import com.travel.model.Car;
+import com.travel.model.FlightBookingDetails;
+import com.travel.model.Hotel;
+import com.travel.model.HotelOfferResponse;
+import com.travel.model.LocationData;
+import com.travel.model.*;
+import com.travel.model.Review;
+import com.travel.model.Train;
+import com.travel.model.User;
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 import com.travel.service.TravelHubService;
 
 
@@ -508,6 +521,7 @@ public class TravelHubController {
 
         return locationData;
     }
+<<<<<<< HEAD
 	@PostMapping("/saveBusTicket")
 	public BusTicket savebusticket(@RequestBody BusTicket busticket, @RequestParam String userEmail) {
 	    // Fetch user object by email
@@ -530,4 +544,8 @@ public class TravelHubController {
         // Save the train ticket
         return service.savetrainticket(trainTicket);
     }
+=======
+
+
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 }
