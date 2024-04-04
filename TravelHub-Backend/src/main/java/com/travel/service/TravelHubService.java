@@ -6,21 +6,39 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.travel.model.Bus;
+import com.travel.model.BusTicket;
 import com.travel.model.Car;
+<<<<<<< HEAD
+import com.travel.model.CarBooking;
+import com.travel.model.FlightBookingDetails;
+import com.travel.model.FlightTicket;
 import com.travel.model.Hotel;
+import com.travel.model.HotelBooking;
+=======
+import com.travel.model.FlightBookingDetails;
+import com.travel.model.Hotel;
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
+import com.travel.model.LocationData;
 import com.travel.model.Review;
 import com.travel.model.Room;
 import com.travel.model.Train;
+import com.travel.model.TrainTicket;
 import com.travel.model.User;
 import com.travel.repository.BusRepository;
+import com.travel.repository.BusTicketRepository;
 import com.travel.repository.CarRepository;
+import com.travel.repository.FlightsRepository;
 import com.travel.repository.HotelRepository;
+import com.travel.repository.Locationrepository;
 import com.travel.repository.ReviewRepository;
 import com.travel.repository.RoomRepository;
 import com.travel.repository.TrainRepository;
+import com.travel.repository.TrainTicketRepository;
 import com.travel.repository.UserRepository;
+import com.travel.repository.carbookingrepository;
+import com.travel.repository.flightticketrepository;
+import com.travel.repository.hotelbookingrepository;
 
 @Service
 public class TravelHubService {
@@ -34,6 +52,23 @@ public class TravelHubService {
 	BusRepository busrepo;
 	@Autowired
 	CarRepository carrepo;
+	@Autowired
+	FlightsRepository flightrepo;
+	@Autowired
+    Locationrepository locationrepo;
+<<<<<<< HEAD
+	@Autowired
+	BusTicketRepository busticket;
+	@Autowired
+	TrainTicketRepository trainticket;
+	@Autowired
+	flightticketrepository flightticket;
+	@Autowired
+	carbookingrepository carbooking;
+	@Autowired
+	hotelbookingrepository hotelbooking;
+=======
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 	public User saveUser(User user) throws Exception {
 		if(user==null) {
 			throw new Exception("user is null");
@@ -68,7 +103,7 @@ public class TravelHubService {
 		 return carrepo.save(car);
 	 }
 	 public List<Car> searchCars(String pickupLocation, LocalDate rentalStartDate, LocalDate rentalEndDate) {
-		    List<Car> cars = carrepo.findByPickupLocationAndRentalStartDateLessThanEqualAndRentalEndDateGreaterThanEqual(
+		    List<Car> cars = carrepo.findByPickupLocationStartingWithIgnoreCaseAndRentalStartDateLessThanEqualAndRentalEndDateGreaterThanEqual(
 		            pickupLocation, rentalStartDate, rentalEndDate);
 		    return cars;
 	}
@@ -83,7 +118,34 @@ public class TravelHubService {
 		return roomrepo.save(room);
 	}
 	public List<Hotel> getAllHotels() {
-        return hotelrepo.findAll();
-    }
+	    return hotelrepo.findAll();
+	}
+
+	public List<LocationData> saveAll(List<LocationData> locationDataList) {
+	    return locationrepo.saveAll(locationDataList);	
+	}
+	public List<FlightBookingDetails> saveAllflights(List<FlightBookingDetails> FlightBookingDetails) {
+	    return flightrepo.saveAll(FlightBookingDetails);	
+	}
+<<<<<<< HEAD
+	public BusTicket savebusticket(BusTicket busticketobject) {
+		return busticket.save(busticketobject);
+	}
+	public TrainTicket savetrainticket(TrainTicket trainticketobject) {
+		return trainticket.save(trainticketobject);
+	}
+	public FlightTicket saveflightticket(FlightTicket flightticketobject) {
+		return flightticket.save(flightticketobject);
+	}
+	public CarBooking savecarbooking(CarBooking carookingobject) {
+		return carbooking.save(carookingobject);
+	}
+	public HotelBooking savehotelbooking(HotelBooking carookingobject) {
+		return hotelbooking.save(carookingobject);
+	}
+
+=======
+
 	 
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 }

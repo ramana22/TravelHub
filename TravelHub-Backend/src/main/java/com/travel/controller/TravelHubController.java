@@ -2,6 +2,7 @@ package com.travel.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -22,15 +23,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
+import com.travel.model.*;
+=======
 import com.travel.model.Bus;
 import com.travel.model.Car;
 import com.travel.model.FlightBookingDetails;
 import com.travel.model.Hotel;
 import com.travel.model.HotelOfferResponse;
+import com.travel.model.LocationData;
+import com.travel.model.*;
 import com.travel.model.Review;
 import com.travel.model.Train;
 import com.travel.model.User;
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 import com.travel.service.TravelHubService;
+
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -79,30 +87,7 @@ public class TravelHubController {
     public String healthCheck() {
         return "Application is running!";
     }
-	@GetMapping("/searchLocations")
-	public ResponseEntity<List<String>> searchLocations(@RequestParam String keyword) {
-	    try {
-	        Location[] locations = AmadeusConnect.searchLocations(keyword);
-	        List<String> locationStrings = new ArrayList<>();
-	        for (Location location : locations) {
-	            locationStrings.add(formatLocation(location));
-	        }
-	        return ResponseEntity.ok(locationStrings);
-	    } catch (ResponseException e) {
-	        e.printStackTrace(); // Log the exception for debugging
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body(Collections.singletonList("An error occurred while processing your request."));
-	    }
-	}
-
-	private String formatLocation(Location location) {
-	    return String.format("Name: %s\nDetailed Name: %s\nIATA Code: %s\nCity: %s\nCountry: %s\nRegion Code: %s\nLatitude: %s\nLongitude: %s\nTime Zone Offset: %s\nTravelers Score: %s",
-	            location.getName(), location.getDetailedName(), location.getIataCode(),
-	            location.getAddress().getCityName(), location.getAddress().getCountryName(),
-	            location.getAddress().getRegionCode(), location.getGeoCode().getLatitude(),
-	            location.getGeoCode().getLongitude(), location.getTimeZoneOffset(),
-	            location.getAnalytics().getTravelers().getScore());
-	}
+	
 
 	@GetMapping("/searchFlights")
 	public ResponseEntity<?> searchFlights(@RequestParam String origin,
@@ -124,6 +109,37 @@ public class TravelHubController {
 	                uniqueFlightOffers.put(totalPrice, bookingDetails);
 	            }
 	        }
+	        
+	        return ResponseEntity.ok(flightBookingDetailsList);
+	    } catch (ResponseException e) {
+	        e.printStackTrace(); // Log the exception for debugging
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("An error occurred while processing your request.");
+	    } catch (IllegalArgumentException e) {
+	        return ResponseEntity.badRequest()
+	                .body("Invalid request parameters. Please check your input.");
+	    } 
+	}
+	@GetMapping("/searchFlightsoneway")
+	public ResponseEntity<?> searchFlightsoneway(@RequestParam String origin,
+	                                       @RequestParam String destination,
+	                                       @RequestParam String departDate,
+	                                       @RequestParam String adults) {
+	    try {
+	        FlightOfferSearch[] flightOffers = AmadeusConnect.searchFlightsoneway(origin, destination, departDate, adults);
+	        
+	        Map<Double, FlightBookingDetails> uniqueFlightOffers = new HashMap<>();
+	        List<FlightBookingDetails> flightBookingDetailsList = new ArrayList<>();
+
+	        for (FlightOfferSearch flightOffer : flightOffers) {
+	            double totalPrice = calculateTotalPrice(flightOffer);
+	            if (!uniqueFlightOffers.containsKey(totalPrice)) {
+	                FlightBookingDetails bookingDetails = extractBookingDetails(flightOffer);
+	                flightBookingDetailsList.add(bookingDetails);
+	                uniqueFlightOffers.put(totalPrice, bookingDetails);
+	            }
+	        }
+	        service.saveAllflights(flightBookingDetailsList);
 	        
 	        return ResponseEntity.ok(flightBookingDetailsList);
 	    } catch (ResponseException e) {
@@ -240,7 +256,6 @@ public class TravelHubController {
 	            fareDetailsBySegment.setCabin(fareDetails.getCabin());
 	            fareDetailsBySegment.setFareBasis(fareDetails.getFareBasis());
 	            fareDetailsBySegment.setSegmentClass(fareDetails.getSegmentClass());
-	            fareDetailsBySegment.setIncludedCheckedBags(fareDetails.getIncludedCheckedBags());
 	            fareDetailsList.add(fareDetailsBySegment);
 	        }
 	        pricing.setFareDetailsBySegment(fareDetailsList);
@@ -274,6 +289,17 @@ public class TravelHubController {
 
 	    return service.searchtrains(departureStation, arrivalStation, departureDate);
 	}
+	@PostMapping("/buses")
+	public List<Bus> searchBuses(@RequestBody Map<String, Object> requestMap) {
+	    String departureTerminal = (String) requestMap.get("departureTerminal");
+	    String arrivalTerminal = (String) requestMap.get("arrivalTerminal");
+	    String departureDateString = (String) requestMap.get("departureDate");
+
+	    // Parse the departureDateString to LocalDate
+	    LocalDate departureDate = LocalDate.parse(departureDateString);
+
+	    return service.searchBuses(departureTerminal, arrivalTerminal, departureDate);
+	}
 	@PostMapping("/cars")
 	public List<Car> searchCars(@RequestBody Map<String, Object> requestMap) {
 	    String pickupLocation = (String) requestMap.get("pickupLocation");
@@ -283,6 +309,11 @@ public class TravelHubController {
 	    // Parse the rentalStartDate and rentalEndDate to LocalDate
 	    LocalDate rentalStartDate = LocalDate.parse(rentalStartDateString);
 	    LocalDate rentalEndDate = LocalDate.parse(rentalEndDateString);
+	    System.out.print(pickupLocation);
+	    System.out.print(rentalStartDate);
+	    System.out.print(rentalEndDate);
+	    
+	    
 
 	    return service.searchCars(pickupLocation, rentalStartDate, rentalEndDate);
 	}
@@ -458,4 +489,63 @@ public class TravelHubController {
 	       Hotel savedHotel = service.saveHotel(hotel);
 	       return savedHotel;
 	}
+	@GetMapping("/searchLocations")
+    public ResponseEntity<List<LocationData>> searchLocations(@RequestParam String keyword) {
+        try {
+            Location[] locations = AmadeusConnect.searchLocations(keyword);
+            List<LocationData> locationDataList = new ArrayList<>();
+            for (Location location : locations) {
+                locationDataList.add(mapToLocationData(location));
+            }
+            service.saveAll(locationDataList);
+            return ResponseEntity.ok(locationDataList);
+        } catch (ResponseException e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return null;
+        }
+    }
+
+	public LocationData mapToLocationData(Location location) {
+        LocationData locationData = new LocationData();
+        locationData.setName(location.getName());
+        locationData.setDetailedName(location.getDetailedName());
+        locationData.setIataCode(location.getIataCode());
+
+        // Create and set the Address
+        
+        locationData.setCityName(location.getAddress().getCityName());
+        locationData.setCountryName(location.getAddress().getCountryName());
+        locationData.setRegionCode(location.getAddress().getRegionCode());
+
+        locationData.setTimeZoneOffset(location.getTimeZoneOffset());
+
+        return locationData;
+    }
+<<<<<<< HEAD
+	@PostMapping("/saveBusTicket")
+	public BusTicket savebusticket(@RequestBody BusTicket busticket, @RequestParam String userEmail) {
+	    // Fetch user object by email
+	    User user = service.fetchemail(userEmail);
+	    
+	    // Set the fetched user object to the bus ticket
+	    busticket.setUser(user);
+	    
+	    // Save the bus ticket
+	    return service.savebusticket(busticket);
+	}
+	@PostMapping("/saveTrainTicket")
+    public TrainTicket saveTrainTicket(@RequestBody TrainTicket trainTicket, @RequestParam String userEmail) {
+        // Fetch user object by email
+        User user = service.fetchemail(userEmail);
+
+        // Set the fetched user object to the train ticket
+        trainTicket.setUser(user);
+
+        // Save the train ticket
+        return service.savetrainticket(trainTicket);
+    }
+=======
+
+
+>>>>>>> 47b52d7d84172a927fabd81b74146faef0c985ae
 }
