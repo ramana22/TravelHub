@@ -1,0 +1,51 @@
+.container{
+    margin: 2cm;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+
+.input-data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left{
+    margin: 1cm;
+}
+.form-group {
+    margin-bottom: 20px;
+    margin-right: 1cm;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="number"] {
+    width: 7cm;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.payment{
+    padding: 1cm;
+    width: 10cm;
+}
+
+.form-group button{
+    width: 3cm;
+    background-color: lightseagreen;
+    height: 1.3cm;
+    color: white;
+    border: none;
+    margin-top: 2.5cm;
+}

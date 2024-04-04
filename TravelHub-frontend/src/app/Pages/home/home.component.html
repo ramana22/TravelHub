@@ -110,6 +110,25 @@
             [class.is-invalid]="email.invalid && email.touched"
           />
         </div>
+        <div class="emailsection">
+          <label><b>select a service :&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+          <select
+            name="service"
+            [(ngModel)]="review.service"
+            required
+            #service="ngModel"
+            [class.is-invalid]="service.invalid && service.touched" style="height: 0.8cm; width: 4.3cm;"
+          >
+            <option value="" disabled selected>Select a service</option>
+            <option value="hotel">Hotel</option>
+            <option value="car">Car</option>
+            <option value="train">Train</option>
+            <option value="flight">Flight</option>
+            <option value="bus">Bus</option>
+            <option value="restaurant">Restaurant</option>
+          </select>
+        </div>
+        
         <div class="stars">
           <span
             class="star"

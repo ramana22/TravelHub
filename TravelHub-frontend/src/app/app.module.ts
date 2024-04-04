@@ -29,6 +29,8 @@ import { CarbookingComponent } from './Pages/carbooking/carbooking.component';
 import { HotelbookingComponent } from './Pages/hotelbooking/hotelbooking.component';
 import { TrainticketComponent } from './Pages/trainticket/trainticket.component';
 import { BusticketComponent } from './Pages/busticket/busticket.component';
+import { PaymentpageComponent } from './Pages/paymentpage/paymentpage.component';
+import { PaypalComponent } from './Pages/paypal/paypal.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { BusticketComponent } from './Pages/busticket/busticket.component';
     CarbookingComponent,
     HotelbookingComponent,
     TrainticketComponent,
-    BusticketComponent
+    BusticketComponent,
+    PaymentpageComponent,
+    PaypalComponent
   ],
   imports: [
     BrowserModule,

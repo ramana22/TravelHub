@@ -19,6 +19,7 @@ export class Review {
   'date': string;
   'reviewemail': string;
   'userDetails': User;
+  'service': String;
 }
 // Define interfaces or classes to represent the structure of the flight offer data
 
@@ -105,6 +106,7 @@ departureformattedDateTime: any;
   arrivalDate: string; // Date of arrival (format: "YYYY-MM-DD")
   arrivalTime: string; // Time of arrival (format: "HH:mm:ss")
   price: number; // Price of the bus ticket
+  total:number;
 }
 
 export interface Train {
@@ -287,6 +289,39 @@ export interface LocationData {
   timeZoneOffset: string;
 }
 
+
+
+export interface Payment {
+  id: number;
+  paymentMethod: string;
+  cardNumber: string;
+  expirationDate: Date;
+  cvv: string;
+  amount: number;
+  status: string;
+}
+export interface BusTicket {
+  id: number;
+  bus: Bus;
+  traveler: Traveler;
+  payment: Payment;
+  user: User;
+}
+export interface Traveler {
+  fullName: string;
+  emailAddress: string;
+  phoneNumber: string;
+  dateOfBirth: Date;
+  people: number;
+}
+
+export interface TrainTicket {
+  id?: number;
+  train: Train;
+  user: User;
+  traveler: Traveler;
+  payment: Payment;
+}
 
 
 

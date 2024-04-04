@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TravelHubServiceService } from '../travel-hub-service.service';
 import { Train } from '../models.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-train',
@@ -14,12 +15,26 @@ export class TrainComponent {
   arrivalStation = "";
   departureDate!: Date;
   weatherData: any;
+  isLoggedIn!: Boolean;
 
-  constructor(private trainService: TravelHubServiceService, private router: Router) { }
+  constructor(private trainService: TravelHubServiceService, private router: Router,private authservice:AuthService) { }
 
   ngOnInit(): void {
+    this.authservice.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+      this.isLoggedIn = isLoggedIn;
+    });
   }
-
+  selectdeparture(train:Train): void {
+    if (!this.isLoggedIn) {
+      const confirmLogin = window.confirm('Please login to proceed. Do you want to login now?');
+      if (confirmLogin) {
+        this.router.navigate(['/signin']); // Redirect to signin page if user confirms
+      }
+    } else {
+      console.log("hello")
+      this.router.navigate(['/trainticket'], { queryParams: { train: JSON.stringify(train) } });
+    }
+  }
   searchTrains(): void {
     console.log('Departure Station:', this.departureStation);
     console.log('Arrival Station:', this.arrivalStation);

@@ -41,7 +41,7 @@
         <div class="price card">
           <div class="pricetag" style="font-size: 24px;"><b>{{bus.price}}$</b></div>
           <span><i class="bi bi-person"></i>&nbsp;&nbsp;1&nbsp;&nbsp;One Way </span>
-          <div class="check"><button type="submit" routerLink="/bookingpage" routerLinkActive="active-link">Select Departure</button></div>
+          <div class="check"><button type="submit" (click)="selectdeparture(bus)">Select Departure</button></div>
         </div>
       </div>
     </div>

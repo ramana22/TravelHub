@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Bus, Car, HotelOffer, Review, Train, User } from './models.service';
+import { Bus, BusTicket, Car, HotelOffer, Review, Train, TrainTicket, User } from './models.service';
 
 @Injectable({
   providedIn: 'root',
@@ -102,6 +102,14 @@ export class TravelHubServiceService {
       rentalEndDate
     };
     return this.http.post("http://localhost:8080/cars",searchParams);
+  }
+
+  saveBusTicket(busTicket: BusTicket, userEmail: string): Observable<BusTicket> {
+    return this.http.post<BusTicket>(`${this.baseUrl}/saveBusTicket?userEmail=${userEmail}`, busTicket);
+  }
+
+  saveTrainTicket(trainTicket: TrainTicket, userEmail: string): Observable<TrainTicket> {
+    return this.http.post<TrainTicket>(`${this.baseUrl}/saveTrainTicket?userEmail=${userEmail}`, trainTicket);
   }
 
 }

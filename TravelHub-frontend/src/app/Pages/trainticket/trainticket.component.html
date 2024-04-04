@@ -1,1 +1,51 @@
-<p>trainticket works!</p>
+<div class="container">
+    <div class="selectionheading">
+        <h4><b>Review Ticket Options</b></h4>
+        <div class="price" style="margin-right: 1.5cm;">
+            <div><h3><b>$&nbsp;{{train.price}}</b></h3><span>1 ADULT ESSENTIAL</span></div>
+            <button type="submit" (click)="confirm(train)">continue</button>
+        </div>
+    </div>
+    <div class="selectionbottom">
+        <div class="selectionleft">
+            <h4 style="margin-block: 0.5cm;">Trip Selection</h4>
+            <div class="departure-container">
+                <div class="departure">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <div>
+                        <h5 style="white-space: nowrap;">{{train.departureformattedDateTime}}</h5>
+                        <h5>{{train.departureStation}}</h5>
+                    </div>
+                    
+                </div>
+                <div class="d-flex" style="height: 100px;">
+                    <div class="vr"></div>
+                </div>
+                <div class="arrival">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <div>
+                        <h5 style="white-space: nowrap;">{{train.arrivalformattedDateTime}}</h5>
+                        <h5>{{train.arrivalStation}}</h5>
+                    </div>
+                    
+                </div>
+            </div>            
+        </div>
+        <div class="selectionright">
+            <h4 style="margin-block: 0.5cm;">Comfort</h4>
+            <div class="Amenities">
+                <span class="amenity"><i class="bi bi-check2"></i> Air conditioning</span>
+                <span class="amenity"><i class="bi bi-check2"></i> Tiolet</span>
+                <span class="amenity"><i class="bi bi-check2"></i> Standard seat</span>
+                <span class="amenity"><i class="bi bi-check2"></i> Wi Fi</span>
+                <span class="amenity"><i class="bi bi-check2"></i> Power-Outlets</span>
+            </div>
+            <h4 style="margin-block: 1cm;">Features and Conditons</h4>
+            <div class="Features" style="display: flex;flex-direction: column;">
+                <span class="Features"><i class="bi bi-check2"></i>Free cancellation up to 24 hours before departure</span>
+                <span class="feature"><i class="bi bi-check2"></i>Refundable ticket</span>
+                <span class="feature"><i class="bi bi-check2"></i>Flexible travel dates</span>
+            </div>
+        </div>
+    </div>
+</div>

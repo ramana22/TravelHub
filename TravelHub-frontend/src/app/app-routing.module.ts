@@ -13,6 +13,8 @@ import { BusticketComponent } from './Pages/busticket/busticket.component';
 import { TrainticketComponent } from './Pages/trainticket/trainticket.component';
 import { CarbookingComponent } from './Pages/carbooking/carbooking.component';
 import { HotelbookingComponent } from './Pages/hotelbooking/hotelbooking.component';
+import { PaymentpageComponent } from './Pages/paymentpage/paymentpage.component';
+import { PaypalComponent } from './Pages/paypal/paypal.component';
 
 
 const routes: Routes = [
@@ -28,8 +30,9 @@ const routes: Routes = [
   {path:'busticket',component:BusticketComponent},
   {path:'trainticket',component:TrainticketComponent},
   {path:'carbooking',component:CarbookingComponent},
-  {path:'hotelbooking',component:HotelbookingComponent}
-
+  {path:'hotelbooking',component:HotelbookingComponent},
+  {path:'payment',component:PaymentpageComponent},
+  {path:'paypal',component:PaypalComponent}
 ];
 
 @NgModule({

@@ -49,5 +49,11 @@
       routerLinkActive="active-link"
       >Sign in</a
     >
+    <a
+      class="nav-link"
+      *ngIf="isLoggedIn"
+      (click)="logout()"
+      >log out</a
+    >
   </div>
 </div>

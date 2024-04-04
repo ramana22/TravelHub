@@ -1,0 +1,58 @@
+<div class="container card">
+    <div class="left ">
+        <h4 style="margin-bottom: 1cm;">Traveler information</h4>
+        <div class="form-card">
+            <form #travelerForm="ngForm" (ngSubmit)="onSubmit(fullName,emailAddress,phoneNumber,dateOfBirth,people)">
+              <div class="input-data">
+                <div class="form-group">
+                  <label for="fullName">Full Name:</label>
+                  <input type="text" id="fullName" [(ngModel)]="fullName" name="fullName" class="form-control" required>
+                </div>
+          
+                <div class="form-group">
+                  <label for="emailAddress">Email Address:</label>
+                  <input type="email" id="emailAddress" [(ngModel)]="emailAddress" name="emailAddress" class="form-control" required>
+                </div>
+              </div>
+              <div class="input-data">
+          
+                <div class="form-group">
+                  <label for="phoneNumber">Phone Number:</label>
+                  <input type="tel" id="phoneNumber" [(ngModel)]="phoneNumber" name="phoneNumber" class="form-control" required>
+                </div>
+          
+                <div class="form-group">
+                  <label for="dateOfBirth">Date of Birth:</label>
+                  <input type="date" id="dateOfBirth" [(ngModel)]="dateOfBirth" name="dateOfBirth" class="form-control" required>
+                </div>
+          
+              </div>
+              <div class="input-data">
+                <div class="form-group">
+                  <label for="people">Number of People:</label>
+                  <input type="number" id="people" [(ngModel)]="people" name="people" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <button  style="white-space: nowrap;" type="submit">continue</button>
+                </div>                             
+              </div>
+            </form>
+        </div>
+    </div>
+    <div class="payment card" *ngIf="isclicked">
+        <h4 style="margin-bottom: 1cm; margin-top: 1cm;">Payment information</h4>
+        <div class="paymentdetails" style="display: flex; flex-direction: column;">
+          <span>Per Person&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{bus.price}}</span>
+          <span style="margin-top: 0.5cm;">Service Tax&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{this.random}}</span>
+          <span style="margin-top: 0.5cm;">subtotal&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{this.subtotal}}</span>
+          <div>--------------------------------------------------------------</div>
+          <h5 style="margin-top: 0.5cm; white-space: nowrap;">Grand Total&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{this.grandtotal}}</h5>
+        </div>
+        <div>
+          <app-paypal [grandtotal]="grandtotal"></app-paypal>
+        </div>
+    </div>
+</div>
+
+
+
