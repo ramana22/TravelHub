@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 jobs:
-  build-Backend:
+  build:
 
     runs-on: ubuntu-latest
     permissions:
@@ -48,17 +48,13 @@ jobs:
       with:
         node-version: '14'
 
-      # Change to frontend directory
-    - name: Change to Frontend Directory
-      run: cd TravelHub-frontend/
-
-      # Install frontend dependencies
-    - name: Install Frontend Dependencies
-      run: npm install
-
-      # Build frontend
     - name: Build Frontend
-      run: npm run build -- --prod
+      run: |
+        cd TravelHub-frontend
+        npm install
+        npm run build -- --prod
+
+    
 
       # Build & push Docker image for frontend
     - name: Build & Push Frontend Docker Image
