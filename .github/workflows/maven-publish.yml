@@ -46,15 +46,13 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+         node-version: '18.x'
 
     - name: Build Frontend
       run: |
         cd TravelHub-frontend
         npm install
         npm run build -- --prod
-
-    
 
       # Build & push Docker image for frontend
     - name: Build & Push Frontend Docker Image
