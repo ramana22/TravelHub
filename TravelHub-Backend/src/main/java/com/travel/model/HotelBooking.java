@@ -23,6 +23,10 @@ public class HotelBooking {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+    
+    @OneToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 
 	public Long getId() {
 		return id;

@@ -121,7 +121,6 @@ public class TravelHubService {
 	public List<FlightBookingDetails> saveAllflights(List<FlightBookingDetails> FlightBookingDetails) {
 	    return flightrepo.saveAll(FlightBookingDetails);	
 	}
-<<<<<<< HEAD
 	public BusTicket savebusticket(BusTicket busticketobject) {
 		return busticket.save(busticketobject);
 	}
@@ -134,8 +133,8 @@ public class TravelHubService {
 	public CarBooking savecarbooking(CarBooking carookingobject) {
 		return carbooking.save(carookingobject);
 	}
-	public HotelBooking savehotelbooking(HotelBooking carookingobject) {
-		return hotelbooking.save(carookingobject);
+	public HotelBooking savehotelbooking(HotelBooking hotelbookingobject) {
+		return hotelbooking.save(hotelbookingobject);
 	}
 
 }
