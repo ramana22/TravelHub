@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Bus, BusTicket, Car, HotelOffer, Review, Train, TrainTicket, User } from './models.service';
+import { Bus, BusTicket, Car, HotelBooking, HotelOffer, Review, Train, TrainTicket, User } from './models.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TravelHubServiceService {
   [x: string]: any;
+  private selectedFlight: any;
   searchAirports(searchQuery: any) {
     throw new Error('Method not implemented.');
   }
@@ -111,5 +112,16 @@ export class TravelHubServiceService {
   saveTrainTicket(trainTicket: TrainTicket, userEmail: string): Observable<TrainTicket> {
     return this.http.post<TrainTicket>(`${this.baseUrl}/saveTrainTicket?userEmail=${userEmail}`, trainTicket);
   }
+
+  saveHotelBooking(hotelBooking: HotelBooking, userEmail: string): Observable<HotelBooking> {
+    return this.http.post<HotelBooking>(`${this.baseUrl}/saveHotelBooking?userEmail=${userEmail}`, hotelBooking);
+  }setSelectedFlight(flight: any) {
+    this.selectedFlight = flight;
+  }
+
+  getSelectedFlight() {
+    return this.selectedFlight;
+  }
+
 
 }

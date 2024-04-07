@@ -323,7 +323,12 @@ export interface TrainTicket {
   payment: Payment;
 }
 
-
+export interface HotelBooking {
+  traveler: Traveler;
+  payment: Payment;
+  user: User;
+  hotel: Hotel;
+}
 
 
 

@@ -1,0 +1,101 @@
+.images {
+    display:flex;
+}
+
+.image1 img{
+    width: 9cm;
+    height: 9cm;
+}
+.image2 .image-container img{
+    width: 7cm;
+    height: 4.5cm;
+}
+
+
+.image-container {
+    width: 100%; /* Set width of image container */
+}
+
+.image {
+    width: 20cm;
+    padding-top: 1cm;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.headcontainer{
+    margin-inline: 2.5cm;
+    margin-top: 2cm;
+}
+.head{
+    font-size: 28px;
+    font-weight: bolder;
+    white-space: nowrap;
+    margin-bottom: 0.5cm;
+}
+.details{
+    padding: 1cm;
+}
+
+.feature{
+    color: lightseagreen;
+}
+
+
+.rating{
+    margin-bottom: 0.5cm;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5cm;
+  }
+
+ 
+.bottom{
+    padding-left: 0.3cm;
+}
+
+.amenities-list span {
+    display: block; /* Make spans block-level to display them in separate lines */
+    margin-bottom: 10px;
+
+}
+
+.rowclass{
+    display: flex;
+    flex-direction: row;
+}
+.colleft{
+    padding-top: 0.5cm;
+}
+.colright{
+    padding-top: 0.5cm;
+    margin-left: 5cm;
+}
+
+.room-details p {
+    margin-bottom: 0;
+}
+.room-details{
+   padding: 0.5cm;
+}
+
+.price{
+    padding: 0.5cm;
+    display: flex;
+    flex-direction: row;
+}
+
+.price button{
+    width: 3cm;
+    color: white;
+    background-color: lightseagreen;
+    height: 1.3cm;
+    border: none;
+    border-radius: 10px;
+    margin-left: 3cm;
+}
+

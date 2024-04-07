@@ -20,7 +20,7 @@ export class SigninComponent {
         console.log("response recieved");
         this.authService.login();
         this._service.currentuser = this.user;
-        this._Router.navigate([""]);
+        window.history.back();
       },
       error =>{
         console.log("exception occured");

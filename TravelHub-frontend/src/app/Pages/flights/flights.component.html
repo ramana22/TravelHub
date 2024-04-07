@@ -118,13 +118,13 @@
         <div class="main-data" style="margin-inline: 0.5cm;">
           <p class="main-data-item" style="font-weight: bold; font-size: 18px;">To</p>
           <p class="main-data-item" style="font-weight: bold;" >{{arrivalSearchResult[i].detailedName}}</p>
-          <p class="main-data-item">{{generateRandomEndTime(this.starttime)}}</p>
+          <p class="main-data-item">{{generateRandomEndTime(this.endtime)}}</p>
         </div>
 
        </div>
         <div class="card-footer card">
-          <div class="price"><p style="font-size: 24px;font-weight: bold;"> {{ flight.travelerPricings[0].price.total }}$</p><span>per person</span><br><span>Grand Total:</span></div>
-          <button mat-button class="details-button" (click)="toggleDetails(flight)">Show Details</button>
+          <div class="price"><p style="font-size: 24px;font-weight: bold;"> {{ flight.travelerPricings[0].price.total }}$</p><span>per person</span><br></div>
+          <button mat-button class="details-button" (click)="toggleDetails(flight,this.departureSearchResult[i].detailedName,this.starttime,this.arrivalSearchResult[i].detailedName,this.endtime)">Show Details</button>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Bus, BusTicket, Payment, Train, TrainTicket, Traveler, User } from '../models.service';
+import { Bus, BusTicket, Hotel, HotelBooking, Payment, Train, TrainTicket, Traveler, User } from '../models.service';
 import { NgForm } from '@angular/forms';
 import { TravelHubServiceService } from '../travel-hub-service.service';
 
@@ -29,6 +29,8 @@ export class PaymentpageComponent {
   train!: Train;
   trainTicket!: TrainTicket;
   userEmail!: string;
+  hotel!: Hotel;
+  flight: any;
 
   constructor(private route: ActivatedRoute,private router:Router,private travelservice:TravelHubServiceService) { }
 
@@ -44,11 +46,29 @@ export class PaymentpageComponent {
       }
     });
     this.route.queryParams.subscribe(params => {
+      if (params && params['fligth']) { // accessing 'bus' using index signature
+        // Parse the bus object from the string representation
+        this.flight = JSON.parse(params['flight'] as string); // type assertion
+        console.log(this.flight);
+        this.price = this.flight.travelerPricings[0].price.total;
+        console.log(this.price);
+      }
+    });
+    this.route.queryParams.subscribe(params => {
       if (params && params['train']) { // accessing 'bus' using index signature
         // Parse the bus object from the string representation
         this.bus = JSON.parse(params['train'] as string); // type assertion
         console.log(this.train);
         this.price = this.train.price;
+        console.log(this.price);
+      }
+    });
+    this.route.queryParams.subscribe(params => {
+      if (params && params['hotel']) { // accessing 'bus' using index signature
+        // Parse the bus object from the string representation
+        this.hotel = JSON.parse(params['hotel'] as string); // type assertion
+        console.log(this.hotel);
+        this.price = this.hotel.room.bill.amount;
         console.log(this.price);
       }
     });
@@ -83,6 +103,11 @@ export class PaymentpageComponent {
           // Handle error appropriately
         }
       );
+      
+      // Calculate subtotal and grandtotal for bus
+      this.subtotal = this.price * traveler.people;
+      this.random = this.generateRandomServiceTax();
+      this.grandtotal = this.subtotal + this.random;
     }
   
     if (this.train) {
@@ -103,15 +128,53 @@ export class PaymentpageComponent {
           // Handle error appropriately
         }
       );
+      
+      // Calculate subtotal and grandtotal for train
+      this.subtotal = this.price * traveler.people;
+      this.random = this.generateRandomServiceTax();
+      this.grandtotal = this.subtotal + this.random;
+    }
+    if (this.flight) {
+      const trainTicket: TrainTicket = {
+        train: this.train,
+        traveler: traveler,
+        payment: this.payment,
+        user: this.travelservice.currentuser // Assuming currentUser holds the current user
+      };
+      
+      
+      // Calculate subtotal and grandtotal for train
+      this.subtotal = this.price * traveler.people;
+      this.random = this.generateRandomServiceTax();
+      this.grandtotal = this.subtotal + this.random;
+    }
+    
+    if (this.hotel) {
+      const hotelbooking:HotelBooking = {
+        hotel: this.hotel,
+        traveler: traveler,
+        payment: this.payment,
+        user: this.travelservice.currentuser // Assuming currentUser holds the current user
+      };
+      const userEmail = this.travelservice.currentuser.email; // Replace with actual user email
+      this.travelservice.saveHotelBooking(hotelbooking, this.userEmail)
+      .subscribe((response) => {
+        console.log('Hotel booking saved:', response);
+        // Handle success or redirect
+      }, (error) => {
+        console.error('Error saving hotel booking:', error);
+        // Handle error
+      });
+      
+      // Calculate subtotal and grandtotal for hotel
+      this.subtotal = this.price * traveler.people;
+      this.random = this.generateRandomServiceTax();
+      this.grandtotal = this.subtotal + this.random;
     }
   
-    // Calculate subtotal and grandtotal
-    this.subtotal = this.price * traveler.people;
-    this.random = this.generateRandomServiceTax();
-    this.grandtotal = this.subtotal + this.random;
-  
     this.isclicked = true;
-  }
+}
+
   
 
   generateRandomServiceTax(): number {

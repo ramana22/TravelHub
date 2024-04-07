@@ -31,6 +31,7 @@ import { TrainticketComponent } from './Pages/trainticket/trainticket.component'
 import { BusticketComponent } from './Pages/busticket/busticket.component';
 import { PaymentpageComponent } from './Pages/paymentpage/paymentpage.component';
 import { PaypalComponent } from './Pages/paypal/paypal.component';
+import { ConfirmpageComponent } from './Pages/confirmpage/confirmpage.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { PaypalComponent } from './Pages/paypal/paypal.component';
     TrainticketComponent,
     BusticketComponent,
     PaymentpageComponent,
-    PaypalComponent
+    PaypalComponent,
+    ConfirmpageComponent
   ],
   imports: [
     BrowserModule,

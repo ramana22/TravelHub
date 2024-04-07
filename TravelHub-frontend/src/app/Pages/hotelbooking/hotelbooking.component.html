@@ -1,1 +1,100 @@
-<p>hotelbooking works!</p>
+<div class="headcontainer">
+    <div class="container">
+        <div class="image">
+            <div class="images">
+                <div class="image1">
+                    <img src="{{hotel.room.image.imageUrl}}">
+                </div>
+                <div class="image2">
+                    <div class="image-container">
+                        <img src="{{hotel.image.imageUrl}}">
+                    </div>
+                    <div class="image-container">
+                        <img src="https://cdn.vacatia.com/propertyresidence/20/1/20118/wm_thumb_770x513_superior-room-2-queen-beds-5cc99822e4e1f.jpg">
+                    </div>
+                </div>
+            </div>                 
+        </div>
+        <div class="details">
+                <div class="head" >{{hotel.name}}</div>
+                <span class="location"><i class="bi bi-geo-alt-fill"></i>&nbsp;&nbsp;{{hotel.address.street}},&nbsp;&nbsp;{{hotel.address.city}}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{hotel.address.state}},&nbsp;&nbsp;{{hotel.address.postalCode}}</span>
+                <p style="margin-top: 0.5cm;">hotel with outdoor pool</p>
+                <div class="feature">
+                    <span style="margin-right: 0.5cm;">&#10003; fully refundable</span>
+                    <span>&#10003; reserve now pay later</span>
+                </div>
+                <div class="rating card">
+                    <span style="background-color: lightseagreen; color: white; font-size: 22px; padding-inline: 0.2cm;">{{hotel.rating}}</span>
+                    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <span style="font-size: 24px;">Wonderful</span>
+                </div>
+                <div class="liked-features">
+                    <p><span>Guests liked:</span><br>Clean rooms, friendly staff, property condition</p>
+                </div>            
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="popular-amenities">
+            <h4>Popular amenities</h4>
+            <div class="rowclass">
+                <div class="colleft">
+                    <div class="amenities-list">
+                        <span><i class="bi bi-water"></i>&nbsp;&nbsp;Pool</span>
+                        <span><i class="bi bi-egg-fried"></i>&nbsp;&nbsp;Free breakfast</span>
+                        <span><i class="bi bi-activity"></i>&nbsp;&nbsp;Laundry facilities</span>
+                    </div>
+                </div>
+                <div class="colright">
+                    <div class="amenities-list">
+                        <span><i class="bi bi-activity"></i>&nbsp;&nbsp;Free parking</span>
+                        <span><i class="bi bi-wifi"></i>&nbsp;&nbsp;Free WiFi</span>
+                        <span><i class="bi bi-activity"></i>&nbsp;&nbsp;Gym</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 style="margin-block: 0.5cm;">choose your room</h3>
+        <div class="room" style="display: flex; padding: 1cm; ">
+            <div class="room-card" style="width: 9cm; height: fit-content;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); margin-right: 1cm;">
+                <div class="room-image">
+                    <img src="https://images.ctfassets.net/sahy2rpqbnsp/vE9UJ9NE76yyk688ckKAI/4603d51df69529d390754395996420f2/terrace_studio_2_queens-beds-NEW-wide.jpg?w=600&h=315&fm=jpg&q=100&fit=fill" alt="Room Image" style="width: 100%; height: 5cm;">
+                </div>
+                <div class="room-details">
+                    <h4>Standard Room, 2 Queen Beds</h4>
+                    <p>Rating: 9.6/10 Exceptional</p>
+                    <p class="tick">Reserve now, pay later&nbsp;&nbsp;&nbsp;&nbsp;&#10003;</p>
+                    <p class="tick">Free WiFi&nbsp;&nbsp;&nbsp;&nbsp; &#10003;</p>
+                    <p class="tick">Free breakfast&nbsp;&nbsp;&nbsp;&nbsp; &#10003;</p>
+                    <p class="tick">Free self parking&nbsp;&nbsp;&nbsp;&nbsp; &#10003;</p>
+                    <p class="tick">Sleeps 4&nbsp;&nbsp;&nbsp;&nbsp; &#10003;</p>
+                    <p class="tick">2 Queen Beds&nbsp;&nbsp;&nbsp;&nbsp; &#10003;</p>
+                </div>
+                <div class="price">
+                    <div><h4><b>{{hotel.room.bill.amount}}$</b></h4>
+                        <span style="white-space: nowrap;">per person</span></div>
+                    <div class="check"><button type="submit" (click)="checkout(hotel)">Check Out</button></div>
+                </div>
+            </div> 
+            <div class="room-card" style="width: 9cm; height: fit-content;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+                <div class="room-image">
+                    <img src="https://d1dzqwexhp5ztx.cloudfront.net/imageRepo/6/0/102/264/55/Double_Guest_Room_R.jpg" alt="Room Image" style="width: 100%; height: 5cm;">
+                </div>
+                <div class="room-details">
+                    <h4>Standard Room, 2 Queen Beds</h4>
+                    <p>Rating: 9.6/10 Exceptional</p>
+                    <p class="tick">Reserve now, pay later &nbsp;&nbsp;&nbsp;&nbsp;&#10003;</p>
+                    <p class="tick">Free WiFi &nbsp;&nbsp;&nbsp;&nbsp;&#10003;</p>
+                    <p class="tick">Free breakfast &nbsp;&nbsp;&nbsp;&nbsp;&#10003;</p>
+                    <p class="tick">Free self parking&nbsp;&nbsp;&nbsp;&nbsp; &#10003;</p>
+                    <p class="tick">Sleeps 4 &nbsp;&nbsp;&nbsp;&nbsp;&#10003;</p>
+                    <p class="tick">2 Queen Beds &nbsp;&nbsp;&nbsp;&nbsp;&#10003;</p>
+                </div>
+                <div class="price">
+                    <div><h4><b>567$</b></h4>
+                        <span style="white-space: nowrap;">per person</span></div>
+                    <div class="check"><button type="submit" (click)="checkout(hotel)">Check Out</button></div>
+                </div>
+            </div>            
+        </div>                
+    </div>
+</div>

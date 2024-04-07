@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TravelHubServiceService } from '../travel-hub-service.service';
 import { Hotel, HotelOffer } from '../models.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-hotels',
@@ -9,22 +10,26 @@ import { Router } from '@angular/router';
   styleUrl: './hotels.component.css'
 })
 export class HotelsComponent {
-  searchClicked: boolean = false;
+    searchClicked: boolean = false;
     hotels: any[] = []; 
     filterhotels:any[]=[];
     restaurants: any[] = [];
     destination: string = "";
     showOptions: boolean = false;
     city: string="";
+    isLoggedIn!: boolean;
   
     toggleOptions() {
       this.showOptions = !this.showOptions;
     }
   
     
-    constructor(private hotelService: TravelHubServiceService,public router:Router) { }
+    constructor(private hotelService: TravelHubServiceService,public router:Router,private authservice:AuthService) { }
 
     ngOnInit() {
+      this.authservice.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+        this.isLoggedIn = isLoggedIn;
+      });
     }
   
     search(): void {
@@ -67,5 +72,16 @@ export class HotelsComponent {
             // Handle error appropriately
         }
     );
+  }
+
+  checkout(hotel: Hotel): void {
+    if (!this.isLoggedIn) {
+      const confirmLogin = window.confirm('Please login to proceed. Do you want to login now?');
+      if (confirmLogin) {
+        this.router.navigate(['/signin']); // Redirect to signin page if user confirms
+      }
+    } else {
+      this.router.navigate(['/hotelbooking'], { queryParams: { hotel: JSON.stringify(hotel) } });
+    }
   }
 }

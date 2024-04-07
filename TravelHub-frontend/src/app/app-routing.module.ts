@@ -15,6 +15,8 @@ import { CarbookingComponent } from './Pages/carbooking/carbooking.component';
 import { HotelbookingComponent } from './Pages/hotelbooking/hotelbooking.component';
 import { PaymentpageComponent } from './Pages/paymentpage/paymentpage.component';
 import { PaypalComponent } from './Pages/paypal/paypal.component';
+import { ConfirmpageComponent } from './Pages/confirmpage/confirmpage.component';
+import { FlightticketComponent } from './Pages/flightticket/flightticket.component';
 
 
 const routes: Routes = [
@@ -32,7 +34,9 @@ const routes: Routes = [
   {path:'carbooking',component:CarbookingComponent},
   {path:'hotelbooking',component:HotelbookingComponent},
   {path:'payment',component:PaymentpageComponent},
-  {path:'paypal',component:PaypalComponent}
+  {path:'paypal',component:PaypalComponent},
+  {path:'confirm',component:ConfirmpageComponent},
+  {path:'flightticket/:departureDetail/:starttime/:arrivalDetail/:endTime',component:FlightticketComponent}
 ];
 
 @NgModule({

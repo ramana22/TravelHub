@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TravelHubServiceService } from '../travel-hub-service.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FlightOffer, LocationData } from '../models.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flights',
@@ -26,8 +28,9 @@ export class FlightsComponent {
   departureDateObject!: Date;
   starttime!: Date;
   endtime!: Date;
+  isLoggedIn!: boolean;
 
-  constructor(private fb: FormBuilder,public service: TravelHubServiceService) {}
+  constructor(private fb: FormBuilder,public service: TravelHubServiceService,private authservice:AuthService,private router:Router) {}
   isRoundTrip: boolean = false;
   searchTerm: string = '';
   airportList: { name: string, iataCode: string }[] = [];
@@ -43,14 +46,26 @@ export class FlightsComponent {
 
   }
 
-  toggleDetails(flight: any) { // Replace any with actual flight interface/type
-    flight.showDetails = !flight.showDetails;
+  
+  toggleDetails(flight: any, departureDetail: string, starttime: Date, arrivalDetail: string, endTime: Date): void {
+    console.log('Before navigation');
+      this.router.navigate(['/flightticket', departureDetail, starttime.toISOString(), arrivalDetail, endTime.toISOString()], {
+        state: { flight: flight }
+      }).then(() => {
+        console.log('Navigation successful');
+      }).catch(error => {
+        console.error('Navigation error:', error);
+      });
+
   }
+  
   reloadPage() {
     location.reload();
   }
   ngOnInit(): void {
-    
+    this.authservice.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+      this.isLoggedIn = isLoggedIn;
+    });
   }
 
   searchFlights() {
