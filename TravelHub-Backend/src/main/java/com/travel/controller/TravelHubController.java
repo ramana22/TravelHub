@@ -529,4 +529,15 @@ public class TravelHubController {
         // Save the train ticket
         return service.savetrainticket(trainTicket);
     }
+	@PostMapping("/saveHotelBooking")
+    public HotelBooking saveHotelBooking(@RequestBody HotelBooking hotelBooking, @RequestParam String userEmail) {
+        // Fetch user object by email
+        User user = service.fetchemail(userEmail);
+
+        // Set the fetched user object to the hotel booking
+        hotelBooking.setUser(user);
+
+        // Save the hotel booking
+        return service.savehotelbooking(hotelBooking);
+    }
 }
