@@ -51,8 +51,10 @@ jobs:
     - name: Build Frontend
       run: |
         cd TravelHub-frontend
+        npm install -g @angular/cli
         npm install
         ng build --configuration=production
+
 
       # Build & push Docker image for frontend
     - name: Build & Push Frontend Docker Image
