@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amadeus.resources.ScoredLocation.CategoryScores.Restaurant;
 import com.travel.model.Bus;
 import com.travel.model.BusTicket;
 import com.travel.model.Car;
@@ -28,6 +29,7 @@ import com.travel.repository.CarRepository;
 import com.travel.repository.FlightsRepository;
 import com.travel.repository.HotelRepository;
 import com.travel.repository.Locationrepository;
+import com.travel.repository.RestaurantRepository;
 import com.travel.repository.ReviewRepository;
 import com.travel.repository.RoomRepository;
 import com.travel.repository.TrainRepository;
@@ -61,6 +63,8 @@ public class TravelHubService {
 	flightticketrepository flightticket;
 	@Autowired
 	carbookingrepository carbooking;
+	@Autowired
+	RestaurantRepository restaurantrepo;
 	@Autowired
 	hotelbookingrepository hotelbooking;
 	public User saveUser(User user) throws Exception {
@@ -135,6 +139,12 @@ public class TravelHubService {
 	}
 	public HotelBooking savehotelbooking(HotelBooking hotelbookingobject) {
 		return hotelbooking.save(hotelbookingobject);
+	}
+	public Restaurant saveRestaurant(Restaurant restaurant) {
+		return restaurantrepo.save(restaurant);
+	}
+	public List<Restaurant> getallrestaurants() {
+	    return restaurantrepo.findAll();
 	}
 
 }
