@@ -122,6 +122,9 @@ export class TravelHubServiceService {
   getSelectedFlight() {
     return this.selectedFlight;
   }
+  getRestaurants(destination: string): Observable<any> {
+    return this.http.post<any>("http://localhost:8080/getfilterRestaurant", { city: destination });
+  }
 
 
 }
