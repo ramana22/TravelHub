@@ -540,4 +540,18 @@ public class TravelHubController {
         // Save the hotel booking
         return service.savehotelbooking(hotelBooking);
     }
+	@PostMapping("/getfilterRestaurant")
+	public List<Restaurant> filterrestaurant(@RequestBody Map<String, String> requestBody) {
+	        String city = requestBody.get("city");
+	        List<Restaurant> filteredRestaurants = new ArrayList<>();
+	        List<Restaurant> restaurants= service.getAllRestaurent();
+	        for (Restaurant restaurant : restaurants) {
+	            String restaurantCity = restaurant.getAddress().getCity();
+
+	            if (restaurantCity != null && restaurantCity.equalsIgnoreCase(city.trim())) {
+	            	filteredRestaurants.add(restaurant);
+	            }
+	        }
+	        return filteredRestaurants;
+	}
 }
