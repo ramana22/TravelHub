@@ -264,6 +264,10 @@ public class TravelHubController {
 	public Car saveCar (@RequestBody Car car) {
 		   return service.saveCar(car);
 	}
+	@PostMapping("/saveRestaurant")
+	public Restaurant saveRestaurant (@RequestBody Restaurant restaurant) {
+		   return service.saveRestaurant(restaurant);
+	}
 	@PostMapping("/trains")
 	public List<Train> searchTrains(@RequestBody Map<String, Object> requestMap) {
 	    String departureStation = (String) requestMap.get("departureStation");
@@ -539,5 +543,16 @@ public class TravelHubController {
 
         // Save the hotel booking
         return service.savehotelbooking(hotelBooking);
+    }
+	@PostMapping("/savecarBooking")
+    public CarBooking saveCarBooking(@RequestBody CarBooking carBooking, @RequestParam String userEmail) {
+        // Fetch user object by email
+        User user = service.fetchemail(userEmail);
+
+        // Set the fetched user object to the hotel booking
+        carBooking.setUser(user);
+
+        // Save the hotel booking
+        return service.savecarbooking(carBooking);
     }
 }

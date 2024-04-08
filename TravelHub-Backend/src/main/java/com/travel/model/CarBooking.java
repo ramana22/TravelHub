@@ -15,10 +15,6 @@ public class CarBooking {
     private Car car;
 
     @ManyToOne
-    @JoinColumn(name = "renter_id")
-    private Renter renter;
-
-    @ManyToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
     
@@ -26,10 +22,20 @@ public class CarBooking {
     @JoinColumn(name = "user_id")
     private User user;
     
-    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "traveler_id")
+    private Traveler traveler;
 
 	public Car getCar() {
 		return car;
+	}
+	
+	public Traveler getTraveler() {
+		return traveler;
+	}
+
+	public void setTraveler(Traveler traveler) {
+		this.traveler = traveler;
 	}
 
 	public void setCar(Car car) {
@@ -50,14 +56,6 @@ public class CarBooking {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Renter getRenter() {
-		return renter;
-	}
-
-	public void setRenter(Renter renter) {
-		this.renter = renter;
 	}
 
 	public Payment getPayment() {

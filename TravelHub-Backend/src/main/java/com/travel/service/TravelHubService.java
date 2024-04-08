@@ -1,43 +1,17 @@
 package com.travel.service;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.amadeus.resources.ScoredLocation.CategoryScores.Restaurant;
-import com.travel.model.Bus;
-import com.travel.model.BusTicket;
-import com.travel.model.Car;
-import com.travel.model.CarBooking;
-import com.travel.model.FlightBookingDetails;
-import com.travel.model.FlightTicket;
-import com.travel.model.Hotel;
-import com.travel.model.HotelBooking;
-import com.travel.model.FlightBookingDetails;
-import com.travel.model.Hotel;
-import com.travel.model.LocationData;
-import com.travel.model.Review;
-import com.travel.model.Room;
-import com.travel.model.Train;
-import com.travel.model.TrainTicket;
-import com.travel.model.User;
-import com.travel.repository.BusRepository;
-import com.travel.repository.BusTicketRepository;
-import com.travel.repository.CarRepository;
-import com.travel.repository.FlightsRepository;
-import com.travel.repository.HotelRepository;
-import com.travel.repository.Locationrepository;
-import com.travel.repository.RestaurantRepository;
-import com.travel.repository.ReviewRepository;
-import com.travel.repository.RoomRepository;
-import com.travel.repository.TrainRepository;
-import com.travel.repository.TrainTicketRepository;
-import com.travel.repository.UserRepository;
-import com.travel.repository.carbookingrepository;
-import com.travel.repository.flightticketrepository;
-import com.travel.repository.hotelbookingrepository;
+import com.travel.model.*;
+
+import com.travel.repository.*;
+
+
 
 @Service
 public class TravelHubService {
@@ -64,7 +38,7 @@ public class TravelHubService {
 	@Autowired
 	carbookingrepository carbooking;
 	@Autowired
-	RestaurantRepository restaurantrepo;
+	RestaurantRepository restrepo;
 	@Autowired
 	hotelbookingrepository hotelbooking;
 	public User saveUser(User user) throws Exception {
@@ -141,10 +115,10 @@ public class TravelHubService {
 		return hotelbooking.save(hotelbookingobject);
 	}
 	public Restaurant saveRestaurant(Restaurant restaurant) {
-		return restaurantrepo.save(restaurant);
+		return restrepo.save(restaurant);
 	}
 	public List<Restaurant> getallrestaurants() {
-	    return restaurantrepo.findAll();
+	    return restrepo.findAll();
 	}
 
 }
