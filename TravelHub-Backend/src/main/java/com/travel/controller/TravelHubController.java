@@ -2,8 +2,7 @@ package com.travel.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import com.amadeus.resources.Location;
 import com.amadeus.exceptions.ResponseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -555,4 +553,18 @@ public class TravelHubController {
         // Save the hotel booking
         return service.savecarbooking(carBooking);
     }
+	@PostMapping("/getfilterRestaurant")
+	public List<Restaurant> filterrestaurant(@RequestBody Map<String, String> requestBody) {
+	        String city = requestBody.get("city");
+	        List<Restaurant> filteredRestaurants = new ArrayList<>();
+	        List<Restaurant> restaurants= service.getallrestaurants();
+	        for (Restaurant restaurant : restaurants) {
+	            String restaurantCity = restaurant.getAddress().getCity();
+
+	            if (restaurantCity != null && restaurantCity.equalsIgnoreCase(city.trim())) {
+	            	filteredRestaurants.add(restaurant);
+	            }
+	        }
+	        return filteredRestaurants;
+	}
 }
