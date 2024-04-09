@@ -1,0 +1,20 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Backend Build and Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Backend Workflow
+        uses: ./.github/workflows/backend.yml
+
+  frontend:
+    name: Frontend Build and Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Frontend Workflow
+        uses: ./.github/workflows/frontend.yml
