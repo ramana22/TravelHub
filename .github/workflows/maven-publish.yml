@@ -39,13 +39,4 @@ jobs:
         cd TravelHub-Backend
         docker-compose up -d
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18.x'
 
-    - name: Build and run Frontend
-      run: |
-        cd ..
-        cd TravelHub-frontend
-        docker-compose up --build
