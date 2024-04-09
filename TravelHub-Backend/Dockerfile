@@ -1,5 +1,5 @@
-# Use the AdoptOpenJDK JDK 17 Alpine JRE image as the base image
-FROM adoptopenjdk/openjdk17:alpine-jre
+# Use the official OpenJDK 17 image as the base image
+FROM openjdk:17-jdk-alpine
 
 # Add the compiled JAR file from the target directory to the Docker image
 ADD target/travelhub.jar app.jar
