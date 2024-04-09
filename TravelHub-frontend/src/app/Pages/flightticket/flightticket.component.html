@@ -1,6 +1,6 @@
 <div class="container">
     <div class="selectionheading">
-        <h4><b>Review Bus Ticket Options</b></h4>
+        <h4><b>Review Flight Ticket Options</b></h4>
         <div class="price" style="margin-right: 1.5cm;">
             <div><h3><b>$&nbsp;{{flight.travelerPricings[0].price.total}}</b></h3><span>1 ADULT ESSENTIAL</span></div>
             <button type="submit" (click)="confirm(flight)">continue</button>
@@ -24,7 +24,7 @@
                     <i class="bi bi-geo-alt-fill"></i>
                     <div>
                         <h5 style="white-space: nowrap;">{{arrivalDetail}}</h5>
-                        <h5>{{endtime}}{{enddate}}</h5>
+                        <h5>{{endtime}},{{enddate}}</h5>
                     </div>
                     
                 </div>

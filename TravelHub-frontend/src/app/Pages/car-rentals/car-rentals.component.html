@@ -32,7 +32,7 @@
         <span>Explore our fleet: from compact sedans to spacious SUVs</span>
         <div class="pricetag">
           <div class="ammout"><b>{{car.totalPrice}}$</b><br><span>per day</span></div>
-          <div class="check"><button type="submit" routerLink="/bookingpage" routerLinkActive="active-link">learn more</button></div>
+          <div class="check"><button type="submit" (click)="confirm(car)" >learn more</button></div>
         </div>
       </div>
   </div>

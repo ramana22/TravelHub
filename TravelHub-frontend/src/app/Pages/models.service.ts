@@ -331,5 +331,29 @@ export interface HotelBooking {
 }
 
 
+export interface CarBooking {
+  id?: number;
+  car?: Car;
+  payment?: Payment;
+  user?: User;
+  traveler?: Traveler;
+}
+
+export interface Restaurant {
+  restaurantid?: number;
+  name: string;
+  rating: number;
+  review: string;
+  address: address;
+  image: Image;
+  Bill: Bill;
+}
+
+
+
+
+
+
+
 
 

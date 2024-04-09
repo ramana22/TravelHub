@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Bus, BusTicket, Hotel, HotelBooking, Payment, Train, TrainTicket, Traveler, User } from '../models.service';
+import { Bus, BusTicket, Car, CarBooking, Hotel, HotelBooking, Payment, Train, TrainTicket, Traveler, User } from '../models.service';
 import { NgForm } from '@angular/forms';
 import { TravelHubServiceService } from '../travel-hub-service.service';
 
@@ -31,6 +31,7 @@ export class PaymentpageComponent {
   userEmail!: string;
   hotel!: Hotel;
   flight: any;
+  car!: Car;
 
   constructor(private route: ActivatedRoute,private router:Router,private travelservice:TravelHubServiceService) { }
 
@@ -168,6 +169,18 @@ export class PaymentpageComponent {
       
       // Calculate subtotal and grandtotal for hotel
       this.subtotal = this.price * traveler.people;
+      this.random = this.generateRandomServiceTax();
+      this.grandtotal = this.subtotal + this.random;
+    }
+    if (this.car) {
+      const carbooking: CarBooking = {
+        car: this.car,
+        traveler: traveler,
+        payment: this.payment,
+        user: this.travelservice.currentuser// Assuming currentUser holds the current user
+      };
+      const userEmail = this.travelservice.currentuser.email; // Replace with actual user email
+      this.subtotal = this.price;
       this.random = this.generateRandomServiceTax();
       this.grandtotal = this.subtotal + this.random;
     }

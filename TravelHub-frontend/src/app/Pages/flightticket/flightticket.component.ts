@@ -62,7 +62,6 @@ export class FlightticketComponent {
     return { date: formattedDate, time: formattedTime };
   }
   confirm(flight:any): void {
-    console.log("hello")
     this.router.navigate(['/payment'], { queryParams: { flight: JSON.stringify(flight) } });
   }
   

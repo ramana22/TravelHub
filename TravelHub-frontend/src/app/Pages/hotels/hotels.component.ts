@@ -45,6 +45,15 @@ export class HotelsComponent {
           console.error('Error:', error);
         }
       );
+      this.hotelService.getRestaurants(this.destination).subscribe(
+        (data) => {
+          this.restaurants = data;  // Assuming data is an array of hotels
+          console.log(this.restaurants)
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      );
       this.searchClicked = true;
   }
   bookNow(hotel: Hotel): void {
@@ -83,5 +92,9 @@ export class HotelsComponent {
     } else {
       this.router.navigate(['/hotelbooking'], { queryParams: { hotel: JSON.stringify(hotel) } });
     }
+  }
+  generateGoogleSearchLink(restaurantName: string): string {
+    const location = restaurantName; // You can modify this as per your requirement
+    return "https://www.google.com/search?q=" + encodeURIComponent(location) + "+restaurants";
   }
 }
