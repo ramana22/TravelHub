@@ -1,0 +1,79 @@
+.head{
+    margin: 2cm;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    margin: 1cm;
+}
+.carimg img {
+    width: 10cm; /* Make the image fill its container */
+    height: 7cm; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optionally, add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+}
+.carimg{
+    margin-right: 2cm;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+}
+
+.features span::before {
+    content: '✓'; /* Add tick mark as content */
+    color: green; /* Set color to green */
+    margin-right: 5px; /* Add space between tick mark and text */
+}
+.features{
+    display: flex;
+    flex-direction: column;
+    margin-block: 0.5cm;
+}
+.provider{
+    display: flex;
+    flex-direction: column;
+    margin-block: 0.5cm;
+}
+.maindetails{
+    margin-left: 2cm;
+}
+
+
+
+.departure-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.departure,
+.arrival {
+    justify-content: space-between; /* Distributes items evenly with a gap */
+    text-align: center;
+    display: flex;
+    flex-direction:row ;
+}
+
+.pickup{
+    margin-block: 1cm;
+}
+
+
+.vr {
+    width: 2px;
+    height: 100%;
+    background-color: black;
+}
+
+.button button{
+    margin-top: 1.5cm;
+    margin-left: 4.5cm;
+    width: 3cm;
+    height: 1cm;
+    color: white;
+    background-color: lightseagreen;
+    border: none;
+    border-radius: 5px;
+}
+
