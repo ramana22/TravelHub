@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql-standalone:
-    image: reshma784/mysql:latest
+    image:mysql:latest
     container_name: mysql-standalone
     environment:
       - MYSQL_ROOT_PASSWORD=root
