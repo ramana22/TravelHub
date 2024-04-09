@@ -33,7 +33,9 @@ jobs:
     - name: run Backend
       run: |  
         cd TravelHub-Backend
+        docker-compose build
         docker-compose up
+
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
