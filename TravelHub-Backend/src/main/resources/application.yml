@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver  # Corrected driver class name
+    url: jdbc:mysql://mysql-standalone:3386/travelhub?allowPublicKeyRetrieval=true&useSSL=false  # Corrected URL, 'Retreival' to 'Retrieval', 'useSSl' to 'useSSL'
+    username: root
+    password: root
+    hikari:
+      initialization-fail-timeout: 0  # Corrected property name
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect  # Corrected dialect class name
+    generate-ddl: true  # Added space after hyphen
+    show-sql: true  # Corrected property name, added colon instead of hyphen
+    hibernate:
+      ddl-auto: update  # Corrected property name, changed 'auto' to 'update'
