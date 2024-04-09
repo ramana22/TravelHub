@@ -3,9 +3,9 @@ version: '3'
 services:
     mysql-standalone:
       image: mysql:latest
-      container-name: mysql-standalone
+      container_name: mysql-standalone
       environment:
-        - MYSQL_ROOT-PASSWORD=root
+        - MYSQL_ROOT_PASSWORD=root
         - MYSQL_DATABASE=travelhub
         - MYSQL_USER=root
         - MYSQL_PASSWORD=root
