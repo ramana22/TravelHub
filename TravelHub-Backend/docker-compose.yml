@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    mysql-standalone:
+      image: mysql:latest
+      container-name: mysql-standalone
+      environment:
+        - MYSQL_ROOT-PASSWORD=root
+        - MYSQL_DATABASE=travelhub
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=root
+    travelhub-springboot:
+      image: travelhub-backend
+      container_name: travelhub-springboot
+      ports:
+        - 8080:8080
+      build:
+        context: ./
+        dockerfile: Dockerfile
+
+      depends_on:
+        - mysql-standalone
