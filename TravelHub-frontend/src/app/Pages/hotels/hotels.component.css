@@ -141,3 +141,61 @@ input {
   background-color: lightseagreen; /* Adjust button color */
   height: 1.3cm;
 }
+
+
+
+
+
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin-inline: 3cm;
+  .card {
+    display: inline-block;
+  }
+}
+
+.rest-card {
+  width: 7cm; /* Adjust card width as needed */
+  height: 9cm;
+  margin-inline: 5px;
+}
+
+
+.restimage img{
+  width: 100%; /* Ensure full width */
+  height: 5cm; /* Ensure full height */
+  background-size: cover; 
+  background-position: center; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add box shadow */
+}
+
+.rest-name{
+  margin-inline: 0.4cm;
+}
+
+.address{
+  margin-inline: 0.4cm;
+}
+
+.rate{
+  display: flex;
+  flex-direction: row;
+  margin-inline:0.4cm ;
+}
+.rate button{
+  width: 3cm;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  background-color: lightseagreen; /* Adjust button color */
+  height: 1cm;
+}  
+
+.rate h6{
+  width: 1cm;
+  font-size: 24px;
+}
