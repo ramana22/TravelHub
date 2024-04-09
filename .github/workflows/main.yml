@@ -34,7 +34,7 @@ jobs:
       - name: Build and run Backend
         run: |
           cd TravelHub-Backend
-          docker-compose up -d
+          docker-compose up --build
 
   frontend:
     name: Frontend Build and Deployment
