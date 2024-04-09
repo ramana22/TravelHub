@@ -9,6 +9,8 @@ services:
         - MYSQL_DATABASE=travelhub
         - MYSQL_USER=test   
         - MYSQL_PASSWORD=root
+      ports:
+        - 3306:3306
     travelhub-springboot:
       image: travelhub-backend
       container_name: travelhub-springboot
