@@ -25,7 +25,7 @@ import com.travel.service.TravelHubService;
 
 
 @RestController
-@CrossOrigin(origins="http://localhost:80")
+@CrossOrigin(origins="http://localhost:4200")
 public class TravelHubController {
 	 @Autowired
 	 TravelHubService service;
