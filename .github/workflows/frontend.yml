@@ -1,0 +1,25 @@
+name: Frontend Build and Deployment
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout Frontend Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+
+      - name: Build and run Frontend
+        run: |
+          cd TravelHub-frontend
+          docker-compose up --build
