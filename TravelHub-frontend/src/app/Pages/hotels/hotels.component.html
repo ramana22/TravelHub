@@ -51,4 +51,34 @@
   </div>
 </div>
 
-  
+
+ 
+
+<div class="rest-container" >
+  <h1 *ngIf="searchClicked" style="margin-left: 4cm; margin-top: 2cm;" class="clicked"><b>Best Restaurant deals</b></h1>
+  <div class="restaurant-list">
+    <div class="scrolling-wrapper">
+      <div *ngFor="let restaurant of restaurants" class="rest-card card">
+        <div class="rest-card card>">
+          <div class="restimage">
+            <img [src]="restaurant.image.imageUrl" alt="{{restaurant.name}}">
+          </div>
+          <div class="rest-name">
+            <h5><b>{{restaurant.name}}</b></h5>
+          </div>
+          <div class="address">
+            <h6>{{restaurant.address.street}}, {{restaurant.address.city}}</h6>
+            <h6>{{restaurant.address.state}},{{restaurant.address.postalCode}}</h6>
+          </div>
+          <div class="rate">
+            <h6>{{restaurant.rating}}</h6>
+            <a [href]="generateGoogleSearchLink(restaurant.name)" target="_blank">
+              <button type="submit" style="margin-left: 2cm;">Learn More</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
