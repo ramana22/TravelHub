@@ -1,4 +1,7 @@
 spring:
+  server:
+    port: 8080
+    address: 0.0.0.0
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver  # Corrected driver class name
     url: jdbc:mysql://mysql-standalone:3386/travelhub?allowPublicKeyRetrieval=true&useSSL=false  # Corrected URL, 'Retreival' to 'Retrieval', 'useSSl' to 'useSSL'
