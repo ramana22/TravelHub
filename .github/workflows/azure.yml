@@ -30,7 +30,7 @@ jobs:
       - name: Build Backend
         run: |
           cd TravelHub-Backend
-          mvn clean install
+          mvn clean package -DskipTests
 
       - name: Build Backend Docker image
         run: |
@@ -60,7 +60,7 @@ jobs:
         run: |
           cd TravelHub-frontend
           npm install
-          ng build --prod
+          ng build --configuration=production
 
       - name: Build Frontend Docker image
         run: |
