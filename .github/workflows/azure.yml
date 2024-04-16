@@ -53,6 +53,13 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Azure Container Registry Login
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
