@@ -30,7 +30,7 @@ jobs:
       - name: Build Backend
         run: |
           cd TravelHub-Backend
-          ./mvnw clean package -DskipTests
+          mvn clean install
 
       - name: Build Backend Docker image
         run: |
