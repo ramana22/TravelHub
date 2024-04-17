@@ -32,6 +32,7 @@ export class PaymentpageComponent {
   hotel!: Hotel;
   flight: any;
   car!: Car;
+  grand!: number;
 
   constructor(private route: ActivatedRoute,private router:Router,private travelservice:TravelHubServiceService) { }
 
@@ -47,7 +48,7 @@ export class PaymentpageComponent {
       }
     });
     this.route.queryParams.subscribe(params => {
-      if (params && params['fligth']) { // accessing 'bus' using index signature
+      if (params && params['flight']) { // accessing 'bus' using index signature
         // Parse the bus object from the string representation
         this.flight = JSON.parse(params['flight'] as string); // type assertion
         console.log(this.flight);
@@ -70,6 +71,15 @@ export class PaymentpageComponent {
         this.hotel = JSON.parse(params['hotel'] as string); // type assertion
         console.log(this.hotel);
         this.price = this.hotel.room.bill.amount;
+        console.log(this.price);
+      }
+    });
+    this.route.queryParams.subscribe(params => {
+      if (params && params['car']) { // accessing 'bus' using index signature
+        // Parse the bus object from the string representation
+        this.car = JSON.parse(params['car'] as string); // type assertion
+        console.log(this.car)
+        this.price = this.car.totalPrice;
         console.log(this.price);
       }
     });
@@ -108,7 +118,8 @@ export class PaymentpageComponent {
       // Calculate subtotal and grandtotal for bus
       this.subtotal = this.price * traveler.people;
       this.random = this.generateRandomServiceTax();
-      this.grandtotal = this.subtotal + this.random;
+      this.grand = this.subtotal + this.random;
+      this.grandtotal = Math.round(this.grand * 100) / 100;
     }
   
     if (this.train) {
@@ -133,7 +144,8 @@ export class PaymentpageComponent {
       // Calculate subtotal and grandtotal for train
       this.subtotal = this.price * traveler.people;
       this.random = this.generateRandomServiceTax();
-      this.grandtotal = this.subtotal + this.random;
+      this.grand = this.subtotal + this.random;
+      this.grandtotal = Math.round(this.grand * 100) / 100;
     }
     if (this.flight) {
       const trainTicket: TrainTicket = {
@@ -147,7 +159,8 @@ export class PaymentpageComponent {
       // Calculate subtotal and grandtotal for train
       this.subtotal = this.price * traveler.people;
       this.random = this.generateRandomServiceTax();
-      this.grandtotal = this.subtotal + this.random;
+      this.grand = this.subtotal + this.random;
+      this.grandtotal = Math.round(this.grand * 100) / 100;
     }
     
     if (this.hotel) {
@@ -170,7 +183,8 @@ export class PaymentpageComponent {
       // Calculate subtotal and grandtotal for hotel
       this.subtotal = this.price * traveler.people;
       this.random = this.generateRandomServiceTax();
-      this.grandtotal = this.subtotal + this.random;
+      this.grand = this.subtotal + this.random;
+      this.grandtotal = Math.round(this.grand * 100) / 100;
     }
     if (this.car) {
       const carbooking: CarBooking = {
@@ -182,7 +196,9 @@ export class PaymentpageComponent {
       const userEmail = this.travelservice.currentuser.email; // Replace with actual user email
       this.subtotal = this.price;
       this.random = this.generateRandomServiceTax();
-      this.grandtotal = this.subtotal + this.random;
+      this.grand = this.subtotal + this.random;
+      this.grandtotal = Math.round(this.grand * 100) / 100;
+      
     }
   
     this.isclicked = true;

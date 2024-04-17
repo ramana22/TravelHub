@@ -95,6 +95,6 @@ export class HotelsComponent {
   }
   generateGoogleSearchLink(restaurantName: string): string {
     const location = restaurantName; // You can modify this as per your requirement
-    return "https://www.google.com/search?q=" + encodeURIComponent(location) + "+restaurants";
+    return "https://www.google.com/search?q=" + encodeURIComponent(location) + "+restaurant";
   }
 }
