@@ -92,3 +92,7 @@ jobs:
           app-name: travelhubweb
           slot-name: production # Optional: specify deployment slot
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+
+      - name: Check Deployment Status
+        run: |
+          curl -sSfL https://travelhubweb.azurewebsites.net/ || echo "Application is not responding"
