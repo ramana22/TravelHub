@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./TravelHub-Backend  # Path to your backend application
+      dockerfile: Dockerfile  # Dockerfile for your backend application
+    container_name: backend-container
+    ports:
+      - "8080:8080"  # Adjust the port as needed
+    environment:
+      - MYSQL_HOST=mysql-standalone
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=travelhub
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+    depends_on:
+      - mysql-standalone
+
+  frontend:
+    build:
+      context: ./TravelHub-frontend  # Path to your frontend application
+      dockerfile: Dockerfile  # Dockerfile for your frontend application
+    container_name: frontend-container
+    ports:
+      - "80:80"  # Adjust the port as needed
+    depends_on:
+      - backend
