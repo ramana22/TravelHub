@@ -28,18 +28,12 @@ jobs:
       - name: Build Backend Docker image
         run: |
           cd TravelHub-Backend
-          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/backend:latest .
+          docker build -t backend:latest .
 
-      - name: Login to Azure Container Registry
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Push Backend Docker image to Azure Container Registry
+      - name: Deploy Backend Service using Docker Compose
         run: |
-          docker push ${{ secrets.ACR_NAME }}.azurecr.io/backend:latest
+          cd TravelHub-Backend
+          docker-compose up -d
 
   frontend:
     name: Frontend Build and Deployment
