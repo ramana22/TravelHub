@@ -44,7 +44,7 @@ jobs:
       - name: Deploy Backend Service using Docker Compose
         run: |
           cd TravelHub-Backend
-          docker-compose up -d
+          docker-compose up 
   frontend:
     name: Frontend Build and Deployment
     runs-on: ubuntu-latest
