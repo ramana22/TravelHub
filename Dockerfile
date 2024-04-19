@@ -27,7 +27,8 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copy NGINX configuration
-COPY src/nginx/etc/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY TravelHub-frontend/src/nginx/etc/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy built Angular application files to NGINX HTML directory
-COPY --from=frontend /app/dist/travel-hub-frontend /usr/share/nginx/html
+COPY TravelHub-frontend/dist/travel-hub-frontend /usr/share/nginx/html
+
