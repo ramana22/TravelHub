@@ -9,9 +9,13 @@ services:
       - MYSQL_DATABASE=travelhub
     ports:
       - "3306:3306"  # Forward MySQL port 3306 from container to host
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"] # Health check command for MySQL
+      timeout: 10s
+      retries: 5
 
   travelhub-springboot:
-    image: ${{ secrets.ACR_NAME }}.azurecr.io/backend:latest
+    image: travelhub.azurecr.io/backend:latest
     container_name: travelhub-springboot
     ports:
       - "8080:8080"  # Forward Spring Boot app port 8080 from container to host
@@ -20,4 +24,5 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
     depends_on:
-      - mysql-standalone
+      mysql-standalone:
+        condition: service_healthy # Wait for the MySQL service to be healthy before starting
