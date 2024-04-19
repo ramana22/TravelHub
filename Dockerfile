@@ -1,34 +1,32 @@
-# Use the official OpenJDK 17 image as the base image for Spring Boot
-FROM openjdk:17-jdk-alpine as backend
-
-# Set working directory for Spring Boot app
-WORKDIR /app
-
-# Add the compiled JAR file from the target directory to the Docker image
-COPY TravelHub-Backend/target/travelhub.jar app.jar
-
-# Specify the entry point command to run the Spring Boot application when the container starts
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
-# Use the official Node.js image as the base image for Angular
+# Stage 1: Build Angular application
 FROM node:latest as frontend
 
 # Set working directory for Angular app
-WORKDIR /app
+WORKDIR /app/TravelHub-frontend
 
-# Copy the Angular application source code to the working directory
+# Copy package.json and package-lock.json
+COPY TravelHub-frontend/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the Angular application source code
 COPY TravelHub-frontend .
 
-# Install dependencies and build Angular application
-RUN npm install
+# Build Angular application
 RUN npm run build --prod
 
-# Use NGINX image as the base image for serving Angular static files
-FROM nginx:alpine
+# Stage 2: Build and run Spring Boot application
+FROM openjdk:17-jdk-alpine as backend
 
-# Copy NGINX configuration
-COPY TravelHub-frontend/src/nginx/etc/conf.d/default.conf /etc/nginx/conf.d/default.conf
+# Set working directory for Spring Boot app
+WORKDIR /app/TravelHub-Backend
 
-# Copy built Angular application files to NGINX HTML directory
-COPY TravelHub-frontend/dist/travel-hub-frontend /usr/share/nginx/html
+# Copy the Spring Boot application JAR file
+COPY TravelHub-Backend/target/travelhub.jar .
 
+# Expose Spring Boot app port
+EXPOSE 8080
+
+# Run Spring Boot application
+CMD ["java", "-jar", "travelhub.jar"]
