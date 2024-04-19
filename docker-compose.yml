@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mysql-standalone:
+    image: mysql:latest
+    container_name: mysql-standalone
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=travelhub
+    ports:
+      - "3306:3306"  # Forward MySQL port 3306 from container to host
+
+  travelhub-fullstack:
+    build: ./
+    container_name: travelhub-fullstack
+    ports:
+      - "80:80"  # Forward NGINX port 80 from container to host
+      - "8080:8080"  # Forward Spring Boot app port 8080 from container to host
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-standalone:3306/travelhub?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      - mysql-standalone
