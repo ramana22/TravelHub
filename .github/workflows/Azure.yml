@@ -28,7 +28,7 @@ jobs:
       - name: Build Backend Docker image
         run: |
           cd TravelHub-Backend
-          docker-compose -f docker-compose.yml build
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/backend:latest .
 
       - name: Login to Azure Container Registry
         uses: azure/docker-login@v1
@@ -39,8 +39,7 @@ jobs:
 
       - name: Push Backend Docker image to Azure Container Registry
         run: |
-          cd TravelHub-Backend
-          docker-compose -f docker-compose.yml push
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/backend:latest
 
   frontend:
     name: Frontend Build and Deployment
@@ -61,7 +60,9 @@ jobs:
       - name: Build Frontend Docker image
         run: |
           cd TravelHub-frontend
-          docker-compose -f docker-compose.yml build
+          npm install
+          ng build --configuration=production
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/frontend:latest .
 
       - name: Login to Azure Container Registry
         uses: azure/docker-login@v1
@@ -72,5 +73,4 @@ jobs:
 
       - name: Push Frontend Docker image to Azure Container Registry
         run: |
-          cd TravelHub-frontend
-          docker-compose -f docker-compose.yml push
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/frontend:latest
