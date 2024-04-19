@@ -20,6 +20,11 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
+      - name: Build Backend JAR
+        run: |
+          cd TravelHub-Backend
+          mvn clean package -DskipTests
+
       - name: Build Backend Docker image
         run: |
           cd TravelHub-Backend
