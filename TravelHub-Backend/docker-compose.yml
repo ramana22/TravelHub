@@ -11,7 +11,7 @@ services:
       - "3306:3306"  # Forward MySQL port 3306 from container to host
 
   travelhub-springboot:
-    image: travelhub.azurecr.io/travelhub-springboot:latest  # Update with your ACR name
+    image: travelhub-springboot:latest  # Update with your ACR name
     container_name: travelhub-springboot
     ports:
       - "8080:8080"  # Forward Spring Boot app port 8080 from container to host
