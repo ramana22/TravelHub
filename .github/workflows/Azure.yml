@@ -22,10 +22,10 @@ jobs:
       - name: Build Docker image
         run: |
            cd TravelHub-Backend
-           docker build -t my-spring-boot-app .
+           docker build -t reshma784/my-spring-boot-app .
 
       - name: Push Docker image to Docker Hub
-        run: docker push my-spring-boot-app
+        run: docker push reshma784/my-spring-boot-app
 
   deploy:
     name: Deploy Docker Container
@@ -33,7 +33,7 @@ jobs:
     needs: build
     steps:
       - name: Pull Docker image from Docker Hub
-        run: docker pull my-spring-boot-app
+        run: docker pull reshma784/my-spring-boot-app
 
       - name: Run Docker container
-        run: docker run -d -p 8080:8080 my-spring-boot-app
+        run: docker run -d -p 8080:8080 reshma784/my-spring-boot-app
