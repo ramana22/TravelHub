@@ -1,5 +1,5 @@
 # Use a base image with Java and Maven installed
-FROM openjdk17:alpine as builder
+FROM adoptopenjdk/openjdk17:alpine as builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -8,13 +8,13 @@ WORKDIR /app
 COPY pom.xml .
 
 # Download dependencies
-RUN ["./mvnw", "dependency:go-offline"]
+RUN sh ./mvnw dependency:go-offline
 
 # Copy the project source
 COPY src ./src
 
 # Build the application
-RUN ["./mvnw", "package", "-DskipTests"]
+RUN sh ./mvnw package -DskipTests
 
 # Create a minimal runtime image
 FROM adoptopenjdk/openjdk17:alpine
