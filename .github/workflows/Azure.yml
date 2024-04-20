@@ -43,7 +43,8 @@ jobs:
 
       - name: Run Backend Docker image locally
         run: |
-          docker run -d -p 8080:8080 ${{ secrets.ACR_NAME }}.azurecr.io/backend:latest 
+          docker-compose up -d
+ 
 
   frontend:
     name: Frontend Build and Deployment
