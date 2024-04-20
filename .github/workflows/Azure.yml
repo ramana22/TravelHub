@@ -1,4 +1,4 @@
-name: Deploy App to Azure App Service
+name: CI/CD Pipeline
 
 on:
   push:
@@ -6,45 +6,35 @@ on:
       - main
 
 jobs:
-  backend:
-    name: Backend Build and Deployment
+  build:
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Backend Repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Setup Java
-        uses: actions/setup-java@v3
+      - name: Build Docker image
+        run: docker build -t my-spring-boot-app .
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Backend Project
-        run: |
-          cd TravelHub-Backend
-          mvn clean install -DskipTests
-
-      - name: Upload Artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: backend
-          path: TravelHub-Backend/target/*.jar
+      - name: Push Docker image to Docker Hub
+        run: docker push my-spring-boot-app
 
   deploy:
-    name: Deploy to Azure App Service
+    name: Deploy Docker Container
     runs-on: ubuntu-latest
-    needs: backend
+    needs: build
     steps:
-      - name: Download Artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: backend
-          path: backend
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Deploy Backend to Azure App Service
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: travelhubbackend
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE}}
-          package: 'backend/*.jar'
-          slot-name: production
+      - name: Pull Docker image from Docker Hub
+        run: docker pull my-spring-boot-app
+
+      - name: Run Docker container
+        run: docker run -d -p 8080:8080 my-spring-boot-app
