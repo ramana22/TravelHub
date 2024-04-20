@@ -22,7 +22,7 @@ COPY src ./src
 RUN ./mvnw dependency:go-offline package -DskipTests
 
 # Create a minimal runtime image
-FROM adoptopenjdk/openjdk17:jdk-17.0.2_8-alpine
+FROM openjdk:17-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
