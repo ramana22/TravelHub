@@ -1,5 +1,5 @@
 # Use a base image with Java and Maven installed
-FROM adoptopenjdk/openjdk17:alpine as builder
+FROM openjdk17:alpine as builder
 
 # Set the working directory in the container
 WORKDIR /app
