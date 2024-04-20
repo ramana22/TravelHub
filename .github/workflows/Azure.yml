@@ -53,3 +53,8 @@ jobs:
         run: |
           cd TravelHub-Backend
           mvn spring-boot:run
+      - name: Check Application
+        run: |
+          # Perform checks here, such as making HTTP requests to your application's endpoints
+          # Example using curl:
+          curl http://localhost:8080/health
