@@ -13,4 +13,17 @@ public class TravelHubBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TravelHubBackendApplication.class, args);
 	}
+	@Autowired
+    private DataSource dataSource;
+
+    @PostConstruct
+    public void testConnection() {
+        try {
+            Connection connection = dataSource.getConnection();
+            System.out.println("Connected to MySQL!");
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
