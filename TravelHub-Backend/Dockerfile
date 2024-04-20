@@ -28,3 +28,6 @@ COPY --from=builder /app/target/*.jar app.jar
 # Specify the entry point command to run the Spring Boot application when the container starts
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
+# Copy the MySQL Docker image setup
+FROM my-mysql-image as mysql
+
