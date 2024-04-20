@@ -1,24 +1,8 @@
-# Use a base image with Java and Maven installed
-FROM adoptopenjdk/openjdk17:alpine as builder
+# Use the official OpenJDK 17 image as the base image
+FROM openjdk:17-jdk-alpine
 
-# Set the working directory in the container
-WORKDIR /app
+# Add the compiled JAR file from the target directory to the Docker image
+ADD target/travelhub.jar app.jar
 
-# Copy the Maven Wrapper script and project files
-COPY .mvn .mvn
-COPY mvnw ./
-COPY src ./src
-COPY pom.xml .
-
-# Ensure Maven Wrapper script is executable
-RUN chmod +x mvnw
-
-# Run mvn clean install to build the application
-RUN ./mvnw clean install -DskipTests
-
-# Create a minimal runtime image
-FROM adoptopenjdk/openjdk17:alpine
-WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
-EXPOSE 8080
+# Specify the entry point command to run the Spring Boot application when the container starts
 ENTRYPOINT ["java", "-jar", "app.jar"]
