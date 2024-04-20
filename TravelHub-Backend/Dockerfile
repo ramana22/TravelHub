@@ -1,4 +1,4 @@
-# Use the official OpenJDK 17 image as the base image
+# Stage 1: Build the Spring Boot application
 FROM openjdk:17-jdk-alpine as builder
 
 # Install Maven
@@ -16,7 +16,13 @@ COPY src ./src
 # Run mvn clean install to build the application
 RUN mvn clean install -DskipTests
 
-# Use the official OpenJDK 17 image as the base image
+# Stage 2: Set up the MySQL database
+FROM mysql:latest as mysql
+
+# Example: Add additional configurations or scripts to initialize the database if needed
+# COPY init.sql /docker-entrypoint-initdb.d/
+
+# Stage 3: Create the final image
 FROM openjdk:17-jdk-alpine
 
 # Set the working directory in the container
@@ -27,7 +33,3 @@ COPY --from=builder /app/target/*.jar app.jar
 
 # Specify the entry point command to run the Spring Boot application when the container starts
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
-# Copy the MySQL Docker image setup
-FROM my-mysql-image as mysql
-
