@@ -1,8 +1,24 @@
-# Use the official OpenJDK 17 image as the base image
-FROM openjdk:17-jdk-alpine
+# Use a base image with Java and Maven installed
+FROM adoptopenjdk/openjdk17:alpine as builder
 
-# Add the compiled JAR file from the target directory to the Docker image
-ADD target/travelhub.jar app.jar
+# Set the working directory in the container
+WORKDIR /app
 
-# Specify the entry point command to run the Spring Boot application when the container starts
+# Copy the Maven project file
+COPY pom.xml .
+
+# Download dependencies
+RUN ["./mvnw", "dependency:go-offline"]
+
+# Copy the project source
+COPY src ./src
+
+# Build the application
+RUN ["./mvnw", "package", "-DskipTests"]
+
+# Create a minimal runtime image
+FROM adoptopenjdk/openjdk17:alpine
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
