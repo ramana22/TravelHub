@@ -43,7 +43,7 @@ jobs:
 
       - name: Run Backend Docker image locally
         run: |
-          docker-compose up -d
+          docker-compose up 
  
 
   frontend:
