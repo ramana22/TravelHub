@@ -1,60 +1,26 @@
-name: Java Maven CI with Spring Boot and MySQL
+name: Build and Push Docker Image
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]  # Change 'main' to your branch name if needed
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  build-and-push:
+    runs-on: ubuntu-latest  # Adjust OS if needed
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3  # Checkout code from your repository
 
-      - name: Set up Java
-        uses: actions/setup-java@v3
+      - name: Login to ACR
+        uses: azure/login@v1
         with:
-          java-version: 17
-          distribution: 'adopt'
-          java-package: jdk
+          cred: ${{ secrets.ACR_LOGIN }}  # Replace with your ACR login secret
 
-      - name: Build with Maven
+      - name: Build Docker Image
         run: |
-          cd TravelHub-Backend
-          mvn clean install
+          cd TravelHub-backend
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/travelhub-backend:latest .  # Replace placeholders
 
-  test:
-    runs-on: ubuntu-latest
-
-    env:
-      DB_DATABASE: travelhub
-      DB_USER: root
-      DB_PASSWORD: root
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Start MySQL
+      - name: Push Docker Image to ACR
         run: |
-          sudo /etc/init.d/mysql start
-          mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
-
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: 'adopt'
-          java-package: jdk
-
-      - name: Build with Maven
-        run: |
-          cd TravelHub-Backend
-          mvn spring-boot:run
-      - name: Check Application
-        run: |
-          # Perform checks here, such as making HTTP requests to your application's endpoints
-          # Example using curl:
-          curl http://localhost:8080/health
+          cd TravelHub-backend
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/travelhub-backend:latest
