@@ -16,18 +16,6 @@ COPY src ./src
 # Run mvn clean install to build the application
 RUN mvn clean install -DskipTests
 
-# Stage 2: Set up the MySQL database
-FROM mysql:latest as mysql
-
-# Set environment variables
-ENV MYSQL_ROOT_PASSWORD=root
-ENV MYSQL_DATABASE=travelhub
-ENV MYSQL_USER=tester
-ENV MYSQL_PASSWORD=test@123
-
-# Example: Add additional configurations or scripts to initialize the database if needed
-# COPY init.sql /docker-entrypoint-initdb.d/
-
 # Stage 3: Create the final image
 FROM openjdk:17-jdk-alpine
 
