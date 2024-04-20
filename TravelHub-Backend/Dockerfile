@@ -1,8 +1,17 @@
 # Use a base image with Java and Maven installed
-FROM maven:3.8.3-openjdk-17 as builder
+FROM openjdk17:alpine as builder
 
 # Set the working directory in the container
 WORKDIR /app
+
+# Copy the Maven project file
+COPY pom.xml .
+
+# Download dependencies
+RUN ["./mvnw", "dependency:go-offline"]
+
+# Copy the project source
+COPY src ./src
 
 # Copy the Maven Wrapper script and project files
 COPY .mvn .mvn
@@ -17,4 +26,4 @@ FROM adoptopenjdk/openjdk17:alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]  
