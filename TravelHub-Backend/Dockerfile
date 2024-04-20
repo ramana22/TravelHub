@@ -1,6 +1,9 @@
 # Use the official OpenJDK 17 image as the base image
 FROM openjdk:17-jdk-alpine as builder
 
+# Install Maven
+RUN apk add --no-cache maven
+
 # Set the working directory in the container
 WORKDIR /app
 
