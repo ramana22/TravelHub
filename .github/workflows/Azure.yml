@@ -9,14 +9,6 @@ jobs:
   build:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: travelhub
-        ports:
-          - 3306:3306
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -50,5 +42,6 @@ jobs:
       - name: Pull Docker image from Docker Hub
         run: docker pull reshma784/my-spring-boot-app
 
-      - name: Run Docker container
-        run: docker run -p 8080:8080 reshma784/my-spring-boot-app
+      - name: Run Docker container with MySQL linked
+        run: |
+          docker run -d -p 8080:8080 --name my-spring-boot-app --link mysql:mysql reshma784/my-spring-boot-app
