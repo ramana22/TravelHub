@@ -1,13 +1,17 @@
 spring:
+  server:
+    port: 8080
+    address: 0.0.0.0
   datasource:
-    url: jdbc:mysql://localhost:3306/your_database_name?useSSL=false&serverTimezone=UTC
-    username: your_database_username
-    password: your_database_password
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver  # Corrected driver class name
+    url: jdbc:mysql://mysql-standalone:3386/travelhub?allowPublicKeyRetrieval=true&useSSL=false  # Corrected URL, 'Retreival' to 'Retrieval', 'useSSl' to 'useSSL'
+    username: root
+    password: root
+    hikari:
+      initialization-fail-timeout: 0  # Corrected property name
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: true
-        hbm2ddl:
-          auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect  # Corrected dialect class name
+    generate-ddl: true  # Added space after hyphen
+    show-sql: true  # Corrected property name, added colon instead of hyphen
+    hibernate:
+      ddl-auto: update  # Corrected property name, changed 'auto' to 'update'
