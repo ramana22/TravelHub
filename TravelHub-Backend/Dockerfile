@@ -1,5 +1,5 @@
 # Use a base image with Java and Maven installed
-FROM openjdk17:alpine as builder
+FROM openjdk:17-alpine as builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -26,4 +26,4 @@ FROM adoptopenjdk/openjdk17:alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]  
+ENTRYPOINT ["java", "-jar", "app.jar"]
