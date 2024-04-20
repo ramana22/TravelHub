@@ -1,4 +1,4 @@
-name: Backend Build and Deployment
+name: Backend and Frontend Build and Deployment
 
 on:
   push:
@@ -41,10 +41,10 @@ jobs:
         run: |
           docker push ${{ secrets.ACR_NAME }}.azurecr.io/backend:latest
 
-      - name: Deploy Backend Service using Docker Compose
+      - name: Run Backend Docker image locally
         run: |
-          cd TravelHub-Backend
-          docker-compose up 
+          docker run -d -p 8080:8080 ${{ secrets.ACR_NAME }}.azurecr.io/backend:latest 
+
   frontend:
     name: Frontend Build and Deployment
     runs-on: ubuntu-latest
