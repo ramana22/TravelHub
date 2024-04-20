@@ -42,6 +42,6 @@ jobs:
       - name: Pull Docker image from Docker Hub
         run: docker pull reshma784/my-spring-boot-app
 
-      - name: Run Docker container with MySQL linked
+      - name: Run Docker container with MySQL network
         run: |
-          docker run -d -p 8080:8080 --name my-spring-boot-app --link mysql:mysql reshma784/my-spring-boot-app
+          docker run -p 8080:8080 --name my-spring-boot-app --network bridge reshma784/my-spring-boot-app
