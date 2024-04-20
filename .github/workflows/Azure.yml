@@ -9,6 +9,14 @@ jobs:
   build:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: travelhub
+        ports:
+          - 3306:3306
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
