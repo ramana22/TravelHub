@@ -36,4 +36,4 @@ jobs:
         run: docker pull reshma784/my-spring-boot-app
 
       - name: Run Docker container
-        run: docker run -d -p 8080:8080 reshma784/my-spring-boot-app
+        run: docker run -p 8080:8080 reshma784/my-spring-boot-app
