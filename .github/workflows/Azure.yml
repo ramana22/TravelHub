@@ -26,3 +26,9 @@ jobs:
         run: |
           cd TravelHub-Backend
           docker push ${{ secrets.ACR_NAME }}.azurecr.io/travelhub-backend:latest
+      - name: Deploy to Azure App Service (Existing)
+        run: |
+          # Assuming your App Service details are:
+          # - App Service name: <app_service_name> (replace here)
+          # - Resource group name: <resource_group_name>
+          az app service update --name travelhubbackend --resource-group RLDS --image ${{ secrets.ACR_NAME }}.azurecr.io/travelhub-backend:latest
