@@ -2,51 +2,53 @@ name: Build and Deploy Spring Boot Angular App
 
 on:
   push:
-    branches: [ main ]  # Change 'main' to your branch name if needed
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest  # Adjust OS if needed
     steps:
-      - uses: actions/checkout@v3  # Checkout code from your repository
-      - name: Login to Docker Hub (if using Docker Hub)
+      - name: Checkout code
+        uses: actions/checkout@v3  # Checkout code from your repository
+      
+      # Docker Hub Login (if using Docker Hub)
+      - name: Login to Docker Hub
+        if: secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != ''
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      # Build Spring Boot Image
       - name: Build Spring Boot Image
         run: |
           cd backend
           docker build -t ${{ secrets.DOCKER_USERNAME }}/travelhub-backend:latest .
+      
+      # Build Angular Image
       - name: Build Angular Image
         run: |
           cd frontend
           docker build -t ${{ secrets.DOCKER_USERNAME }}/travelhub-frontend:latest .
-      - name: Push Spring Boot Image (if using Docker Hub)
+      
+      # Push Spring Boot Image (if using Docker Hub)
+      - name: Push Spring Boot Image
+        if: secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != ''
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/travelhub-backend:latest
-      - name: Push Angular Image (if using Docker Hub)
+      
+      # Push Angular Image (if using Docker Hub)
+      - name: Push Angular Image
+        if: secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != ''
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/travelhub-frontend:latest
-      - name: Deploy to Azure App Service (Optional)
-         uses: azure/webapps-deploy@v2
-         with:
-           resourceGroup: <your_resource_group_name>
-           appService: <your_app_service_name>
-           package: .  # Use a specific deployment package if needed
-           publishProfile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Service Principal credentials
-
-**Explanation:**
-
-- The workflow retrieves secrets using the syntax `${{ secrets.<SECRET_NAME> }}`.
-- The `docker login` step (if using Docker Hub) utilizes the `DOCKER_USERNAME` and `DOCKER_PASSWORD` for authentication.
-- The `azure/webapps-deploy` action leverages the base64-encoded service principal credentials stored in `AZURE_WEBAPP_PUBLISH_PROFILE` (containing client ID, secret, tenant ID, and subscription ID) to authenticate with Azure App Service.
-
-**Important Notes:**
-
-- Replace placeholders like `<your_resource_group_name>` and `<your_app_service_name>` with your actual Azure App Service details.
-- This example assumes you're either using Docker Hub or Azure Container Registry (ACR). Adjust steps accordingly if using ACR.
-
-Remember, never expose secrets directly in the workflow. Utilize GitHub Secrets to ensure secure management and reference them as shown above.
-
-By incorporating these steps and adhering to best practices, you can securely automate your Spring Boot Angular project's deployment using your GitHub secrets.
+      
+      # Deploy to Azure App Service (Optional)
+      - name: Deploy to Azure App Service
+        if: secrets.AZURE_WEBAPP_PUBLISH_PROFILE != ''
+        uses: azure/webapps-deploy@v2
+        with:
+          resourceGroup: RLDS
+          appService: TravelHubWeb
+          package: .  # Use a specific deployment package if needed
+          publishProfile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Service Principal credentials
