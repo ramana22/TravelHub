@@ -17,6 +17,8 @@ import { PaymentpageComponent } from './Pages/paymentpage/paymentpage.component'
 import { PaypalComponent } from './Pages/paypal/paypal.component';
 import { ConfirmpageComponent } from './Pages/confirmpage/confirmpage.component';
 import { FlightticketComponent } from './Pages/flightticket/flightticket.component';
+import { ActivityComponent } from './Pages/activity/activity.component';
+import { ChangeprofileComponent } from './Pages/changeprofile/changeprofile.component';
 
 
 const routes: Routes = [
@@ -36,6 +38,8 @@ const routes: Routes = [
   {path:'payment',component:PaymentpageComponent},
   {path:'paypal',component:PaypalComponent},
   {path:'confirm',component:ConfirmpageComponent},
+  {path:'activity',component:ActivityComponent},
+  {path:'change',component:ChangeprofileComponent},
   {path:'flightticket/:departureDetail/:starttime/:arrivalDetail/:endTime',component:FlightticketComponent}
 ];
 

@@ -25,7 +25,7 @@ export class TrainticketComponent {
   }
   confirm(train:Train): void {
     console.log("hello")
-    this.router.navigate(['/payment'], { queryParams: { bus: JSON.stringify(train) } });
+    this.router.navigate(['/payment'], { queryParams: { train: JSON.stringify(train) } });
   }
 
 }
