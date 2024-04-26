@@ -49,11 +49,22 @@
       routerLinkActive="active-link"
       >Sign in</a
     >
-    <a
-      class="nav-link"
-      *ngIf="isLoggedIn"
-      (click)="logout()"
-      >log out</a
-    >
+    <div *ngIf="isLoggedIn" class="account" (click)="toggleCard2()">
+      <i class="bi bi-bell" style="font-size: 22px;"></i>
+      <div class="n-card" *ngIf="notifyCard">
+        <div class="container">
+          <div class="row">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isLoggedIn" class="account" (click)="toggleCard()">
+      <i class="bi bi-person-circle" style="font-size: 22px;"></i>
+      <div class="card left" *ngIf="showCard">
+        <a class="logout"  routerLink="change" routerLinkActive="active-link">profile</a>
+        <a class="logout"  routerLink="activity" routerLinkActive="active-link">Activity</a>
+        <p class="logout" (click)="logout()">logout</p>
+      </div>
+    </div> 
   </div>
 </div>

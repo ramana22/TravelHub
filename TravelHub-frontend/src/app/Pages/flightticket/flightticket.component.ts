@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TravelHubServiceService } from '../travel-hub-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FlightTicket } from '../models.service';
 
 @Component({
   selector: 'app-flightticket',
@@ -18,6 +19,7 @@ export class FlightticketComponent {
   departureDetail!: string ;
 
   arrivalDetail!: string;
+  flightTicket: FlightTicket = new FlightTicket();
 
   constructor(private route: ActivatedRoute,private service:TravelHubServiceService,private router:Router) { }
 
@@ -35,6 +37,11 @@ export class FlightticketComponent {
       const { date: enddate, time: endtime } = this.parseDateTime(params['endTime']);
       this.enddate = enddate;
       this.endtime = endtime;
+      this.flightTicket.origin = params['departureDetail'];
+      this.flightTicket.destination = params['arrivalDetail'];
+      this.flightTicket.departDate = params['starttime'];
+      this.flightTicket.returnDate = params['endTime'];
+      this.flightTicket.adults = params['adults']; 
     });
     
     // Retrieve flight from router's state
@@ -61,8 +68,13 @@ export class FlightticketComponent {
   
     return { date: formattedDate, time: formattedTime };
   }
-  confirm(flight:any): void {
-    this.router.navigate(['/payment'], { queryParams: { flight: JSON.stringify(flight) } });
+  confirm(flight: any): void {
+    console.log(this.flightTicket)
+    this.router.navigate(['/payment'], { 
+      queryParams: { 
+        flight: JSON.stringify(flight), // Convert flight object to JSON string
+        flightTicket: JSON.stringify(this.flightTicket) // Convert flightTicket object to JSON string
+      } 
+    });
   }
-  
 }

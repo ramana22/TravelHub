@@ -11,7 +11,6 @@ export class User {
   'email': string;
   'password': string;
   'confirmpassword': string;
-  constructor() {}
 }
 export class Review {
   'rating': number;
@@ -142,33 +141,6 @@ export interface Car {
 }
 
 
-// hotel-offer-response.model.ts
-
-export interface HotelOfferResponse {
-  data: HotelOffer[];
-}
-
-export interface HotelOffer {
-  room: any;
-  showDetails: any;
-  type: string;
-  hotel: Hotel;
-  available: boolean;
-  offers: Offer[];
-  self: string;
-}
-
-export interface Hotel {
-  type: string;
-  hotelId: string;
-  chainCode: string;
-  dupeId: string;
-  name: string;
-  price: Price;
-  cityCode: string;
-  latitude: number;
-  longitude: number;
-}
 
 export interface Offer {
   id: string;
@@ -188,12 +160,6 @@ export interface RateFamilyEstimated {
   type: string;
 }
 
-export interface Room {
-  type: string;
-  typeEstimated: TypeEstimated;
-  description: Description;
-}
-
 export interface TypeEstimated {
   category: string;
   beds: number;
@@ -209,12 +175,7 @@ export interface Guests {
   adults: number;
 }
 
-export interface hotelPrice {
-  currency: string;
-  base: string;
-  total: string;
-  variations: Variations;
-}
+
 
 export interface Variations {
   average: Average;
@@ -289,7 +250,17 @@ export interface LocationData {
   timeZoneOffset: string;
 }
 
-
+export class FlightTicket {
+  id!: number;
+  origin!: string;
+  destination!: string;
+  departDate!: string;
+  returnDate!: string;
+  adults!: string;
+  traveler!: Traveler;
+  user!: User;
+  payment!: Payment;
+}
 
 export interface Payment {
   id: number;
@@ -315,39 +286,54 @@ export interface Traveler {
   people: number;
 }
 
-export interface TrainTicket {
-  id?: number;
-  train: Train;
-  user: User;
-  traveler: Traveler;
-  payment: Payment;
+export class TrainTicket {
+  id!: number;
+  train!: Train;
+  user!: User;
+  traveler!: Traveler;
+  payment!: Payment;
 }
 
-export interface HotelBooking {
-  traveler: Traveler;
-  payment: Payment;
-  user: User;
-  hotel: Hotel;
-}
-
-
-export interface CarBooking {
-  id?: number;
-  car?: Car;
+export class HotelBooking {
+  hotel?: Hotel;
+  traveler?: Traveler;
   payment?: Payment;
   user?: User;
-  traveler?: Traveler;
 }
 
-export interface Restaurant {
-  restaurantid?: number;
-  name: string;
-  rating: number;
-  review: string;
-  address: address;
-  image: Image;
-  Bill: Bill;
+
+export class CarBooking {
+  id!: number;
+  car!: Car;
+  payment!: Payment;
+  user!: User;
+  traveler!: Traveler;
 }
+
+export class Restaurant {
+  restaurantid!: number;
+  name!: string;
+  rating!: number;
+  review!: string;
+  address!: address;
+  image!: Image;
+  Bill!: Bill;
+}
+
+export class EmailRequest {
+  to?: string;
+  subject?: string;
+  text?: string;
+}
+export class Profile {
+  name!: string;
+  email!: string;
+  phone!: string;
+  dob!: string;
+  gender!: string;
+  nationality!: string;
+}
+
 
 
 

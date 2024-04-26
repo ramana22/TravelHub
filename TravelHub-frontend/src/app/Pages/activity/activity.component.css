@@ -1,0 +1,36 @@
+.user-bookings {
+    margin-inline: 2cm;
+    margin-block: 1cm;
+}
+
+.user-bookings h3 {
+    color: #333;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.booking-category {
+    margin-bottom: 20px;
+}
+
+.booking-category h4 {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.booking-category ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.booking-category li {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.booking-category li:before {
+    content: "•";
+    color: #666;
+    margin-right: 5px;
+}
