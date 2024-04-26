@@ -82,7 +82,7 @@
 .account {
   font-size: 30px;
   color: white;
-  padding-right: 1.1cm;
+  padding-right: 0.8cm;
 }
 /* Add this to your existing styles or create new styles */
 .nav-dropdown {
@@ -154,21 +154,25 @@
 
 .card.left {
   position: absolute;
-  left: -5cm;
-  top: 1;
   height: fit-content;
+  margin-top: 0.8cm;
+  left: -4.4cm;
 }
 .logout {
   color: black;
-  padding-block: 0.3cm;
+  padding-top: 0.2cm;
   padding-inline: 0.3cm;
-  font-size: 20px;
+  font-size: 17px;
   text-decoration: none;
 }
-.n-card.left {
+.logout:hover {
+  background-color: lightgray;
+}
+.n-card {
   position: absolute;
   top: 0;
   left: -8.5cm;
+  margin-top: 0.9cm;
 }
 .n-card h3 {
   color: black;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TravelHubServiceService } from '../travel-hub-service.service';
-import { Hotel, HotelOffer } from '../models.service';
+import { Hotel } from '../models.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -59,7 +59,6 @@ export class HotelsComponent {
   bookNow(hotel: Hotel): void {
   }
 
-  hotelOffers: HotelOffer[] = [];
   cityCode: string='';
   radius!: number;
   checkInDate!: string;
@@ -69,19 +68,6 @@ export class HotelsComponent {
     hotel.showDetails = !hotel.showDetails;
   }
 
-  onSubmit(cityCode: string,checkInDate: string,adult:number, radius?: number) {
-    this.hotelService.getHotelOffers(cityCode,checkInDate,adult, radius)
-      .subscribe(
-        (offers: HotelOffer[]) => {
-            this.hotelOffers = offers;
-            console.log(this.hotelOffers); // Handle the retrieved hotel offers as needed
-        },
-        (error) => {
-          console.error('Error fetching hotel offers:', error);
-            // Handle error appropriately
-        }
-    );
-  }
 
   checkout(hotel: Hotel): void {
     if (!this.isLoggedIn) {

@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="personal-info">
+        <div class="card-header" style="height: 2cm;justify-content: center;" (click)="togglesetpersonalinfo(); getProfile()">
+            <h2 class="mb-0">
+                Personal Information
+            </h2>
+        </div>
+        <div class="profile-data" *ngIf="closeprofile1">
+            <ul>
+                <li><strong>Full Name:</strong> {{ currentprofile.name }}</li>
+                <li><strong>Email Address:</strong> {{ currentprofile.email }}</li>
+                <li><strong>Phone Number:</strong> {{ currentprofile.phone }}</li>
+                <li><strong>Date of Birth:</strong> {{ currentprofile.dob }}</li>
+                <li><strong>Gender:</strong> {{ currentprofile.gender }}</li>
+                <li><strong>Nationality:</strong> {{ currentprofile.nationality }}</li>
+            </ul>
+        </div>
+        <div class="card-header" style="height: 2cm;justify-content: center;" (click)="togglesetpersonalinfo2()">
+            <h2 class="mb-0">
+                Update Information
+            </h2>
+        </div>
+        <form *ngIf="closeprofile2" Style="padding:1cm;margin-bottom: 1cm;">
+            <div class="input-data">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="name" [(ngModel)]="profile.name" name="name" class="form-control" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="emailAddress">Email Address:</label>
+                    <input type="email" id="email" [(ngModel)]="profile.email" name="email" class="form-control" required>
+                </div>
+            </div>
+            <div class="input-data">
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="tel" id="phone" [(ngModel)]="profile.phone" name="phone" class="form-control" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth:</label>
+                    <input type="date" id="dob" [(ngModel)]="profile.dob" name="dob" class="form-control" required>
+                </div>
+            </div>
+            
+            <div class="input-data">
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div>
+                        <select id="gender" name="gender" [(ngModel)]="profile.gender" class="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nationality:</label>
+                    <div>
+                        <input type="text" id="nationality" name="nationality" [(ngModel)]="profile.nationality" class="form-control">
+                    </div>
+                </div>
+            </div> 
+            <div class="save-update" style="float:right">
+                <button  class="btn btn-primary" style="margin-right: 1cm;" (click)="saveChanges()">Save Changes</button>
+                <button  class="btn btn-primary"  (click)="cancelChanges()" >Cancel</button>
+            </div>           
+        </form>
+    </div>
+    <div class="card-header" style="height: 2cm;" (click)="toggleChangePassword()">
+        <h2 class="mb-0">
+            Change Password
+        </h2>
+    </div>
+    <div class="card-body" *ngIf="showChangePassword">
+        <form>
+            <div class="form-group" style="margin-left: 0.5cm;">
+                <label for="current-password">Current Password:</label>
+                <input type="password" id="current-password" name="current-password" style="width: 10cm;" [(ngModel)]="current" class="form-control">
+            </div>
+            <div class="form-group" style="margin-left: 0.5cm;">
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" name="new-password" style="width: 10cm;" [(ngModel)]="new" class="form-control">
+            </div>
+            <div class="form-group" style="margin-left: 0.5cm;">
+                <label for="confirm-password">Confirm New Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" style="width: 10cm;"  [(ngModel)]="confirm" class="form-control">
+            </div>
+            <button (click)="changePassword(current,new)" style="float: right;margin-right: 1cm;margin-bottom: 0.5cm;" class="btn btn-primary">Change Password</button>
+        </form>
+    </div>
+</div>

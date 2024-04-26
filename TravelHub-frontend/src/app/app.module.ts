@@ -32,6 +32,8 @@ import { BusticketComponent } from './Pages/busticket/busticket.component';
 import { PaymentpageComponent } from './Pages/paymentpage/paymentpage.component';
 import { PaypalComponent } from './Pages/paypal/paypal.component';
 import { ConfirmpageComponent } from './Pages/confirmpage/confirmpage.component';
+import { ChangeprofileComponent } from './Pages/changeprofile/changeprofile.component';
+import { ActivityComponent } from './Pages/activity/activity.component';
 
 
 @NgModule({
@@ -55,7 +57,10 @@ import { ConfirmpageComponent } from './Pages/confirmpage/confirmpage.component'
     BusticketComponent,
     PaymentpageComponent,
     PaypalComponent,
-    ConfirmpageComponent
+    ConfirmpageComponent,
+    ChangeprofileComponent,
+    ActivityComponent
+
   ],
   imports: [
     BrowserModule,
