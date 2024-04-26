@@ -12,11 +12,11 @@ public class HotelBooking {
 
     // Additional fields for hotel details, if needed
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
     
@@ -59,6 +59,10 @@ public class HotelBooking {
 	public void setUser(User user) {
 		this.user = user;
 	}
-    
-    
+
+	@Override
+	public String toString() {
+		return "HotelBooking [id=" + id + ", traveler=" + traveler + ", payment=" + payment + ", user=" + user
+				+ ", hotel=" + hotel + "]";
+	}
 }

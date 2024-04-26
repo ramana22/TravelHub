@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import java.util.List;
 
+import org.apache.maven.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,8 @@ public class TravelHubService {
 	BusRepository busrepo;
 	@Autowired
 	CarRepository carrepo;
+	@Autowired
+	ProfileRepository profilerepo;
 	@Autowired
 	FlightsRepository flightrepo;
 	@Autowired
@@ -49,6 +52,9 @@ public class TravelHubService {
 	}
 	public User fetchemail(String email) {
 		return userrepo.findByEmail(email);
+	}
+	public profile fetchprofile(String email) {
+		return profilerepo.findByEmail(email);
 	}
 	public  User fetchuseremailandpassword(String email,String password) {
 		return userrepo.findByEmailAndPassword(email, password);
@@ -88,6 +94,9 @@ public class TravelHubService {
 	}
 	public Room saveRoom(Room room) {
 		return roomrepo.save(room);
+	}
+	public profile saveprofile(profile profile) {
+		return profilerepo.save(profile);
 	}
 	public List<Hotel> getAllHotels() {
 	    return hotelrepo.findAll();

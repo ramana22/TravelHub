@@ -15,7 +15,7 @@ public class BusTicket {
     @JoinColumn(name = "bus_id")
     private Bus bus;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
 

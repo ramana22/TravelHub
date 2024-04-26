@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.travel.model.*;
+import com.travel.service.EmailService;
 import com.travel.service.TravelHubService;
 
 
@@ -29,6 +30,8 @@ import com.travel.service.TravelHubService;
 public class TravelHubController {
 	 @Autowired
 	 TravelHubService service;
+	 @Autowired
+	 EmailService emailservice;
 	 @PostMapping("/register")
      public User registerUser(@RequestBody User user) throws Exception  {
   	   String tempemail=user.getEmail();
@@ -44,35 +47,72 @@ public class TravelHubController {
   	   }
   	   return userobj;
     }
-	 @PostMapping("/login")
-	   public User login(@RequestBody User user) throws Exception {
-		   String tempemail=user.getEmail();
-		   String temppass=user.getPassword();
-		   User userobj=null;
-		   if(tempemail!=null &&temppass!=null) {
-			   userobj=service.fetchuseremailandpassword(tempemail, temppass);
-		   }
-		   if(userobj==null) {
-			   throw new Exception("Bad Credentials");
-		   }
-		   return userobj;   
-	   }
+	@PostMapping("/login")
+	public User login(@RequestBody User user) throws Exception {
+		String tempemail=user.getEmail();
+		String temppass=user.getPassword();
+		User userobj=null;
+		if(tempemail!=null &&temppass!=null) {
+			userobj=service.fetchuseremailandpassword(tempemail, temppass);
+		}
+		if(userobj==null) {
+			throw new Exception("Bad Credentials");
+		}
+		return userobj;   
+	}
+	@PostMapping("/saveprofile")
+	public profile saveprofile(@RequestBody  profile user) throws Exception {
+		String tempemail=user.getEmail();
+		User userobj=null;
+		profile prof=null;
+		if(tempemail!=null) {
+			userobj=service.fetchemail(tempemail);
+		}
+		if(userobj==null) {
+			throw new Exception("Bad Credentials");
+		}
+		else {
+			prof=service.saveprofile(user); 
+		}
+		return  prof; 
+	}
+	@GetMapping("/getprofile")
+	public profile getProfile(@RequestParam String email) throws Exception {
+		profile prof = service.fetchprofile(email);
+	    if (prof == null) {
+	        throw new Exception("Profile not found for email: " + email);
+	    }
+	    return prof;
+	}
+
+	@PostMapping("/change")
+	 public User changePassword(@RequestBody Map<String, String> body) throws Exception {
+	   String tempemail= body.get("email");
+	   String temppass = body.get("oldpass");
+       String newpass = body.get("newpass");
+ 	   User userobj=null;
+ 	   if(tempemail!=null && !"".equals(tempemail) && temppass!=null) {
+ 		   userobj=service.fetchemail(tempemail);
+ 		   if(userobj!=null) {
+ 			   userobj.setPassword(newpass);  
+ 		   }
+ 	   }
+ 	   return service.saveUser(userobj);
+    }   
 	@PostMapping("/saveReview")
-	   public Review saveReview(@RequestBody Review review) {
-		   User user= service.fetchemail(review.getReviewemail());
-		   review.setUserDetails(user);
-		   return service.saveReview(review);
-	   }
-	 @GetMapping("/getreview")
-	   public List<Review> getReviews(){
-		   return service.getReview();
-	   }
+	public Review saveReview(@RequestBody Review review) {
+		User user= service.fetchemail(review.getReviewemail());
+		review.setUserDetails(user);
+		return service.saveReview(review);
+	}
+	@GetMapping("/getreview")
+	public List<Review> getReviews(){
+		return service.getReview();
+	}
 	@GetMapping("/health")
     public String healthCheck() {
         return "Application is running!";
     }
-	
-
 	@GetMapping("/searchFlights")
 	public ResponseEntity<?> searchFlights(@RequestParam String origin,
 	                                       @RequestParam String destination,
@@ -524,12 +564,24 @@ public class TravelHubController {
     public TrainTicket saveTrainTicket(@RequestBody TrainTicket trainTicket, @RequestParam String userEmail) {
         // Fetch user object by email
         User user = service.fetchemail(userEmail);
-
+        System.out.println(user.toString());
         // Set the fetched user object to the train ticket
         trainTicket.setUser(user);
 
         // Save the train ticket
         return service.savetrainticket(trainTicket);
+    }
+	@PostMapping("/saveFlightTicket")
+    public FlightTicket saveFlightTicket(@RequestBody FlightTicket flightTicket, @RequestParam String userEmail) {
+        // Fetch user object by email
+        User user = service.fetchemail(userEmail);
+        System.out.println(user.toString());
+
+        // Set the fetched user object to the train ticket
+        flightTicket.setUser(user);
+
+        // Save the train ticket
+        return service.saveflightticket(flightTicket);
     }
 	@PostMapping("/saveHotelBooking")
     public HotelBooking saveHotelBooking(@RequestBody HotelBooking hotelBooking, @RequestParam String userEmail) {
@@ -538,7 +590,7 @@ public class TravelHubController {
 
         // Set the fetched user object to the hotel booking
         hotelBooking.setUser(user);
-
+        System.out.println(hotelBooking.toString());
         // Save the hotel booking
         return service.savehotelbooking(hotelBooking);
     }
@@ -567,4 +619,13 @@ public class TravelHubController {
 	        }
 	        return filteredRestaurants;
 	}
+	 @PostMapping("/sendEmail")
+	 public void sendEmail(@RequestBody EmailRequest emailRequest) {
+	     String to = emailRequest.getTo();
+	     String subject = emailRequest.getSubject();
+	     String text = emailRequest.getText();
+
+	     emailservice.sendEmail(to, subject, text);
+	}
+	 
 }
