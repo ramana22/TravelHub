@@ -18,9 +18,10 @@ public class TrainTicket {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
+
 
     @ManyToOne
     @JoinColumn(name = "payment_id")
