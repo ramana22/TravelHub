@@ -112,7 +112,7 @@ public class TravelHubController {
 	public List<Review> getReviews(){
 		return service.getReview();
 	}
-	@GetMapping("/health")
+	@GetMapping({"/health","/"})
     public String healthCheck() {
         return "Application is running!";
     }
