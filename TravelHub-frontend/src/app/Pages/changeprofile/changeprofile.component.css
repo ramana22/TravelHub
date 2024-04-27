@@ -33,3 +33,8 @@ input[id="gender"] {
 .container{
     margin: 2cm;
 }
+.card-header{
+    height: 2cm;
+    padding: 0.5cm;
+    margin-bottom: 0.5cm;
+}

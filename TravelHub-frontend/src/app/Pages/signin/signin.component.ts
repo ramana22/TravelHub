@@ -17,6 +17,12 @@ export class SigninComponent {
   public loginUser(){
     this._service.loginUserFromRemote(this.user).subscribe(
       data => {
+        const userEmail = data.email; // Assuming email is in response.data
+        if (userEmail) {
+          localStorage.setItem('userEmail', userEmail);
+        } else {
+          console.error("Email not found in login response.");
+        }
         console.log("response recieved");
         this.authService.login();
         this._service.currentuser = this.user;

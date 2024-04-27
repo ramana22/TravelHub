@@ -87,7 +87,7 @@
                 <label for="confirm-password">Confirm New Password:</label>
                 <input type="password" id="confirm-password" name="confirm-password" style="width: 10cm;"  [(ngModel)]="confirm" class="form-control">
             </div>
-            <button (click)="changePassword(current,new)" style="float: right;margin-right: 1cm;margin-bottom: 0.5cm;" class="btn btn-primary">Change Password</button>
+            <button (click)="changePassword(this.userEmail,current,new)" style="float: right;margin-right: 1cm;margin-bottom: 0.5cm;" class="btn btn-primary">Change Password</button>
         </form>
     </div>
 </div>

@@ -36,6 +36,7 @@ export class PaymentpageComponent {
   carBooking!: CarBooking;
   flightTicket!: FlightTicket;
   tempuser!:User;
+  checkinDate!: string;
 
   constructor(private route: ActivatedRoute,private router:Router,private travelservice:TravelHubServiceService) { }
 
@@ -70,12 +71,18 @@ export class PaymentpageComponent {
     });
     this.route.queryParams.subscribe(params => {
       if (params && params['hotel']) {
-        this.hotel = JSON.parse(params['hotel'] as string); // type assertion
+        this.hotel = JSON.parse(params['hotel'] as string); // Parse hotel object
         console.log(this.hotel);
-        this.price = this.hotel.room.bill.amount;
+    
+        // Access nested properties
+        this.price = this.hotel.room.bill.amount; // Retrieve room price
         console.log(this.price);
+    
+        this.checkinDate = JSON.parse(params['checkinDate'] as string); // Parse check-in date
+        console.log(this.checkinDate)
       }
     });
+    
     this.route.queryParams.subscribe(params => {
       if (params && params['car']) { 
         this.car = JSON.parse(params['car'] as string); // type assertion
@@ -84,7 +91,7 @@ export class PaymentpageComponent {
         console.log(this.price);
       }
     });
-    this.tempuser=this.travelservice.getCurrentUser();
+    this.userEmail = localStorage.getItem('userEmail') || '';
   }
 
   onSubmit(fullName: string, emailAddress: string, phoneNumber: string, dateOfBirth: Date, people: number): void {
@@ -111,7 +118,7 @@ export class PaymentpageComponent {
       };
       const userEmail = this.tempuser.email // Replace with actual user email
       console.log(userEmail)
-      this.travelservice.saveBusTicket(busTicket, userEmail).subscribe(
+      this.travelservice.saveBusTicket(busTicket,this.userEmail).subscribe(
         (savedBusTicket) => {
           console.log('Bus ticket saved successfully:', savedBusTicket);
           // Optionally, you can navigate to another page or perform other actions upon successful save
@@ -139,7 +146,7 @@ export class PaymentpageComponent {
       };
       const userEmail = this.tempuser.email // Replace with actual user email
       console.log(userEmail)
-      this.travelservice.saveTrainTicket(trainTicket, userEmail).subscribe(
+      this.travelservice.saveTrainTicket(trainTicket,this.userEmail).subscribe(
         (savedTrainTicket) => {
           console.log('Train ticket saved successfully:', savedTrainTicket);
           // Optionally, you can navigate to another page or perform other actions upon successful save
@@ -158,9 +165,7 @@ export class PaymentpageComponent {
     }
     if (this.flight) {
       this.flightTicket.traveler=traveler;
-      const userEmail = this.tempuser.email // Replace with actual user email
-      console.log(userEmail)
-      this.travelservice.saveFlightTicket(this.flightTicket,userEmail).subscribe(
+      this.travelservice.saveFlightTicket(this.flightTicket,this.userEmail).subscribe(
         (savedTrainTicket) => {
           console.log('flight ticket saved successfully:', savedTrainTicket);
           // Optionally, you can navigate to another page or perform other actions upon successful save
@@ -178,15 +183,16 @@ export class PaymentpageComponent {
     }
     
     if (this.hotel) {
-      console.log('Hotel booking ', this.hotel);
+      console.log('Hotel details', this.hotel);
       const hotelbooking: HotelBooking = {
-          hotel:this.hotel,
-          traveler: traveler,
-          payment: this.payment,
-      };
-      console.log('Hotel booking ', hotelbooking);
-      const userEmail = this.travelservice.currentuser.email; // Replace with actual user email
-      this.travelservice.saveHotelBooking(hotelbooking, this.userEmail)
+        id:0,
+        hotel: this.hotel,          // Assign the hotel object
+        checkinDate: this.checkinDate,  // Assign the check-in date
+        traveler: traveler,         // Assign the traveler object
+        payment: this.payment       // Assign the payment object
+      };      
+      console.log('Hotel booking saving', hotelbooking);
+      this.travelservice.saveHotelBooking(hotelbooking,this.userEmail)
           .subscribe((response) => {
               console.log('Hotel booking saved:', response);
               // Handle success or redirect
@@ -210,9 +216,7 @@ export class PaymentpageComponent {
         id: 0,
         user: new User
       };
-      const userEmail = this.tempuser.email // Replace with actual user email
-      console.log(userEmail)
-      this.travelservice.saveCarBooking(this.carBooking, this.userEmail)
+      this.travelservice.saveCarBooking(this.carBooking,this.userEmail)
       .subscribe((result) => {
         console.log('Car booking saved successfully:', result);
         // Optionally, you can perform additional actions after the car booking is saved

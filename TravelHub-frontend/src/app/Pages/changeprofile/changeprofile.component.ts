@@ -18,11 +18,11 @@ export class ChangeprofileComponent {
   closeprofile1:Boolean=false;
   closeprofile2:Boolean=false;
   user!:User;
-  public email!: string;
   currentprofile= new Profile();
+  userEmail!: string;
   ngOnInit(): void {
-    this.user = this._service.getCurrentUser();
-    this.email = this.user.email;
+    // Fetch userEmail from localStorage on initialization
+    this.userEmail = localStorage.getItem('userEmail') || '';
   }
   constructor(public _service:TravelHubServiceService,public _Router:Router,public authService:AuthService){}
   toggleChangePassword() {
@@ -34,8 +34,8 @@ export class ChangeprofileComponent {
   togglesetpersonalinfo2() {
     this.closeprofile2=!this.closeprofile2;
   }
-  changePassword(oldPassword: string, newPassword: string): void {
-    this._service.changePassword(this.email, oldPassword, newPassword)
+  changePassword(userEmail:string,oldPassword: string, newPassword: string): void {
+    this._service.changePassword(this.userEmail,oldPassword, newPassword)
       .subscribe(
         response => {
           console.log('Password changed successfully', response);
@@ -48,7 +48,7 @@ export class ChangeprofileComponent {
       );
   }
   getProfile() {
-    this._service.getProfile(this.email).subscribe(
+    this._service.getProfile(this.userEmail).subscribe(
       (data: Profile) => {
         this.currentprofile = data;
         console.log("Response received", this.currentprofile);

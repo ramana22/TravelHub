@@ -9,6 +9,7 @@ import { Hotel } from '../models.service';
 })
 export class HotelbookingComponent {
   hotel!: Hotel; // Update type to any or Hotel depending on your data structure
+  checkInDate!: string;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -17,15 +18,25 @@ export class HotelbookingComponent {
       console.log('Query parameters:', params); // Log all query parameters
       if (params && params['hotel']) { 
         console.log('Hotel parameter found:');
-        this.hotel = JSON.parse(params['hotel'] as string); 
-        console.log(this.hotel);
+        try {
+          this.hotel = JSON.parse(params['hotel'] as string); // Parse hotel parameter from JSON string
+          this.checkInDate = JSON.parse(params['checkinDate'] as string); // Parse checkinDate parameter
+          console.log(this.hotel); // Log hotel details
+        } catch (error) {
+          console.error('Error parsing query parameters:', error); // Log parsing error
+        }
       } else {
         console.log('Hotel parameter not found');
       }
-    });
+    });        
   }
   checkout(hotel: Hotel) {
-    this.router.navigate(['/payment'], { queryParams: { hotel: JSON.stringify(hotel) } });
+    this.router.navigate(['/payment'], { 
+      queryParams: { 
+        hotel: JSON.stringify(hotel), // Stringify the hotel object
+        checkinDate: JSON.stringify(this.checkInDate) // Pass the check-in date
+      } 
+    });
   }
   
 }

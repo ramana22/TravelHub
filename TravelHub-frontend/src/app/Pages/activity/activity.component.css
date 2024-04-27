@@ -9,28 +9,13 @@
     margin-bottom: 10px;
 }
 
-.booking-category {
-    margin-bottom: 20px;
+
+.card-header{
+    height: 2cm;
+    padding: 0.5cm;
+    margin-bottom: 0.5cm;
 }
 
-.booking-category h4 {
-    color: #666;
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-.booking-category ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.booking-category li {
-    margin-bottom: 5px;
-    color: #666;
-}
-
-.booking-category li:before {
-    content: "•";
-    color: #666;
-    margin-right: 5px;
+.no{
+    text-align: center;
 }

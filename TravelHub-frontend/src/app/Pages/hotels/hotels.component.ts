@@ -76,9 +76,16 @@ export class HotelsComponent {
         this.router.navigate(['/signin']); // Redirect to signin page if user confirms
       }
     } else {
-      this.router.navigate(['/hotelbooking'], { queryParams: { hotel: JSON.stringify(hotel) } });
+      // Navigate to hotel booking page with hotel and check-in date as query parameters
+      this.router.navigate(['/hotelbooking'], { 
+        queryParams: { 
+          hotel: JSON.stringify(hotel), // Convert hotel object to string
+          checkinDate: JSON.stringify(this.checkInDate) // Pass check-in date
+        } 
+      });
     }
   }
+  
   generateGoogleSearchLink(restaurantName: string): string {
     const location = restaurantName; // You can modify this as per your requirement
     return "https://www.google.com/search?q=" + encodeURIComponent(location) + "+restaurant";

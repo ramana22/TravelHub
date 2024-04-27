@@ -204,14 +204,14 @@ export interface Cancellation {
 
 export class Hotel{
   'hotelid':number;
-  'hotelname':String;
+  'name':String;
   'rating':number;
   'address':address;
   'image':Image;
   'room':Room;
 }
 export class Room{
-  'roomnumber':number;
+  'roomNumber':number;
   'image':Image; 
   'bill':Bill;  
 }
@@ -295,7 +295,9 @@ export class TrainTicket {
 }
 
 export class HotelBooking {
+  id!:number;
   hotel?: Hotel;
+  checkinDate?:String;
   traveler?: Traveler;
   payment?: Payment;
   user?: User;

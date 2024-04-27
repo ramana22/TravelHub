@@ -1,34 +1,47 @@
 <div class="user-bookings">
     <h3>User Bookings</h3>
-    <div class="booking-category">
-        <h4>Hotels</h4>
-        <ul>
-            <li>User booked a hotel in Paris</li>
-            <li>User canceled a hotel booking in London</li>
-        </ul>
+    <div class="card-header" (click)="togglehotel();showhotels()">
+        <h4 class="mb-0">Hotels</h4>
     </div>
-    <div class="booking-category">
-        <h4>Flights</h4>
-        <ul>
-            <li>User booked a flight from New York to London</li>
-        </ul>
+    <div *ngIf="showhotel" class="showhotel">
+        <div *ngIf="Hotelbookings" class="card-container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card-deck">
+                  <div *ngFor="let booking of Hotelbookings" style="display: flex;flex-direction: column;" class="card">
+                    <div class="card-body">
+                        <!-- Hotel booking details -->
+                        <h6>Booking ID: {{ booking.hotel?.hotelid }}</h6>
+                        <p>Hotel Name: {{ booking.hotel?.name }}</p>
+                        <p>Check-in Date: {{ booking.checkinDate }}</p>
+                        <!-- Room details -->
+                        <h6>Room Details:</h6>
+                        <p>Room Number: {{ booking.hotel?.room?.roomNumber}}</p>
+                        <p>Bill: {{ booking.hotel?.room?.bill?.amount}}</p>
+                         <!-- Add more room details as needed -->
+                         <div class="card-footer" style="float: right;">
+                            <button class="btn btn-danger" (click)="cancelBooking(booking.id)">Cancel Booking</button>
+                        </div>
+                    </div>
+                  </div>                   
+                </div>
+              </div>
+            </div>
+        </div>                
     </div>
-    <div class="booking-category">
-        <h4>Cars</h4>
-        <ul>
-            <li>User rented a car in Los Angeles</li>
-        </ul>
+    <div class="card-header" (click)="toggleflights();showflights()">
+        <h4 class="mb-0">Flights</h4>
     </div>
-    <div class="booking-category">
-        <h4>Trains</h4>
-        <ul>
-            <li>User searched for train schedules from Rome to Venice</li>
-        </ul>
+    <div *ngIf="showflight" class="showflight">
+       
     </div>
-    <div class="booking-category">
-        <h4>Buses</h4>
-        <ul>
-            <li>User booked a bus ticket from Madrid to Barcelona</li>
-        </ul>
+    <div class="card-header" (click)="togglecars()">
+        <h4 class="mb-0">Cars</h4>
+    </div>
+    <div class="card-header" (click)="toggletrains()">
+        <h4 class="mb-0">Trains</h4>
+    </div>
+    <div class="card-header" (click)="togglebuses()">
+        <h4 class="mb-0" >Buses</h4>
     </div>
 </div>

@@ -1,48 +1,54 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Bus, BusTicket, Car, CarBooking, FlightTicket, HotelBooking, Profile, Review, Train, TrainTicket, User } from './models.service';
-
 @Injectable({
   providedIn: 'root',
 })
 export class TravelHubServiceService {
-  [x: string]: any;
   private selectedFlight: any;
-  searchAirports(searchQuery: any) {
-    throw new Error('Method not implemented.');
-  }
-  private baseUrl = 'http://localhost:8080';
+  userEmail!: string;
+  private baseUrl = 'travel.up.railway.app';
   currentuser!:User;
   constructor(public http: HttpClient) {}
+  ngOnInit() {
+    // Fetch userEmail from localStorage on initialization
+    this.userEmail = localStorage.getItem('userEmail') || '';
+  }
+
   public registerUserFromRemote(user: User): Observable<any> {
     this.currentuser = user;
-    return this.http.post('http://localhost:8080/register', user);
+    return this.http.post(`${this.baseUrl}/register`, user);
   }
   public loginUserFromRemote(user: User): Observable<any> {
-    // Assuming this.getUser returns an Observable
-    this.setCurrentUser(user)
-    return this.http.post('http://localhost:8080/login', user);
+    return this.http.post(`${this.baseUrl}/login`, user).pipe(
+      tap(() => {
+        // Assuming this.getUser returns an Observable
+        this.setCurrentUser(user);
+        this.userEmail = user.email; // Set userEmail
+        localStorage.setItem('userEmail', this.userEmail);
+      })
+    );
   }
   public saveprofile(profile: Profile): Observable<any> {
     console.log(profile)
-    return this.http.post('http://localhost:8080/saveprofile', profile);
+    return this.http.post(`${this.baseUrl}/saveprofile`, profile);
   }
   getProfile(email: string): Observable<any> {
-    return this.http.get(`http://localhost:8080/getprofile?email=${email}`);
+    return this.http.get(`${this.baseUrl}/getprofile?email=${email}`);
   }
+  
   setCurrentUser(user: User): void {
-    this.currentuser = user;
+    this.currentuser=user;
   }
-
   getCurrentUser() {
     return this.currentuser;
   }
   public getReviews(): Observable<any> {
-    return this.http.get('http://localhost:8080/getreview');
+    return this.http.get(`${this.baseUrl}/getreview`);
   }
   saveReview(review: Review): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/saveReview', review);
+    return this.http.post<any>(`${this.baseUrl}/saveReview`, review);
   }
   searchFlights(departureAirport: string, arrivalAirport: string, departureDate: string, returnDate: string, passengers : number): Observable<any> {
     const url = `${this.baseUrl}/searchFlights`;
@@ -74,7 +80,7 @@ export class TravelHubServiceService {
     return this.http.get(url, { params });
   }
   getAirports(keyword: string) {
-    return this.http.get<any[]>(`http://localhost:8080/searchLocations?keyword=${keyword}`);
+    return this.http.get<any[]>(`${this.baseUrl}/searchLocations?keyword=${keyword}`);
   }
  
   searchBuses(departureTerminal: string, arrivalTerminal: string,departureDate:string) {
@@ -83,7 +89,7 @@ export class TravelHubServiceService {
       arrivalTerminal,
       departureDate
     };
-    return this.http.post<Bus[]>("http://localhost:8080/buses", searchParams);
+    return this.http.post<Bus[]>(`${this.baseUrl}/buses`, searchParams);
   }
   searchTrains(departureStation: string, arrivalStation: string,departureDate:Date) {
     const searchParams = {
@@ -91,10 +97,10 @@ export class TravelHubServiceService {
       arrivalStation,
       departureDate
     };
-    return this.http.post<Train[]>("http://localhost:8080/trains", searchParams);
+    return this.http.post<Train[]>(`${this.baseUrl}/trains`, searchParams);
   }
   searchDestination(destination: string): Observable<any> {
-    return this.http.post<any>("http://localhost:8080/getfilterlist", { city: destination });
+    return this.http.post<any>(`${this.baseUrl}/getfilterlist`, { city: destination });
   }
   public getCars(pickupLocation:string,rentalStartDate:string,rentalEndDate:string):Observable<any> {
     const searchParams = {
@@ -105,21 +111,21 @@ export class TravelHubServiceService {
     return this.http.post("http://localhost:8080/cars",searchParams);
   }
 
-  saveBusTicket(busTicket: BusTicket, userEmail: string){
+  saveBusTicket(busTicket: BusTicket,userEmail:string){
     return this.http.post<BusTicket>(`${this.baseUrl}/saveBusTicket?userEmail=${userEmail}`, busTicket);
   }
 
-  saveTrainTicket(trainTicket: TrainTicket, userEmail: string): Observable<TrainTicket> {
+  saveTrainTicket(trainTicket: TrainTicket,userEmail:string): Observable<TrainTicket> {
     return this.http.post<TrainTicket>(`${this.baseUrl}/saveTrainTicket?userEmail=${userEmail}`, trainTicket);
   }
-  saveFlightTicket(flightTicket: FlightTicket, userEmail: string): Observable<TrainTicket> {
+  saveFlightTicket(flightTicket: FlightTicket,userEmail:string): Observable<TrainTicket> {
     return this.http.post<TrainTicket>(`${this.baseUrl}/saveFlightTicket?userEmail=${userEmail}`, flightTicket);
   }
 
-  saveHotelBooking(hotelBooking: HotelBooking, userEmail: string){
+  saveHotelBooking(hotelBooking: HotelBooking,userEmail:string){
     return this.http.post<HotelBooking>(`${this.baseUrl}/saveHotelBooking?userEmail=${userEmail}`, hotelBooking);
   }
-  saveCarBooking(carBooking: CarBooking, userEmail: string): Observable<CarBooking> {
+  saveCarBooking(carBooking: CarBooking,userEmail:string): Observable<CarBooking> {
 
     // Construct the request body
     const requestBody = {
@@ -137,11 +143,19 @@ export class TravelHubServiceService {
     return this.selectedFlight;
   }
   getRestaurants(destination: string): Observable<any> {
-    return this.http.post<any>("http://localhost:8080/getfilterRestaurant", { city: destination });
+    return this.http.post<any>(`${this.baseUrl}/getfilterRestaurant`, { city: destination });
   }
-  changePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
+  changePassword(userEmail:string, oldPassword: string, newPassword: string): Observable<any> {
     const url = `${this.baseUrl}/change`;
-    const body = { email, oldpass: oldPassword, newpass: newPassword };
+    const body = {userEmail, oldpass: oldPassword, newpass: newPassword };
     return this.http.post<any>(url, body);
+  }
+  getBookings(email: string): Observable<any> {
+    const body = { email: email };
+    return this.http.post<any>(`${this.baseUrl}/getBooking`, body);
+  }
+  getflighttickets(email: string): Observable<any> {
+    const body = { email: email };
+    return this.http.post<any>(`${this.baseUrl}/getflightticket`, body);
   }
 }
