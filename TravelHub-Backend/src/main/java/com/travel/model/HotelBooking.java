@@ -1,6 +1,8 @@
 package com.travel.model;
 
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -9,25 +11,27 @@ public class HotelBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "checkin_date")
+    private String checkinDate;
 
-    // Additional fields for hotel details, if needed
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
 
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
-
+    
 	public Long getId() {
 		return id;
 	}
@@ -59,10 +63,29 @@ public class HotelBooking {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+	public String getCheckinDate() {
+		return checkinDate;
+	}
+
+	public void setCheckinDate(String checkinDate) {
+		this.checkinDate = checkinDate;
+	}
 
 	@Override
 	public String toString() {
-		return "HotelBooking [id=" + id + ", traveler=" + traveler + ", payment=" + payment + ", user=" + user
-				+ ", hotel=" + hotel + "]";
+		return "HotelBooking [id=" + id + ", checkinDate=" + checkinDate + ", traveler=" + traveler + ", payment="
+				+ payment + ", user=" + user + ", hotel=" + hotel + "]";
 	}
+
+	
 }

@@ -22,9 +22,10 @@ public class CarBooking {
     @JoinColumn(name = "user_id")
     private User user;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
+
 
 	public Car getCar() {
 		return car;

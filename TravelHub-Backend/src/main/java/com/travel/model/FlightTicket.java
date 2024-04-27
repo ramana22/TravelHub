@@ -27,9 +27,10 @@ public class FlightTicket {
     @Column(name = "adults")
     private String adults;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
+
     
     @OneToOne
     @JoinColumn(name = "user_id")

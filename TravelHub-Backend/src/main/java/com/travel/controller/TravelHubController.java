@@ -2,7 +2,7 @@ package com.travel.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.travel.model.*;
 import com.travel.service.EmailService;
 import com.travel.service.TravelHubService;
+
+import jakarta.persistence.EntityNotFoundException;
 
 
 @RestController
@@ -87,7 +90,7 @@ public class TravelHubController {
 
 	@PostMapping("/change")
 	 public User changePassword(@RequestBody Map<String, String> body) throws Exception {
-	   String tempemail= body.get("email");
+	   String tempemail= body.get("userEmail");
 	   String temppass = body.get("oldpass");
        String newpass = body.get("newpass");
  	   User userobj=null;
@@ -109,7 +112,7 @@ public class TravelHubController {
 	public List<Review> getReviews(){
 		return service.getReview();
 	}
-	@GetMapping("/health")
+	@GetMapping({"/health","/"})
     public String healthCheck() {
         return "Application is running!";
     }
@@ -584,16 +587,20 @@ public class TravelHubController {
         return service.saveflightticket(flightTicket);
     }
 	@PostMapping("/saveHotelBooking")
-    public HotelBooking saveHotelBooking(@RequestBody HotelBooking hotelBooking, @RequestParam String userEmail) {
-        // Fetch user object by email
-        User user = service.fetchemail(userEmail);
+	public HotelBooking saveHotelBooking(@RequestBody HotelBooking hotelBooking, @RequestParam String userEmail) {
+	    User user = service.fetchemail(userEmail);
+	    if (user != null) {
+	        // Set the fetched user object to the hotel booking
+	        hotelBooking.setUser(user);
+	        System.out.println(hotelBooking.toString());
+	        return service.savehotelbooking(hotelBooking);
+	    } else {
+	        // Handle the case where user is not found
+	        // For example, you can throw an exception or return a specific response
+	        throw new EntityNotFoundException("User with email " + userEmail + " not found");
+	    }
+	}
 
-        // Set the fetched user object to the hotel booking
-        hotelBooking.setUser(user);
-        System.out.println(hotelBooking.toString());
-        // Save the hotel booking
-        return service.savehotelbooking(hotelBooking);
-    }
 	@PostMapping("/savecarBooking")
     public CarBooking saveCarBooking(@RequestBody CarBooking carBooking, @RequestParam String userEmail) {
         // Fetch user object by email
@@ -627,5 +634,32 @@ public class TravelHubController {
 
 	     emailservice.sendEmail(to, subject, text);
 	}
-	 
+	@PostMapping("/getBooking")
+	public ResponseEntity<List<HotelBooking>> getBookings(@RequestBody Map<String, String> requestMap) {
+	   try {
+	      String email = requestMap.get("email");
+	      List<HotelBooking> bookings = service.getBookingsByUserEmail(email);
+	      return ResponseEntity.ok(bookings);
+	   }catch (EntityNotFoundException e) {
+	           // Handle the exception, log the error, and return an appropriate response
+		   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+	   }catch (Exception e) {
+	           // Handle other exceptions
+		   return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+	   }
+	}
+	@PostMapping("/getflightticket")
+	public ResponseEntity<List<FlightTicket>> getflighttickets(@RequestBody Map<String, String> requestMap) {
+	   try {
+	      String email = requestMap.get("email");
+	      List<FlightTicket> bookings = service.getflightByUserEmail(email);
+	      return ResponseEntity.ok(bookings);
+	   }catch (EntityNotFoundException e) {
+	           // Handle the exception, log the error, and return an appropriate response
+		   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+	   }catch (Exception e) {
+	           // Handle other exceptions
+		   return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+	   }
+	}
 }

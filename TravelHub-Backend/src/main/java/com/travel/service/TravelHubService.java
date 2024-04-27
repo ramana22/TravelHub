@@ -4,14 +4,12 @@ import java.time.LocalDate;
 
 import java.util.List;
 
-import org.apache.maven.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.travel.model.*;
 
 import com.travel.repository.*;
-
 
 
 @Service
@@ -31,7 +29,7 @@ public class TravelHubService {
 	@Autowired
 	FlightsRepository flightrepo;
 	@Autowired
-        Locationrepository locationrepo;
+    Locationrepository locationrepo;
 	@Autowired
 	BusTicketRepository busticket;
 	@Autowired
@@ -129,5 +127,10 @@ public class TravelHubService {
 	public List<Restaurant> getallrestaurants() {
 	    return restrepo.findAll();
 	}
-
+	public List<HotelBooking> getBookingsByUserEmail(String email) {
+	    return hotelbooking.findByUserEmail(email);
+	}
+	public List<FlightTicket> getflightByUserEmail(String email) {
+	    return flightticket.findByUserEmail(email);
+	}
 }
