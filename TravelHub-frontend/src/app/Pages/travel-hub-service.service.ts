@@ -10,7 +10,6 @@ export class TravelHubServiceService {
   userEmail!: string;
   currentuser!:User;
   constructor(private http: HttpClient) {
-      this.http = http.baseUrl(''); // Set base URL here
   }
   ngOnInit() {
     // Fetch userEmail from localStorage on initialization
