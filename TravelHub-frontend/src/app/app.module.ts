@@ -66,7 +66,7 @@ import { ActivityComponent } from './Pages/activity/activity.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule.forRoot({ baseUrl: 'https://travel.up.railway.app' }), 
+    HttpClientModule,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
