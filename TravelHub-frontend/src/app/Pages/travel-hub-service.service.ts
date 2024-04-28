@@ -8,7 +8,7 @@ import { Bus, BusTicket, Car, CarBooking, FlightTicket, HotelBooking, Profile, R
 export class TravelHubServiceService {
   private selectedFlight: any;
   userEmail!: string;
-  private baseUrl = 'travel.up.railway.app';
+  private baseUrl = 'https://travel.up.railway.app/';
   currentuser!:User;
   constructor(public http: HttpClient) {}
   ngOnInit() {
