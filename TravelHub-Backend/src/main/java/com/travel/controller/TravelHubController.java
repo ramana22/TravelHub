@@ -29,7 +29,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 
 @RestController
-@CrossOrigin(origins="https://travelhubweb.azurewebsites.net")
+@CrossOrigin(origins="http://localhost:4200")
 public class TravelHubController {
 	 @Autowired
 	 TravelHubService service;
