@@ -7,6 +7,3 @@ COPY . .
 RUN npm install
 RUN npm run build --prod
 
-FROM nginx:alpine
-COPY src/nginx/etc/conf.d/default.conf /etc/nginx/conf/default.conf
-COPY --from=builder /app/dist/travel-hub-frontend /usr/share/nginx/html
