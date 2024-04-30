@@ -1,148 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Attractions Near Page, AZ</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<div class="container">
+  <h1>Popular Attractions Near Page, AZ</h1>
 
-    <style>
-      /* General reset */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+  <!-- The Alamo -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/seed/picsum/200/300" alt="The Alamo" />
 
-      /* Header section styling */
-      header {
-        background: #000;
-        color: #fff;
-        text-align: center;
-        padding: 10px 0;
-      }
+    <div class="content">
+      <h3>The Alamo (San Antonio)</h3>
+      <p>A historic mission and fortress compound, famous for the Battle of the Alamo in 1836 during the Texas Revolution. Don't miss this iconic symbol of Texas history.</p>
+      <button class="learn-more">Learn More</button>
+    </div>
+  </div>
 
-      /* Container to center the content */
-      .container {
-        max-width: 900px; /* Sets a maximum width for the entire content */
-        margin: 0 auto; /* Centers the content within the browser window */
-        padding: 20px; /* Adds padding around the content */
-      }
+  <!-- Divider Line -->
+  <div class="divider"></div>
 
-      /* Title styling */
-      h1 {
-        color: #a24e3a;
-        text-align: center;
-        margin-bottom: 20px;
-      }
+  <!-- Big Bend National Park -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?grayscale" alt="Big Bend National Park" />
 
-      /* Tour description styling */
-      .tour-description {
-        display: flex;
-        gap: 20px;
-        align-items: flex-start; /* Aligns image and content at the top */
-        margin-bottom: 20px; /* Adds space between components */
-      }
+    <div class="content">
+      <h3>Big Bend National Park</h3>
+      <p>Located in West Texas, it offers stunning landscapes, including mountains, desert, and the winding Rio Grande River. Immerse yourself in nature's grandeur.</p>
+      <button class="learn-more">Learn More</button>
+    </div>
+  </div>
 
-      /* Divider line */
-      .divider {
-        border-bottom: 1px solid #a24e3a; /* Adds a line between components */
-        width: 100%; /* Full width of the component */
-        margin-bottom: 20px; /* Adds some space below the line */
-      }
+  <!-- Divider Line -->
+  <div class="divider"></div>
 
-      /* Image block styling */
-      .tour-description img {
-        height: 200px; /* Set a fixed height */
-        width: auto; /* Maintain aspect ratio */
-        position: sticky;
-        top: 20px; /* Keeps the image sticky at a set offset */
-      }
+  <!-- NASA Space Center Houston -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?random" alt="NASA Space Center Houston" />
 
-      /* Styling for the content */
-      .content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
+    <div class="content">
+      <h3>NASA Space Center Houston</h3>
+      <p>Learn about space exploration and NASA's missions through interactive exhibits, astronaut talks, and tram tours. Embark on an out-of-this-world journey.</p>
+      <button class="learn-more">Learn More</button>
+    </div>
+  </div>
 
-      /* Styling for the 'Learn More' button */
-      .learn-more {
-        background: #a24e3a;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-      }
+  <!-- Divider Line -->
+  <div class="divider"></div>
 
-      /* Additional responsive adjustments */
-      @media (max-width: 768px) {
-        .tour-description {
-          flex-direction: column;
-        }
+  <!-- San Antonio River Walk -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?random" alt="San Antonio River Walk" />
 
-        .tour-description img {
-          width: 100%;
-          height: auto; /* Maintain aspect ratio */
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h2>Book Your Stay Now</h2>
-      <form>
-        <label for="check-in">Check-in</label>
-        <input type="date" id="check-in" name="check-in" />
+    <div class="content">
+      <h3>San Antonio River Walk</h3>
+      <p>A picturesque urban waterway lined with shops, restaurants, and attractions, perfect for a leisurely stroll or boat ride. Discover the charm of San Antonio's downtown.</p>
+      <button class="learn-more">Learn More</button>
+    </div>
+  </div>
 
-        <label for="check-out">Check-out</label>
-        <input type="date" id="check-out" name="check-out" />
+  <!-- Divider Line -->
+  <div class="divider"></div>
 
-        <button type="submit">Search</button>
-      </form>
-    </header>
+  <!-- Texas State Capitol -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?random" alt="Texas State Capitol" />
 
-    <main class="container">
-      <h1>Popular Attractions Near Page, AZ</h1>
+    <div class="content">
+      <h3>Texas State Capitol (Austin)</h3>
+      <p>Explore the beautiful capitol building and its grounds, including historical exhibits and guided tours. Delve into the heart of Texas politics and history.</p>
+      <button class="learn-more">Learn More</button>
+    </div>
+  </div>
 
-      <div class="tour-description">
-        <img
-          src="https://picsum.photos/seed/picsum/200/300"
-          alt="Texas Tour Vehicle"
-        />
+  <!-- Divider Line -->
+  <div class="divider"></div>
 
-        <div class="content">
-          <h3>Texas Private Tours</h3>
-          <p>
-            Texas Private Tours is a leading private tour agency in Northern
-            Texas. We specialize in safe & sanitary custom tours. We pick up
-            guests in Flagstaff and spend our day exploring scenic Texas in an
-            intimate setting with an expert guide in comfort.
-          </p>
-          <button class="learn-more">Learn More</button>
-        </div>
-      </div>
+  <!-- Gulf Coast Beaches -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?random" alt="Gulf Coast Beaches" />
 
-      <div class="divider"></div>
-      <!-- Divider line between components -->
+    <div class="content">
+      <h3>Gulf Coast Beaches</h3>
+      <p>Enjoy the sandy shores and warm waters of beaches such as South Padre Island, Galveston Island, and Corpus Christi. Relax and unwind in the Texas sun.</p>
+      <button class="learn-more">Learn More</button>
+    </div>
+  </div>
 
-      <div class="tour-description">
-        <img
-          src="https://picsum.photos/200/300?grayscale"
-          alt="Antelope Canyon"
-        />
-
-        <div class="content">
-          <h3>Antelope Canyon and Horseshoe Bend Tour</h3>
-          <p>
-            Spend a day visiting two of the most iconic landscapes in the
-            American Southwest: Antelope Canyon & Horseshoe Bend. Our Lower
-            Antelope Canyon Tours takes you into the heart of one of the most
-            spectacular slot canyons in the world.
-          </p>
-          <button class="learn-more">Learn More</button>
-        </div>
-      </div>
-    </main>
-  </body>
-</html>
+</div>

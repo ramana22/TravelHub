@@ -64,7 +64,7 @@ export class PaypalComponent {
   sendEmailOnPaymentCompletion(paymentId: string, payerEmail: string): Observable<any> {
     // Construct the email request object
     const emailRequest: EmailRequest = {
-      to: payerEmail , // Replace with the actual recipient email address
+      to : payerEmail , // Replace with the actual recipient email address
       subject: 'Payment Confirmation', // Subject of the email
       text: `Payment with ID ${paymentId} has been completed successfully.` // Body text of the email
     };

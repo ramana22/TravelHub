@@ -1,84 +1,84 @@
 <div class="banner">
-    <div class="banner-content"><b>Find Your Dream Retreat</b><br></div>
-    <div class="description"> Explore vacation homes, and more...</div>
+  <div class="banner-content"><b>Find Your Dream Retreat</b><br></div>
+  <div class="description"> Explore vacation homes, and more...</div>
 </div>
 
 <div class="search-card">
-  <div class="head">Search Hotels</div>
-  <form (ngSubmit)="search()" class="form">
-    <div class="form-group">
-      <input type="text" id="city" placeholder="where..?" [(ngModel)]="destination" name="city" required>
-    </div>
-    <div class="input-field">
-      <input type="date" [(ngModel)]="checkInDate"  name="checkInDate" required>
-    </div>
-    <div class="form-group">
-      <input type="number" id="radius" placeholder="people" [(ngModel)]="adult" name="radius" required>
-    </div>
-    <div class="form-group">
-      <input type="number" id="radius" placeholder="radius in km" [(ngModel)]="radius" name="radius" required>
-    </div>
-    <button class="search" type="submit">Search </button>
-  </form>
+<div class="head">Search Hotels</div>
+<form (ngSubmit)="search()" class="form">
+  <div class="form-group">
+    <input type="text" id="city" placeholder="where..?" [(ngModel)]="destination" name="city" required>
+  </div>
+  <div class="input-field">
+    <input type="date" [(ngModel)]="checkInDate"  name="checkInDate" required>
+  </div>
+  <div class="form-group">
+    <input type="number" id="radius" placeholder="people" [(ngModel)]="adult" name="radius" required>
+  </div>
+  <div class="form-group">
+    <input type="number" id="radius" placeholder="radius in km" [(ngModel)]="radius" name="radius" required>
+  </div>
+  <button class="search" type="submit">Search </button>
+</form>
 </div>
 
 <div class="container">
-    <div class="row">
-      <h1 *ngIf="searchClicked" style="margin-left: 2cm;" class="clicked"><b>Best Hotel deals</b></h1>
-      <div *ngFor="let hotel of hotels">
-          <div class="holder">
-            <div class="image-container">
-              <img class="img-fluid" src="{{hotel.image.imageUrl}}" alt="">
-            </div>
-            <div class="details card">
-              <div class="head" >{{hotel.name}}</div>
-              <span class="location"><i class="bi bi-geo-alt-fill"></i>&nbsp;&nbsp;{{hotel.address.street}},&nbsp;&nbsp;{{hotel.address.city}}</span>
-              <span class="tick-mark">free parking</span>
-              <span class="tick-mark">free internet access ..<a routerLink="/bookingpage" routerLinkActive="active-link">......Amenties</a></span>
-              <div class="rating card">
-                <span style="background-color: lightseagreen; color: white; font-size: 24px;">{{hotel.rating}}</span>
-                <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                <span style="font-size: 24px;">2.5 Star Hotel</span>
-              </div>
-            </div>
-            <div class="price card">
-              <h1><b>{{hotel.room.bill.amount}}$</b></h1>
-              <span style="margin-block: 0.2cm;">per person</span>
-              <div class="check"><button type="submit" (click)="checkout(hotel)">Check Out</button></div>
+  <div class="row">
+    <h1 *ngIf="searchClicked" style="margin-left: 2cm;" class="clicked"><b>Best Hotel deals</b></h1>
+    <div *ngFor="let hotel of hotels">
+        <div class="holder">
+          <div class="image-container">
+            <img class="img-fluid" src="{{hotel.image.imageUrl}}" alt="">
+          </div>
+          <div class="details card">
+            <div class="head" >{{hotel.name}}</div>
+            <span class="location"><i class="bi bi-geo-alt-fill"></i>&nbsp;&nbsp;{{hotel.address.street}},&nbsp;&nbsp;{{hotel.address.city}}</span>
+            <span class="tick-mark">free parking</span>
+            <span class="tick-mark">free internet access ..<a routerLink="/bookingpage" routerLinkActive="active-link">......Amenties</a></span>
+            <div class="rating card">
+              <span style="background-color: lightseagreen; color: white; font-size: 24px;">{{hotel.rating}}</span>
+              <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+              <span style="font-size: 24px;">2.5 Star Hotel</span>
             </div>
           </div>
-      </div>
-  </div>
+          <div class="price card">
+            <h1><b>{{hotel.room.bill.amount}}$</b></h1>
+            <span style="margin-block: 0.2cm;">per person</span>
+            <div class="check"><button type="submit" (click)="checkout(hotel)">Check Out</button></div>
+          </div>
+        </div>
+    </div>
+</div>
 </div>
 
 
- 
+
 
 <div class="rest-container" >
-  <h1 *ngIf="searchClicked" style="margin-left: 4cm; margin-top: 2cm;" class="clicked"><b>Best Restaurant deals</b></h1>
-  <div class="restaurant-list">
-    <div class="scrolling-wrapper">
-      <div *ngFor="let restaurant of restaurants" class="rest-card card">
-        <div class="rest-card card>">
-          <div class="restimage">
-            <img [src]="restaurant.image.imageUrl" alt="{{restaurant.name}}">
-          </div>
-          <div class="rest-name">
-            <h5><b>{{restaurant.name}}</b></h5>
-          </div>
-          <div class="address">
-            <h6>{{restaurant.address.street}}, {{restaurant.address.city}}</h6>
-            <h6>{{restaurant.address.state}},{{restaurant.address.postalCode}}</h6>
-          </div>
-          <div class="rate">
-            <h6>{{restaurant.rating}}</h6>
-            <a [href]="generateGoogleSearchLink(restaurant.name)" target="_blank">
-              <button type="submit" style="margin-left: 2cm;">Learn More</button>
-            </a>
-          </div>
+<h1 *ngIf="searchClicked" style="margin-left: 4cm; margin-top: 2cm;" class="clicked"><b>Best Restaurant deals</b></h1>
+<div class="restaurant-list">
+  <div class="scrolling-wrapper">
+    <div *ngFor="let restaurant of restaurants" class="rest-card card">
+      <div class="rest-card card>">
+        <div class="restimage">
+          <img [src]="restaurant.image.imageUrl" alt="{{restaurant.name}}">
+        </div>
+        <div class="rest-name">
+          <h5><b>{{restaurant.name}}</b></h5>
+        </div>
+        <div class="address">
+          <h6>{{restaurant.address.street}}, {{restaurant.address.city}}</h6>
+          <h6>{{restaurant.address.state}},{{restaurant.address.postalCode}}</h6>
+        </div>
+        <div class="rate">
+          <h6>{{restaurant.rating}}</h6>
+          <a [href]="generateGoogleSearchLink(restaurant.name)" target="_blank">
+            <button type="submit" style="margin-left: 2cm;">Learn More</button>
+          </a>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 

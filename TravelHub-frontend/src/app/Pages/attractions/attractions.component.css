@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Header section styling */
+  header {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  /* Container to center the content */
+  .container {
+    max-width: 900px; /* Sets a maximum width for the entire content */
+    margin: 0 auto; /* Centers the content within the browser window */
+    padding: 20px; /* Adds padding around the content */
+  }
+
+  /* Title styling */
+  h1 {
+    color: lightseagreen;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* Tour description styling */
+  .tour-description {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start; /* Aligns image and content at the top */
+    margin-bottom: 20px; /* Adds space between components */
+  }
+
+  /* Divider line */
+  .divider {
+    border-bottom: 1px solid lightseagreen; /* Adds a line between components */
+    width: 100%; /* Full width of the component */
+    margin-bottom: 20px; /* Adds some space below the line */
+  }
+
+  /* Image block styling */
+  .tour-description img {
+    height: 200px; /* Set a fixed height */
+    width: auto; /* Maintain aspect ratio */
+    position: sticky;
+    top: 20px; /* Keeps the image sticky at a set offset */
+  }
+
+  /* Styling for the content */
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Styling for the 'Learn More' button */
+  .learn-more {
+    background: lightseagreen;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 4cm;
+    margin-top: 1cm;
+    margin-left: 14cm;
+  }
+  
+  /* Additional responsive adjustments */
+  @media (max-width: 768px) {
+    .tour-description {
+      flex-direction: column;
+    }
+
+    .tour-description img {
+      width: 100%;
+      height: auto; /* Maintain aspect ratio */
+    }
+  }

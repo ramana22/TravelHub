@@ -38,7 +38,7 @@ export class ChangeprofileComponent {
     this._service.changePassword(this.userEmail,oldPassword, newPassword)
       .subscribe(
         response => {
-          console.log('Password changed successfully', response);
+          window.alert('Password changed successfully');
           // Handle success
         },
         error => {
@@ -64,6 +64,7 @@ export class ChangeprofileComponent {
     this._service.saveprofile(this.profile).subscribe(
       data => {
         console.log("response recieved");
+        window.alert("profile saved successfully")
       },
       error =>{
         console.log("exception occured");

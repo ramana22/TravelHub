@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Pages/auth.service';
+import { Notify } from 'src/app/Pages/models.service';
 import { TravelHubServiceService } from 'src/app/Pages/travel-hub-service.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class NavbarComponent {
   email: string | undefined;
   showCard!: boolean;
   notifyCard: boolean = false;
-
+  notifications: Notify[]=[];
+  userEmail!: string;
   constructor(
     private authService: AuthService,
     private el: ElementRef,
@@ -26,6 +28,7 @@ export class NavbarComponent {
     this.authService.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
       this.isLoggedIn = isLoggedIn;
     });
+    this.userEmail = localStorage.getItem('userEmail') || '';
   }
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
@@ -45,5 +48,18 @@ export class NavbarComponent {
     this.authService.logout();
     this.showCard = false;
     this.router.navigate([""]);
+  }
+  notify() {
+    this.service.getnotify(this.userEmail).subscribe(
+      (response) => {
+        // Handle successful response here
+        this.notifications=response;
+        console.log('Notifications:', response);
+      },
+      (error) => {
+        // Handle error response here
+        console.error('Error fetching notifications:', error);
+      }
+    );
   }
 }
