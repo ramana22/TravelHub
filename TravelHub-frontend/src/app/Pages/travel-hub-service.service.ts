@@ -48,6 +48,7 @@ export class TravelHubServiceService {
   public getReviews(): Observable<any> {
     return this.http.get(`${this.baseUrl}/getreview`);
   }
+ 
   saveReview(review: Review): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/saveReview`, review);
   }
@@ -199,5 +200,9 @@ export class TravelHubServiceService {
     };
     return this.http.post<any>(`${this.baseUrl}/deletecarbooking`, body);
 
+  }
+  getnotify(email: string): Observable<any> {
+    const body = { email: email };
+    return this.http.post<any>(`${this.baseUrl}/getnotify`, body);
   }
 }

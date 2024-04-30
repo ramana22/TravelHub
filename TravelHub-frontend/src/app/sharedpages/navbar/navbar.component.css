@@ -173,10 +173,12 @@
   top: 0;
   left: -8.5cm;
   margin-top: 0.9cm;
+  border-radius: 10px;
 }
 .n-card h3 {
-  color: black;
-  border: 2px solid black;
+  color: gray;
+  font-size: 14px;
+  border: 1px solid black;
 }
 .n-card .row {
   margin-top: 0.5cm;

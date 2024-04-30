@@ -336,6 +336,12 @@ export class Profile {
   nationality!: string;
 }
 
+export class Notify {
+  id!: number;
+  message!: string;
+  email!: string;
+}
+
 
 
 
