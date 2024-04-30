@@ -12,7 +12,15 @@
     padding-top: 1.5cm;
     padding-inline: 1cm; 
 }
-
+.development-prompt{
+  color: black;
+  background-color:rgb(180, 255, 5);
+  font-size: bold;
+  margin-top: 2cm;
+  font-size: 18px;
+  margin-bottom: 0;
+  margin-inline: 4cm;
+}
 .description {
     font-size: 30px;
     color: black;
@@ -22,7 +30,8 @@
 
 
 .search-card {
-    margin: 2cm;
+    margin-inline: 2cm;
+    margin-bottom: 2cm;
     padding: 1cm;
     border: 1px solid #ccc;
     border-radius: 5px;

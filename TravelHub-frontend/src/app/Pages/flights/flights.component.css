@@ -5,6 +5,16 @@
     background-repeat: no-repeat;
     height: 300px;
 }
+
+.development-prompt{
+  color: black;
+  background-color:rgb(180, 255, 5);
+  font-size: bold;
+  margin-top: 2cm;
+  font-size: 18px;
+  margin-bottom: 0;
+  margin-inline: 4cm;
+}
 .banner-content {
     font-size: 50px;
     color: white;
