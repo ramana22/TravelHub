@@ -57,8 +57,11 @@
     gap: 10px;
   }
 
+  .content a {
+    margin-left: 11cm;
+  }
   /* Styling for the 'Learn More' button */
-  .learn-more {
+  button {
     background: lightseagreen;
     color: #fff;
     border: none;
@@ -66,7 +69,6 @@
     cursor: pointer;
     width: 4cm;
     margin-top: 1cm;
-    margin-left: 14cm;
   }
   
   /* Additional responsive adjustments */

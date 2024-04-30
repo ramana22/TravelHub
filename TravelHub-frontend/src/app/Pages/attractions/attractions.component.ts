@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './attractions.component.css'
 })
 export class AttractionsComponent {
-  generateGoogleSearchLink(restaurantName: string): string {
-    const location = restaurantName; // You can modify this as per your requirement
+  generateGoogleSearchLink(location: string): string {
     return "https://www.google.com/search?q=" + encodeURIComponent(location);
   }
 }
