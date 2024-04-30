@@ -93,7 +93,7 @@ export class PaymentpageComponent {
         console.log(this.price);
       }
     });
-    this.userEmail = localStorage.getItem('userEmail') || '';
+    
   }
 
   onSubmit(fullName: string, emailAddress: string, phoneNumber: string, dateOfBirth: Date, people: number): void {
@@ -105,6 +105,7 @@ export class PaymentpageComponent {
       dateOfBirth: new Date(dateOfBirth),
       people: people
     };
+    this.userEmail = traveler.emailAddress;
     console.log(this.bus);
     console.log(this.train);
     console.log(this.car);
