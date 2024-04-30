@@ -1,84 +1,97 @@
-<div class="banner">
-    <div class="banner-content"><b>Find Your Dream Retreat</b><br></div>
-    <div class="description"> Explore vacation homes, and more...</div>
-</div>
-
-<div class="search-card">
-  <div class="head">Search Hotels</div>
-  <form (ngSubmit)="search()" class="form">
-    <div class="form-group">
-      <input type="text" id="city" placeholder="where..?" [(ngModel)]="destination" name="city" required>
-    </div>
-    <div class="input-field">
-      <input type="date" [(ngModel)]="checkInDate"  name="checkInDate" required>
-    </div>
-    <div class="form-group">
-      <input type="number" id="radius" placeholder="people" [(ngModel)]="adult" name="radius" required>
-    </div>
-    <div class="form-group">
-      <input type="number" id="radius" placeholder="radius in km" [(ngModel)]="radius" name="radius" required>
-    </div>
-    <button class="search" type="submit">Search </button>
-  </form>
-</div>
-
 <div class="container">
-    <div class="row">
-      <h1 *ngIf="searchClicked" style="margin-left: 2cm;" class="clicked"><b>Best Hotel deals</b></h1>
-      <div *ngFor="let hotel of hotels">
-          <div class="holder">
-            <div class="image-container">
-              <img class="img-fluid" src="{{hotel.image.imageUrl}}" alt="">
-            </div>
-            <div class="details card">
-              <div class="head" >{{hotel.name}}</div>
-              <span class="location"><i class="bi bi-geo-alt-fill"></i>&nbsp;&nbsp;{{hotel.address.street}},&nbsp;&nbsp;{{hotel.address.city}}</span>
-              <span class="tick-mark">free parking</span>
-              <span class="tick-mark">free internet access ..<a routerLink="/bookingpage" routerLinkActive="active-link">......Amenties</a></span>
-              <div class="rating card">
-                <span style="background-color: lightseagreen; color: white; font-size: 24px;">{{hotel.rating}}</span>
-                <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                <span style="font-size: 24px;">2.5 Star Hotel</span>
-              </div>
-            </div>
-            <div class="price card">
-              <h1><b>{{hotel.room.bill.amount}}$</b></h1>
-              <span style="margin-block: 0.2cm;">per person</span>
-              <div class="check"><button type="submit" (click)="checkout(hotel)">Check Out</button></div>
-            </div>
-          </div>
-      </div>
-  </div>
-</div>
+  <h1>Popular Attractions Near Page, AZ</h1>
 
+  <!-- The Alamo -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/seed/picsum/200/300" alt="The Alamo" />
 
- 
-
-<div class="rest-container" >
-  <h1 *ngIf="searchClicked" style="margin-left: 4cm; margin-top: 2cm;" class="clicked"><b>Best Restaurant deals</b></h1>
-  <div class="restaurant-list">
-    <div class="scrolling-wrapper">
-      <div *ngFor="let restaurant of restaurants" class="rest-card card">
-        <div class="rest-card card>">
-          <div class="restimage">
-            <img [src]="restaurant.image.imageUrl" alt="{{restaurant.name}}">
-          </div>
-          <div class="rest-name">
-            <h5><b>{{restaurant.name}}</b></h5>
-          </div>
-          <div class="address">
-            <h6>{{restaurant.address.street}}, {{restaurant.address.city}}</h6>
-            <h6>{{restaurant.address.state}},{{restaurant.address.postalCode}}</h6>
-          </div>
-          <div class="rate">
-            <h6>{{restaurant.rating}}</h6>
-            <a [href]="generateGoogleSearchLink(restaurant.name)" target="_blank">
-              <button type="submit" style="margin-left: 2cm;">Learn More</button>
-            </a>
-          </div>
-        </div>
-      </div>
+    <div class="content">
+      <h3>The Alamo (San Antonio)</h3>
+      <p>A historic mission and fortress compound, famous for the Battle of the Alamo in 1836 during the Texas Revolution. Don't miss this iconic symbol of Texas history.</p>
+      <a [href]="generateGoogleSearchLink('The Alamo (San Antonio)')" target="_blank">
+        <button type="button" style="margin-left: 2cm;">Learn More</button>
+      </a>
     </div>
   </div>
-</div>
 
+  <!-- Divider Line -->
+  <div class="divider"></div>
+
+  <!-- Big Bend National Park -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?grayscale" alt="Big Bend National Park" />
+
+    <div class="content">
+      <h3>Big Bend National Park</h3>
+      <p>Located in West Texas, it offers stunning landscapes, including mountains, desert, and the winding Rio Grande River. Immerse yourself in nature's grandeur.</p>
+      <a [href]="generateGoogleSearchLink('Big Bend National Park')" target="_blank">
+        <button type="button" style="margin-left: 2cm;">Learn More</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Divider Line -->
+  <div class="divider"></div>
+
+  <!-- NASA Space Center Houston -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?random" alt="NASA Space Center Houston" />
+
+    <div class="content">
+      <h3>NASA Space Center Houston</h3>
+      <p>Learn about space exploration and NASA's missions through interactive exhibits, astronaut talks, and tram tours. Embark on an out-of-this-world journey.</p>
+      <a [href]="generateGoogleSearchLink('NASA Space Center Houston')" target="_blank">
+        <button type="button" style="margin-left: 2cm;">Learn More</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Divider Line -->
+  <div class="divider"></div>
+
+  <!-- San Antonio River Walk -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?random" alt="San Antonio River Walk" />
+
+    <div class="content">
+      <h3>San Antonio River Walk</h3>
+      <p>A picturesque urban waterway lined with shops, restaurants, and attractions, perfect for a leisurely stroll or boat ride. Discover the charm of San Antonio's downtown.</p>
+      <a [href]="generateGoogleSearchLink('San Antonio River Walk')" target="_blank">
+        <button type="button" style="margin-left: 2cm;">Learn More</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Divider Line -->
+  <div class="divider"></div>
+
+  <!-- Texas State Capitol -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?random" alt="Texas State Capitol" />
+
+    <div class="content">
+      <h3>Texas State Capitol (Austin)</h3>
+      <p>Explore the beautiful capitol building and its grounds, including historical exhibits and guided tours. Delve into the heart of Texas politics and history.</p>
+      <a [href]="generateGoogleSearchLink('Texas State Capitol (Austin)')" target="_blank">
+        <button type="button" style="margin-left: 2cm;">Learn More</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Divider Line -->
+  <div class="divider"></div>
+
+  <!-- Gulf Coast Beaches -->
+  <div class="tour-description">
+    <img src="https://picsum.photos/200/300?random" alt="Gulf Coast Beaches" />
+
+    <div class="content">
+      <h3>Gulf Coast Beaches</h3>
+      <p>Enjoy the sandy shores and warm waters of beaches such as South Padre Island, Galveston Island, and Corpus Christi. Relax and unwind in the Texas sun.</p>
+      <a [href]="generateGoogleSearchLink('Gulf Coast Beaches')" target="_blank">
+        <button type="button" style="margin-left: 2cm;">Learn More</button>
+      </a>
+    </div>
+  </div>
+
+</div>
