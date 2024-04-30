@@ -1,1 +1,148 @@
-<p>attractions works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Attractions Near Page, AZ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      /* General reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Header section styling */
+      header {
+        background: #000;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      /* Container to center the content */
+      .container {
+        max-width: 900px; /* Sets a maximum width for the entire content */
+        margin: 0 auto; /* Centers the content within the browser window */
+        padding: 20px; /* Adds padding around the content */
+      }
+
+      /* Title styling */
+      h1 {
+        color: #a24e3a;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      /* Tour description styling */
+      .tour-description {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start; /* Aligns image and content at the top */
+        margin-bottom: 20px; /* Adds space between components */
+      }
+
+      /* Divider line */
+      .divider {
+        border-bottom: 1px solid #a24e3a; /* Adds a line between components */
+        width: 100%; /* Full width of the component */
+        margin-bottom: 20px; /* Adds some space below the line */
+      }
+
+      /* Image block styling */
+      .tour-description img {
+        height: 200px; /* Set a fixed height */
+        width: auto; /* Maintain aspect ratio */
+        position: sticky;
+        top: 20px; /* Keeps the image sticky at a set offset */
+      }
+
+      /* Styling for the content */
+      .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      /* Styling for the 'Learn More' button */
+      .learn-more {
+        background: #a24e3a;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      /* Additional responsive adjustments */
+      @media (max-width: 768px) {
+        .tour-description {
+          flex-direction: column;
+        }
+
+        .tour-description img {
+          width: 100%;
+          height: auto; /* Maintain aspect ratio */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2>Book Your Stay Now</h2>
+      <form>
+        <label for="check-in">Check-in</label>
+        <input type="date" id="check-in" name="check-in" />
+
+        <label for="check-out">Check-out</label>
+        <input type="date" id="check-out" name="check-out" />
+
+        <button type="submit">Search</button>
+      </form>
+    </header>
+
+    <main class="container">
+      <h1>Popular Attractions Near Page, AZ</h1>
+
+      <div class="tour-description">
+        <img
+          src="https://picsum.photos/seed/picsum/200/300"
+          alt="Texas Tour Vehicle"
+        />
+
+        <div class="content">
+          <h3>Texas Private Tours</h3>
+          <p>
+            Texas Private Tours is a leading private tour agency in Northern
+            Texas. We specialize in safe & sanitary custom tours. We pick up
+            guests in Flagstaff and spend our day exploring scenic Texas in an
+            intimate setting with an expert guide in comfort.
+          </p>
+          <button class="learn-more">Learn More</button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <!-- Divider line between components -->
+
+      <div class="tour-description">
+        <img
+          src="https://picsum.photos/200/300?grayscale"
+          alt="Antelope Canyon"
+        />
+
+        <div class="content">
+          <h3>Antelope Canyon and Horseshoe Bend Tour</h3>
+          <p>
+            Spend a day visiting two of the most iconic landscapes in the
+            American Southwest: Antelope Canyon & Horseshoe Bend. Our Lower
+            Antelope Canyon Tours takes you into the heart of one of the most
+            spectacular slot canyons in the world.
+          </p>
+          <button class="learn-more">Learn More</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
