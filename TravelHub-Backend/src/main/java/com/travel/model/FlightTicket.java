@@ -27,12 +27,12 @@ public class FlightTicket {
     @Column(name = "adults")
     private String adults;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
 
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

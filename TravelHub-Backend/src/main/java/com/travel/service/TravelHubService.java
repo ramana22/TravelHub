@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.travel.model.*;
@@ -42,6 +43,7 @@ public class TravelHubService {
 	RestaurantRepository restrepo;
 	@Autowired
 	hotelbookingrepository hotelbooking;
+	
 	public User saveUser(User user) throws Exception {
 		if(user==null) {
 			throw new Exception("user is null");
@@ -133,4 +135,64 @@ public class TravelHubService {
 	public List<FlightTicket> getflightByUserEmail(String email) {
 	    return flightticket.findByUserEmail(email);
 	}
+	public List<TrainTicket> getTrainByUserEmail(String email) {
+	    return trainticket.findByUserEmail(email);
+	}
+	public List<BusTicket> getBusByUserEmail(String email) {
+	    return busticket.findByUserEmail(email);
+	}
+	public List<CarBooking> getCarByUserEmail(String email) {
+	    return carbooking.findByUserEmail(email);
+	}
+	public void deleteBusTicket(String email, Long busTicketId) throws NotFoundException {
+	    BusTicket busTicket = busticket.findByIdAndUserEmail(busTicketId, email);
+	    if (busTicket != null) {
+	        busticket.delete(busTicket);
+	    } else {
+	        // Handle case where bus ticket is not found
+	        // For example, throw an exception or log an error
+	        throw new NotFoundException();
+	    }
+	}
+	public void deletetrainTicket(String email, Long trainticketId) throws NotFoundException {
+	    TrainTicket trainTicket = trainticket.findByIdAndUserEmail(trainticketId, email);
+	    if (trainTicket != null) {
+	        trainticket.delete(trainTicket);
+	    } else {
+	        // Handle case where bus ticket is not found
+	        // For example, throw an exception or log an error
+	        throw new NotFoundException();
+	    }
+	}
+	public void deletehotelbooking(String email, Long hotelbookingId) throws NotFoundException {
+		HotelBooking hotelbook = hotelbooking.findByIdAndUserEmail(hotelbookingId, email);
+	    if (hotelbook != null) {
+	        hotelbooking.delete(hotelbook);
+	    } else {
+	        // Handle case where bus ticket is not found
+	        // For example, throw an exception or log an error
+	        throw new NotFoundException();
+	    }
+	}
+	public void deletecarbooking(String email, Long carbookingId) throws NotFoundException {
+	    CarBooking carbook = carbooking.findByIdAndUserEmail(carbookingId, email);
+	    if (carbook != null) {
+	        carbooking.delete(carbook);
+	    } else {
+	        // Handle case where bus ticket is not found
+	        // For example, throw an exception or log an error
+	        throw new NotFoundException();
+	    }
+	}
+	public void deleteflightTicket(String email, Long flightticketId) throws NotFoundException {
+	    FlightTicket flightTicket = flightticket.findByIdAndUserEmail(flightticketId, email);
+	    if (flightTicket != null) {
+	        flightticket.delete(flightTicket);
+	    } else {
+	        // Handle case where bus ticket is not found
+	        // For example, throw an exception or log an error
+	        throw new NotFoundException();
+	    }
+	}
+    
 }

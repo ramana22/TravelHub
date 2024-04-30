@@ -1,8 +1,6 @@
 package com.travel.model;
 
 
-import java.sql.Date;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -15,7 +13,7 @@ public class HotelBooking {
     @Column(name = "checkin_date")
     private String checkinDate;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
 
@@ -24,68 +22,65 @@ public class HotelBooking {
     @JoinColumn(name = "payment_id")
     private Payment payment;
     
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne // Changed to ManyToOne
+    @JoinColumn(name = "user_id") // Changed to ManyToOne
     private User user;
     
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
     
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Traveler getTraveler() {
-		return traveler;
-	}
+    public Traveler getTraveler() {
+        return traveler;
+    }
 
-	public void setTraveler(Traveler traveler) {
-		this.traveler = traveler;
-	}
+    public void setTraveler(Traveler traveler) {
+        this.traveler = traveler;
+    }
 
-	public Payment getPayment() {
-		return payment;
-	}
+    public Payment getPayment() {
+        return payment;
+    }
 
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public Hotel getHotel() {
-		return hotel;
-	}
+    public Hotel getHotel() {
+        return hotel;
+    }
 
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
-	}
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
 
-	public String getCheckinDate() {
-		return checkinDate;
-	}
+    public String getCheckinDate() {
+        return checkinDate;
+    }
 
-	public void setCheckinDate(String checkinDate) {
-		this.checkinDate = checkinDate;
-	}
+    public void setCheckinDate(String checkinDate) {
+        this.checkinDate = checkinDate;
+    }
 
-	@Override
-	public String toString() {
-		return "HotelBooking [id=" + id + ", checkinDate=" + checkinDate + ", traveler=" + traveler + ", payment="
-				+ payment + ", user=" + user + ", hotel=" + hotel + "]";
-	}
-
-	
+    @Override
+    public String toString() {
+        return "HotelBooking [id=" + id + ", checkinDate=" + checkinDate + ", traveler=" + traveler + ", payment="
+                + payment + ", user=" + user + ", hotel=" + hotel + "]";
+    }
 }
