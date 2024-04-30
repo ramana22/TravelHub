@@ -70,7 +70,7 @@ export class PaypalComponent {
     };
   
     // Make an HTTP POST request to your server-side endpoint
-    const url = 'http://localhost:8080/sendEmail'; // Assuming your Angular app is served from the same host as your Spring Boot backend
+    const url = 'https://travel.up.railway.app/sendEmail'; // Assuming your Angular app is served from the same host as your Spring Boot backend
     return this.http.post<any>(url, emailRequest);
   }
   
