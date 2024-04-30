@@ -2,12 +2,15 @@
     <div class="banner-content"><b>Find Your Dream Retreat</b><br></div>
     <div class="description"> Explore vacation homes, and more...</div>
 </div>
+<div class="development-prompt">
+  <p><b>Please select dallas as location ,rentalstart date as May 14th 2024,rentalendDate as may 18th 2024 for acurate results</b></p>
+</div>
 <div class="search-card">
     <div class="head">Search cars for rental</div>
     <form (ngSubmit)="searchCars()">
       <div class="form">
         <div class="input-field">
-          <input [(ngModel)]="pickupLocation" placeholder =" pick Up location " name="departureStation" required>
+          <input [(ngModel)]="pickupLocation" placeholder ="location" name="departureStation" required>
         </div>
         <div class="input-field">
             <input type="date" [(ngModel)]="rentalstartDate" placeholder =" rental start date " name="departureDate" required>
