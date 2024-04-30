@@ -117,7 +117,7 @@ public class TravelHubController {
 	}
 	@GetMapping({"/health","/"})
     public String healthCheck() {
-        return "Application is running!";
+        return "Application is sucess!";
     }
 	@GetMapping("/searchFlights")
 	public ResponseEntity<?> searchFlights(@RequestParam String origin,
