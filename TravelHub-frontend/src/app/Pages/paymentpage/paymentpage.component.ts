@@ -1,8 +1,10 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Bus, BusTicket, Car, CarBooking, FlightTicket, Hotel, HotelBooking, Payment, Train, TrainTicket, Traveler, User } from '../models.service';
+import { Bus, BusTicket, Car, CarBooking, EmailRequest, FlightTicket, Hotel, HotelBooking, Payment, Train, TrainTicket, Traveler, User } from '../models.service';
 import { NgForm } from '@angular/forms';
 import { TravelHubServiceService } from '../travel-hub-service.service';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-paymentpage',
@@ -38,7 +40,7 @@ export class PaymentpageComponent {
   tempuser!:User;
   checkinDate!: string;
 
-  constructor(private route: ActivatedRoute,private router:Router,private travelservice:TravelHubServiceService) { }
+  constructor(private http: HttpClient,private route: ActivatedRoute,private router:Router,private travelservice:TravelHubServiceService) { }
 
   ngOnInit(): void {
     // Retrieve the bus object from query parameters
@@ -116,8 +118,15 @@ export class PaymentpageComponent {
         payment: this.payment,
         user: new User
       };
-      const userEmail = this.tempuser.email // Replace with actual user email
-      console.log(userEmail)
+      const msg =this.constructBusTicketMessage(busTicket)
+      const useremail=traveler.emailAddress;
+      const sub = "BusTicket Information";
+      this.sendEmailOnPaymentCompletion(useremail,msg,sub).subscribe(() => {
+        console.log('Email sent successfully.');
+      }, (error: any) => {
+        console.error('Failed to send email:', error);
+      });
+    
       this.travelservice.saveBusTicket(busTicket,this.userEmail).subscribe(
         (savedBusTicket) => {
           console.log('Bus ticket saved successfully:', savedBusTicket);
@@ -144,8 +153,14 @@ export class PaymentpageComponent {
         user: new User,
         id: 0
       };
-      const userEmail = this.tempuser.email // Replace with actual user email
-      console.log(userEmail)
+      const msg =this.constructTrainBookingMessage(trainTicket)
+      const useremail=traveler.emailAddress;
+      const sub = "TrainTicket Information";
+      this.sendEmailOnPaymentCompletion(useremail,msg,sub).subscribe(() => {
+        console.log('Email sent successfully.');
+      }, (error: any) => {
+        console.error('Failed to send email:', error);
+      });
       this.travelservice.saveTrainTicket(trainTicket,this.userEmail).subscribe(
         (savedTrainTicket) => {
           console.log('Train ticket saved successfully:', savedTrainTicket);
@@ -165,6 +180,14 @@ export class PaymentpageComponent {
     }
     if (this.flight) {
       this.flightTicket.traveler=traveler;
+      const msg =this.constructFlightBookingMessage(this.flightTicket);
+      const useremail=traveler.emailAddress;
+      const sub = "FlightTicket Information";
+      this.sendEmailOnPaymentCompletion(useremail,msg,sub).subscribe(() => {
+        console.log('Email sent successfully.');
+      }, (error: any) => {
+        console.error('Failed to send email:', error);
+      });
       this.travelservice.saveFlightTicket(this.flightTicket,this.userEmail).subscribe(
         (savedTrainTicket) => {
           console.log('flight ticket saved successfully:', savedTrainTicket);
@@ -192,6 +215,14 @@ export class PaymentpageComponent {
         payment: this.payment       // Assign the payment object
       };      
       console.log('Hotel booking saving', hotelbooking);
+      const msg =this.constructHotelBookingMessage(hotelbooking);
+      const useremail=traveler.emailAddress;
+      const sub = "HotelBooking Information";
+      this.sendEmailOnPaymentCompletion(useremail,msg,sub).subscribe(() => {
+        console.log('Email sent successfully.');
+      }, (error: any) => {
+        console.error('Failed to send email:', error);
+      });
       this.travelservice.saveHotelBooking(hotelbooking,this.userEmail)
           .subscribe((response) => {
               console.log('Hotel booking saved:', response);
@@ -216,7 +247,15 @@ export class PaymentpageComponent {
         id: 0,
         user: new User
       };
-      this.travelservice.saveCarBooking(this.carBooking,this.userEmail)
+      const msg =this.constructCarBookingMessage(carbooking);
+      const useremail=traveler.emailAddress;
+      const sub = "CarBooking Information";
+      this.sendEmailOnPaymentCompletion(useremail,msg,sub).subscribe(() => {
+        console.log('Email sent successfully.');
+      }, (error: any) => {
+        console.error('Failed to send email:', error);
+      });
+      this.travelservice.saveCarBooking(carbooking,this.userEmail)
       .subscribe((result) => {
         console.log('Car booking saved successfully:', result);
         // Optionally, you can perform additional actions after the car booking is saved
@@ -234,7 +273,18 @@ export class PaymentpageComponent {
     this.isclicked = true;
   }
 
+  sendEmailOnPaymentCompletion( payerEmail: string,message:string,sub:string): Observable<any> {
+    // Construct the email request object
+    const emailRequest: EmailRequest = {
+      to: payerEmail , // Replace with the actual recipient email address
+      subject: sub, // Subject of the email
+      text:message // Body text of the email
+    };
   
+    // Make an HTTP POST request to your server-side endpoint
+    const url = 'http://localhost:8080/sendEmail'; // Assuming your Angular app is served from the same host as your Spring Boot backend
+    return this.http.post<any>(url, emailRequest);
+  }
 
   generateRandomServiceTax(): number {
     // Generate a random number between 0 and 1
@@ -250,5 +300,86 @@ export class PaymentpageComponent {
         console.log("Confirm button clicked");
         this.isButtonVisible = false; // Hide the button
   }
-
+  constructBusTicketMessage(busTicket: BusTicket): string {
+    let message = "Dear User,\n\n";
+    message += "Thank you for booking a bus ticket with us. Below are the details of your booked ticket:\n\n";
+    message += `Bus Ticket ID: ${busTicket.bus.busId}\n`;
+    message += `Departure Station: ${busTicket.bus.departureTerminal}\n`;
+    message += `Arrival Station: ${busTicket.bus.arrivalTerminal}\n`;
+    message += `Departure Time: ${busTicket.bus.departureTime}\n`;
+    message += `Arrival Time: ${busTicket.bus.arrivalTime}\n`;
+    message += `Operator: ${busTicket.bus.operator}\n`;
+    message += `Price: $${busTicket.bus.price}\n\n`;
+    message += "If you have any questions or need further assistance, feel free to contact us.\n\n";
+    message += "Best regards,\nThe Travel Team";
+  
+    return message;
+  }
+  constructHotelBookingMessage(hotelBooking: HotelBooking): string {
+    let message = "Dear User,\n\n";
+    message += "Thank you for booking a hotel with us. Below are the details of your booked hotel:\n\n";
+    message += `Booking ID: ${hotelBooking.hotel?.hotelid}\n`;
+    message += `Hotel Name: ${hotelBooking.hotel?.name}\n`;
+    message += `Check-in Date: ${hotelBooking.checkinDate}\n`;
+    message += `Room Number: ${hotelBooking.hotel?.room?.roomNumber}\n`;
+    message += `Bill: ${hotelBooking.hotel?.room?.bill?.amount}\n\n`;
+    message += "If you have any questions or need further assistance, feel free to contact us.\n\n";
+    message += "Best regards,\nThe Travel Team";
+  
+    return message;
+  }
+  
+  constructFlightBookingMessage(flightBooking: FlightTicket): string {
+    let message = "Dear User,\n\n";
+    message += "Thank you for booking a flight with us. Below are the details of your booked flight:\n\n";
+    message += `Booking ID: ${flightBooking.id}\n`;
+    message += `Departure: ${flightBooking.origin}\n`;
+    message += `Destination: ${flightBooking.destination}\n`;
+    message += `Departure Date: ${flightBooking.departDate}\n`;
+    message += `Return Date: ${flightBooking.returnDate}\n`;
+    message += `Number of Travelers: ${flightBooking.traveler.people}\n`;
+    message += `Full Name: ${flightBooking.traveler.fullName}\n`;
+    message += `Date of Birth: ${flightBooking.traveler.dateOfBirth}\n`;
+    message += `Email Address: ${flightBooking.traveler.emailAddress}\n`;
+    message += `Phone Number: ${flightBooking.traveler.phoneNumber}\n\n`;
+    message += "If you have any questions or need further assistance, feel free to contact us.\n\n";
+    message += "Best regards,\nThe Travel Team";
+  
+    return message;
+  }
+  
+  constructCarBookingMessage(carBooking: CarBooking): string {
+    let message = "Dear User,\n\n";
+    message += "Thank you for booking a car with us. Below are the details of your booked car:\n\n";
+    message += `Car Booking ID: ${carBooking.car.id}\n`;
+    message += `Car Model: ${carBooking.car.carModel}\n`;
+    message += `Pickup Location: ${carBooking.car.pickupLocation}\n`;
+    message += `Rental Start Date: ${carBooking.car.rentalStartDate}\n`;
+    message += `Rental End Date: ${carBooking.car.rentalEndDate}\n`;
+    message += `Total Price: ${carBooking.car.totalPrice}\n\n`;
+    message += "If you have any questions or need further assistance, feel free to contact us.\n\n";
+    message += "Best regards,\nThe Travel Team";
+  
+    return message;
+  }
+  
+  constructTrainBookingMessage(trainTicket: TrainTicket): string {
+    let message = "Dear User,\n\n";
+    message += "Thank you for booking a train ticket with us. Below are the details of your booked ticket:\n\n";
+    message += `Train Ticket ID: ${trainTicket.train.trainId}\n`;
+    message += `Departure Station: ${trainTicket.train.departureStation}\n`;
+    message += `Arrival Station: ${trainTicket.train.arrivalStation}\n`;
+    message += `Departure Time: ${trainTicket.train.departureTime}\n`;
+    message += `Arrival Time: ${trainTicket.train.arrivalTime}\n`;
+    message += `Operator: ${trainTicket.train.operator}\n`;
+    message += `Price: ${trainTicket.train.price}\n\n`;
+    message += "If you have any questions or need further assistance, feel free to contact us.\n\n";
+    message += "Best regards,\nThe Travel Team";
+  
+    return message;
+  }
+  
 }
+
+
+

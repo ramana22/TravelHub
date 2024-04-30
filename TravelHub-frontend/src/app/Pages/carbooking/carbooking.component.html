@@ -48,7 +48,10 @@
             </div> 
             <div class="pickup">
                 <h5>Pick Up location:</h5><span>{{car.pickupLocation}}</span>
-            </div>  
+            </div> 
+            <div class="pickup">
+                <h5>Bill: ${{car.totalPrice}}</h5>
+            </div> 
             <div class="button">
                 <button type="submit" (click)="confirm(car)">Continue</button>
             </div>   

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TravelHubServiceService } from '../travel-hub-service.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { FlightTicket, HotelBooking, User } from '../models.service';
+import { BusTicket, CarBooking, FlightTicket, HotelBooking, TrainTicket, User } from '../models.service';
 
 @Component({
   selector: 'app-activity',
@@ -10,10 +10,10 @@ import { FlightTicket, HotelBooking, User } from '../models.service';
   styleUrl: './activity.component.css'
 })
 export class ActivityComponent {
-  flightTickets!: FlightTicket;
-cancelBooking(arg0: any) {
-throw new Error('Method not implemented.');
-}
+  flightTickets: FlightTicket[]=[];
+  traintickets: TrainTicket[]=[];
+  bustickets: BusTicket[]=[];
+  carbookings: CarBooking[]=[];
   showhotel:boolean=false;
   showflight:boolean=false;
   showtrain:boolean=false;
@@ -72,12 +72,106 @@ throw new Error('Method not implemented.');
     );
   }
   showtrains(){
-    
+    this._service.gettraintickets(this.userEmail).subscribe(
+      (response) => {
+        this.traintickets=response;
+        console.log('Bookings retrieved successfully:', response);
+        // Handle the response data here
+      },
+      (error) => {
+        console.error('Error retrieving bookings:', error);
+        // Handle errors here
+      }
+    );
   }
   showcars(){
-    
+    this._service.getcarbookings(this.userEmail).subscribe(
+      (response) => {
+        this.carbookings=response;
+        console.log('Bookings retrieved successfully:', response);
+        // Handle the response data here
+      },
+      (error) => {
+        console.error('Error retrieving bookings:', error);
+        // Handle errors here
+      }
+    );
   }
   showbuses(){
-    
+    this._service.getbustickets(this.userEmail).subscribe(
+      (response) => {
+        this.bustickets=response;
+        console.log('Bookings retrieved successfully:', response);
+      },
+      (error) => {
+        console.error('Error retrieving bookings:', error);
+      }
+    );
+  }
+  
+  cancelbusBooking(id:number){
+    console.log(id)
+    this._service.deletebusticket(this.userEmail, id).subscribe(
+      (response) => {
+        // Handle successful response
+        console.log('Bus ticket deleted successfully', response);
+      },
+      (error) => {
+        // Handle error
+        console.error('Error deleting bus ticket', error);
+      }
+    );
+  }
+  canceltrainBooking(id:number){
+    console.log(id)
+    this._service.deletetrainticket(this.userEmail, id).subscribe(
+      (response) => {
+        // Handle successful response
+        console.log('Bus ticket deleted successfully', response);
+      },
+      (error) => {
+        // Handle error
+        console.error('Error deleting bus ticket', error);
+      }
+    );
+  }
+  cancelflightBooking(id:number){
+    console.log(id)
+    this._service.deleteflightticket(this.userEmail, id).subscribe(
+      (response) => {
+        // Handle successful response
+        console.log('Bus ticket deleted successfully', response);
+      },
+      (error) => {
+        // Handle error
+        console.error('Error deleting bus ticket', error);
+      }
+    );
+  }
+  cancelhotelBooking(id:number){
+    console.log(id)
+    this._service.deletehotelbooking(this.userEmail, id).subscribe(
+      (response) => {
+        // Handle successful response
+        console.log('Bus ticket deleted successfully', response);
+      },
+      (error) => {
+        // Handle error
+        console.error('Error deleting bus ticket', error);
+      }
+    );
+  }
+  cancelcarBooking(id:number){
+    console.log(id)
+    this._service.deletecarbooking(this.userEmail, id).subscribe(
+      (response) => {
+        // Handle successful response
+        console.log('Bus ticket deleted successfully', response);
+      },
+      (error) => {
+        // Handle error
+        console.error('Error deleting bus ticket', error);
+      }
+    );
   }
 }

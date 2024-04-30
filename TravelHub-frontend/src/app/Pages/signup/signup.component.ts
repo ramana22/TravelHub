@@ -21,6 +21,12 @@ export class SignupComponent {
         this.authService.login();
         this._service.currentuser = this.user;
         this._Router.navigate([""]);
+        const userEmail = data.email; // Assuming email is in response.data
+        if (userEmail) {
+          localStorage.setItem('userEmail', userEmail);
+        } else {
+          console.error("Email not found in login response.");
+        }
       },
       error =>{
         console.log("exception occured");

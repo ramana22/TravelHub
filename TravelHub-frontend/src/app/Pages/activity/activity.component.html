@@ -20,7 +20,7 @@
                         <p>Bill: {{ booking.hotel?.room?.bill?.amount}}</p>
                          <!-- Add more room details as needed -->
                          <div class="card-footer" style="float: right;">
-                            <button class="btn btn-danger" (click)="cancelBooking(booking.id)">Cancel Booking</button>
+                            <button class="btn btn-danger" (click)="cancelhotelBooking(booking.id)" >Cancel Booking</button>
                         </div>
                     </div>
                   </div>                   
@@ -33,15 +33,121 @@
         <h4 class="mb-0">Flights</h4>
     </div>
     <div *ngIf="showflight" class="showflight">
-       
+            <div *ngIf="flightTickets" class="card-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-deck">
+                            <div *ngFor="let booking of flightTickets" style="display: flex;flex-direction: column;" class="card">
+                                <div class="card-body">
+                                    <!-- Flight booking details -->
+                                    <h6>Booking ID: {{ booking.id }}</h6>
+                                    <p>Departure: {{ booking.origin }}</p>
+                                    <p>Destination: {{ booking.destination }}</p>
+                                    <p>Departure Date: {{ booking.departDate }}</p>
+                                    <p>Return Date: {{ booking.returnDate }}</p>
+                                    <p>Number of Travelers: {{ booking.traveler.people }}</p>
+                                    <!-- Traveler details -->
+                                    <h6>Traveler Information:</h6>
+                                    <p>Full Name: {{ booking.traveler.fullName }}</p>
+                                    <p>Date of Birth: {{ booking.traveler.dateOfBirth }}</p>
+                                    <p>Email Address: {{ booking.traveler.emailAddress }}</p>
+                                    <p>Phone Number: {{ booking.traveler.phoneNumber }}</p>
+                                    <!-- Add more traveler details as needed -->
+                                    <div class="card-footer" style="float: right;">
+                                        <button class="btn btn-danger" (click)="cancelflightBooking(booking.id)" >Cancel Booking</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>       
     </div>
-    <div class="card-header" (click)="togglecars()">
+    <div class="card-header" (click)="togglecars();showcars()">
         <h4 class="mb-0">Cars</h4>
     </div>
-    <div class="card-header" (click)="toggletrains()">
+    <div *ngIf="showcar" class="showflight">
+            <div *ngIf="carbookings" class="card-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-deck">
+                            <!-- Iterate over each car booking -->
+                            <div *ngFor="let booking of carbookings" style="display: flex; flex-direction: column;" class="card">
+                                <div class="card-body">
+                                    <!-- Display car booking details -->
+                                    <h6>Car Booking ID: {{ booking.car.id }}</h6>
+                                    <p>Car Model: {{ booking.car.carModel }}</p>
+                                    <p>Pickup Location: {{ booking.car.pickupLocation }}</p>
+                                    <p>Rental Start Date: {{ booking.car.rentalStartDate }}</p>
+                                    <p>Rental End Date: {{ booking.car.rentalEndDate }}</p>
+                                    <p>Total Price: ${{ booking.car.totalPrice }}</p>
+                                    <!-- Add more booking details as needed -->
+                                    <div class="card-footer" style="float: right;">
+                                        <button class="btn btn-danger" (click)="cancelcarBooking(booking.id)">Cancel Booking</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+    </div>
+    <div class="card-header" (click)="toggletrains();showtrains()">
         <h4 class="mb-0">Trains</h4>
     </div>
-    <div class="card-header" (click)="togglebuses()">
+    <div *ngIf="showtrain" class="showflight">
+        <div *ngIf="traintickets" class="card-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-deck">
+                        <div *ngFor="let ticket of traintickets" style="display: flex; flex-direction: column;" class="card">
+                            <div class="card-body">
+                                <!-- Train ticket details -->
+                                <h6>Train Ticket ID: {{ ticket.train.trainId }}</h6>
+                                <p>Departure Station: {{ ticket.train.departureStation }}</p>
+                                <p>Arrival Station: {{ ticket.train.arrivalStation }}</p>
+                                <p>Departure Time: {{ ticket.train.departureTime }}</p>
+                                <p>Arrival Time: {{ ticket.train.arrivalTime }}</p>
+                                <p>Operator: {{ ticket.train.operator }}</p>
+                                <p>Price: ${{ ticket.train.price }}</p>
+                                <!-- Add more ticket details as needed -->
+                                <div class="card-footer" style="float: right;">
+                                    <button class="btn btn-danger" (click)="canceltrainBooking(ticket.id)" >Cancel Booking</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="card-header" (click)="togglebuses();showbuses()">
         <h4 class="mb-0" >Buses</h4>
+    </div>
+    <div *ngIf="showbus" class="showflight">
+        <div *ngIf="bustickets" class="card-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-deck">
+                        <div *ngFor="let ticket of bustickets" style="display: flex; flex-direction: column;" class="card">
+                            <div class="card-body">
+                                <!-- Train ticket details -->
+                                <h6>Bus Ticket ID: {{ ticket.bus.busId }}</h6>
+                                <p>Departure Station: {{ ticket.bus.departureTerminal }}</p>
+                                <p>Arrival Station: {{ ticket.bus.arrivalTerminal }}</p>
+                                <p>Departure Time: {{ ticket.bus.departureTime }}</p>
+                                <p>Arrival Time: {{ ticket.bus.arrivalTime }}</p>
+                                <p>Operator: {{ ticket.bus.operator }}</p>
+                                <p>Price: $&nbsp;{{ ticket.bus.operator }}</p>
+                                <!-- Add more ticket details as needed -->
+                                <div class="card-footer" style="float: right;">
+                                    <button class="btn btn-danger" (click)="cancelbusBooking(ticket.id)">Cancel Booking</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </div>
 </div>
