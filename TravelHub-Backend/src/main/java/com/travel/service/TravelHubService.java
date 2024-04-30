@@ -43,6 +43,8 @@ public class TravelHubService {
 	RestaurantRepository restrepo;
 	@Autowired
 	hotelbookingrepository hotelbooking;
+	@Autowired
+	NotifyRepository notifyrepo;
 	
 	public User saveUser(User user) throws Exception {
 		if(user==null) {
@@ -95,13 +97,18 @@ public class TravelHubService {
 	public Room saveRoom(Room room) {
 		return roomrepo.save(room);
 	}
+	public Notify savenotify(Notify notify) {
+		return notifyrepo.save(notify);
+	}
 	public profile saveprofile(profile profile) {
 		return profilerepo.save(profile);
 	}
 	public List<Hotel> getAllHotels() {
 	    return hotelrepo.findAll();
 	}
-
+	public List<Notify> getAllnotify(String email) {
+	    return notifyrepo.findByEmail(email);
+	}
 	public List<LocationData> saveAll(List<LocationData> locationDataList) {
 	    return locationrepo.saveAll(locationDataList);	
 	}
@@ -194,5 +201,6 @@ public class TravelHubService {
 	        throw new NotFoundException();
 	    }
 	}
+	
     
 }

@@ -110,6 +110,11 @@ public class TravelHubController {
 	public List<Review> getReviews(){
 		return service.getReview();
 	}
+	@PostMapping("/getnotify")
+	public List<Notify> getnotify(@RequestBody Map<String, String> requestMap){
+		String email = requestMap.get("email");
+		return service.getAllnotify(email);
+	}
 	@GetMapping({"/health","/"})
     public String healthCheck() {
         return "Application is running!";
@@ -632,7 +637,17 @@ public class TravelHubController {
 	     String to = emailRequest.getTo();
 	     String subject = emailRequest.getSubject();
 	     String text = emailRequest.getText();
-
+	     String msg = extractRequiredString(text);
+	     System.out.println(msg);
+	     Notify notify = new Notify();
+	     if(text.length()>=225) {
+	    	 notify.setMessage(msg);
+	     }
+	     else {
+	    	 notify.setMessage(text);
+	     }
+	     notify.setEmail(to);
+	     service.savenotify(notify);
 	     emailservice.sendEmail(to, subject, text);
 	}
 	@PostMapping("/getBooking")
@@ -760,4 +775,20 @@ public class TravelHubController {
 		   
 	   }
 	}
+	// Method to extract the required string if it exists
+	public String extractRequiredString(String msg) {
+	    String requiredString = "";
+	    if (msg != null && !msg.isEmpty()) {
+	        String[] lines = msg.split("\n");
+	        for (String line : lines) {
+	            if (line.trim().startsWith("Thank you for booking") || 
+	                line.trim().startsWith("If you have any questions") ||
+	                line.trim().contains("please check")) {
+	                requiredString += line.trim() + "\n";
+	            }
+	        }
+	    }
+	    return requiredString.trim();
+	}
+
 }
