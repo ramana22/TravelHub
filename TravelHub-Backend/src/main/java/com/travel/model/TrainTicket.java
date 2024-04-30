@@ -14,56 +14,57 @@ public class TrainTicket {
     @JoinColumn(name = "train_id")
     private Train train;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
-
 
     @ManyToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-	public Long getId() {
-		return id;
-	}
+    // Getters and setters
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Train getTrain() {
-		return train;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTrain(Train train) {
-		this.train = train;
-	}
+    public Train getTrain() {
+        return train;
+    }
 
-	public Traveler getTraveler() {
-		return traveler;
-	}
+    public void setTrain(Train train) {
+        this.train = train;
+    }
 
-	public void setTraveler(Traveler traveler) {
-		this.traveler = traveler;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public Payment getPayment() {
-		return payment;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
+    public Traveler getTraveler() {
+        return traveler;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setTraveler(Traveler traveler) {
+        this.traveler = traveler;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 }

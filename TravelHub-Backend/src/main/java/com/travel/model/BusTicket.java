@@ -1,7 +1,5 @@
 package com.travel.model;
 
-
-
 import jakarta.persistence.*;
 
 @Entity
@@ -15,7 +13,7 @@ public class BusTicket {
     @JoinColumn(name = "bus_id")
     private Bus bus;
     
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "traveler_id")
     private Traveler traveler;
 
@@ -23,49 +21,49 @@ public class BusTicket {
     @JoinColumn(name = "payment_id")
     private Payment payment;
     
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne // Changed to ManyToOne
+    @JoinColumn(name = "user_id") // Changed to ManyToOne
     private User user;
     
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Bus getBus() {
-		return bus;
-	}
+    public Bus getBus() {
+        return bus;
+    }
 
-	public void setBus(Bus bus) {
-		this.bus = bus;
-	}
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
 
-	public Traveler getTraveler() {
-		return traveler;
-	}
+    public Traveler getTraveler() {
+        return traveler;
+    }
 
-	public void setTraveler(Traveler traveler) {
-		this.traveler = traveler;
-	}
+    public void setTraveler(Traveler traveler) {
+        this.traveler = traveler;
+    }
 
-	public Payment getPayment() {
-		return payment;
-	}
+    public Payment getPayment() {
+        return payment;
+    }
 
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
     
 }

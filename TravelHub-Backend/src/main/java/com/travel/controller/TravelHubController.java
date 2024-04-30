@@ -12,11 +12,10 @@ import com.amadeus.resources.Location;
 import com.amadeus.exceptions.ResponseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -601,16 +600,19 @@ public class TravelHubController {
 	}
 
 	@PostMapping("/savecarBooking")
-    public CarBooking saveCarBooking(@RequestBody CarBooking carBooking, @RequestParam String userEmail) {
-        // Fetch user object by email
-        User user = service.fetchemail(userEmail);
-
-        // Set the fetched user object to the hotel booking
-        carBooking.setUser(user);
-
-        // Save the hotel booking
-        return service.savecarbooking(carBooking);
-    }
+	public CarBooking saveCarBooking(@RequestBody CarBooking carBooking, @RequestParam String userEmail) {
+	    User user = service.fetchemail(userEmail);
+	    if (user != null) {
+	        // Set the fetched user object to the hotel booking
+	        carBooking.setUser(user);
+	        System.out.println(carBooking.toString());
+	        return service.savecarbooking(carBooking);
+	    } else {
+	        // Handle the case where user is not found
+	        // For example, you can throw an exception or return a specific response
+	        throw new EntityNotFoundException("User with email " + userEmail + " not found");
+	    }
+	}
 	@PostMapping("/getfilterRestaurant")
 	public List<Restaurant> filterrestaurant(@RequestBody Map<String, String> requestBody) {
 	        String city = requestBody.get("city");
@@ -659,6 +661,103 @@ public class TravelHubController {
 	   }catch (Exception e) {
 	           // Handle other exceptions
 		   return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+	   }
+	}
+	@PostMapping("/gettrainticket")
+	public ResponseEntity<List<TrainTicket>> gettraintickets(@RequestBody Map<String, String> requestMap) {
+	   try {
+	      String email = requestMap.get("email");
+	      List<TrainTicket> bookings = service.getTrainByUserEmail(email);
+	      return ResponseEntity.ok(bookings);
+	   }catch (EntityNotFoundException e) {
+	           // Handle the exception, log the error, and return an appropriate response
+		   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+	   }catch (Exception e) {
+	           // Handle other exceptions
+		   return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+	   }
+	}
+	@PostMapping("/getbusticket")
+	public ResponseEntity<List<BusTicket>> getbustickets(@RequestBody Map<String, String> requestMap) {
+	   try {
+	      String email = requestMap.get("email");
+	      List<BusTicket> bookings = service.getBusByUserEmail(email);
+	      return ResponseEntity.ok(bookings);
+	   }catch (EntityNotFoundException e) {
+	           // Handle the exception, log the error, and return an appropriate response
+		   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+	   }catch (Exception e) {
+	           // Handle other exceptions
+		   return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+	   }
+	}
+	@PostMapping("/getcarbooking")
+	public ResponseEntity<List<CarBooking>> getcarbookkings(@RequestBody Map<String, String> requestMap) {
+	   try {
+	      String email = requestMap.get("email");
+	      List<CarBooking> bookings = service.getCarByUserEmail(email);
+	      return ResponseEntity.ok(bookings);
+	   }catch (EntityNotFoundException e) {
+	           // Handle the exception, log the error, and return an appropriate response
+		   return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+	   }catch (Exception e) {
+	           // Handle other exceptions
+		   return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+	   }
+	}
+	@PostMapping("/deletebusticket")
+	public void deletebusticket(@RequestBody Map<String, String> requestMap) throws NotFoundException {
+	   try {
+	      String email = requestMap.get("email");
+	      String busticketid = requestMap.get("busticketid");
+	      long busTicketId = Long.parseLong(busticketid);
+	      service.deleteBusTicket(email,busTicketId);
+	   }catch (EntityNotFoundException e) {   
+		   
+	   }
+	}
+	@PostMapping("/deletetrainticket")
+	public void deletetrainticket(@RequestBody Map<String, String> requestMap) throws NotFoundException {
+	   try {
+	      String email = requestMap.get("email");
+	      String trainticketid = requestMap.get("trainticketid");
+	      long trainTicketId = Long.parseLong(trainticketid);
+	      service.deletetrainTicket(email,trainTicketId);
+	   }catch (EntityNotFoundException e) {   
+		   
+	   }
+	}
+	@PostMapping("/deleteflightticket")
+	public void deleteflightticket(@RequestBody Map<String, String> requestMap) throws NotFoundException {
+	   try {
+	      String email = requestMap.get("email");
+	      String flightticketid = requestMap.get("flightticketid");
+	      long flightTicketId = Long.parseLong(flightticketid);
+	      service.deleteflightTicket(email,flightTicketId);
+	   }catch (EntityNotFoundException e) {   
+		   
+	   }
+	}
+	@PostMapping("/deletehotelbooking")
+	public void deletehotelbooking(@RequestBody Map<String, String> requestMap) throws NotFoundException {
+	   try {
+	      String email = requestMap.get("email");
+	      String hotelbookingid = requestMap.get("hotelbookingid");
+	      long hotelbookingId = Long.parseLong(hotelbookingid);
+	      service.deletehotelbooking(email,hotelbookingId);
+	   }catch (EntityNotFoundException e) {   
+		   
+	   }
+	}
+	@PostMapping("/deletecarbooking")
+	public void deletecarbooking(@RequestBody Map<String, String> requestMap) throws NotFoundException {
+	   try {
+	      String email = requestMap.get("email");
+	      String carbookingid = requestMap.get("carbookingid");
+	      long carbookingId = Long.parseLong(carbookingid);
+	      service.deletecarbooking(email,carbookingId);
+	   }catch (EntityNotFoundException e) {   
+		   
 	   }
 	}
 }
