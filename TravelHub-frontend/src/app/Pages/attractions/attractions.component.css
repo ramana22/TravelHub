@@ -21,7 +21,7 @@
 
   /* Title styling */
   h1 {
-    color: #a24e3a;
+    color: lightseagreen;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -36,7 +36,7 @@
 
   /* Divider line */
   .divider {
-    border-bottom: 1px solid #a24e3a; /* Adds a line between components */
+    border-bottom: 1px solid lightseagreen; /* Adds a line between components */
     width: 100%; /* Full width of the component */
     margin-bottom: 20px; /* Adds some space below the line */
   }
@@ -59,13 +59,16 @@
 
   /* Styling for the 'Learn More' button */
   .learn-more {
-    background: #a24e3a;
+    background: lightseagreen;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    width: 4cm;
+    margin-top: 1cm;
+    margin-left: 14cm;
   }
-
+  
   /* Additional responsive adjustments */
   @media (max-width: 768px) {
     .tour-description {

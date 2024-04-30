@@ -9,7 +9,7 @@ export class TravelHubServiceService {
   private selectedFlight: any;
   userEmail!: string;
   currentuser!:User;
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://travel.up.railway.app';
   constructor(private http: HttpClient) {
   }
   ngOnInit() {
